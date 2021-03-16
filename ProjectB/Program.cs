@@ -6,8 +6,8 @@ namespace ProjectB
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
-            Console.WriteLine("Deze branch is van chris");
+            Register register = new Register();
+            register.registerMain();
         }
     }
 }
