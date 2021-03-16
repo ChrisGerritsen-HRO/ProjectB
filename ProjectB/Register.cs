@@ -1,5 +1,7 @@
 using System;
 using System.Text.RegularExpressions;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace ProjectB
 {
@@ -17,7 +19,7 @@ namespace ProjectB
             Console.WriteLine("Vul uw email: ");
             string userEmail = Console.ReadLine();
 
-            if(Regex.IsMatch(firstName, @"^[a-zA-Z]+$") && Regex.IsMatch(lastName, @"^[a-zA-Z]+$")) {
+            if(Regex.IsMatch(firstName, @"^[a-zA-Z]+$") && Regex.IsMatch(lastName, @"^[a-zA-Z]+$") && userEmail.Contains("@")) {
                 Console.WriteLine("Bedankt!");
             } else {
                 Console.WriteLine("Er klopt iets niet aan de gegevens.");
