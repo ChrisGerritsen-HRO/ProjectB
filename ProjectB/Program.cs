@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text.RegularExpressions;
 
-namespace Sawanthi
+namespace projectB
 {
     class Program
     {
@@ -67,8 +67,9 @@ namespace Sawanthi
                 Console.Clear();
                 textColor("Would you like to create a new account?", 14, false);
                 textColor("[1] YES, continue", 10, false); textColor("[2] NO, back to main menu", 12, false);
-                if(Console.ReadLine() == "1") { Console.Clear(); createAccouint(); }
-                else if(Console.ReadLine() == "2"){ Console.Clear(); mainMenu(); }
+                string input = Console.ReadLine();
+                if (input == "1") { Console.Clear(); createAccouint(); }
+                else if(input == "2"){ Console.Clear(); mainMenu(); }
             }
         }
 
