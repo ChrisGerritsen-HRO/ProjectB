@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ProjectB.DAL;
+using ProjectB.pages;
+using System;
 
 namespace ProjectB
 {
@@ -6,8 +8,8 @@ namespace ProjectB
     {
         static void Main(string[] args)
         {
-            Register register = new Register();
-            register.registerMain();
+            dataStorageHandler.init("storage.json");
+            Register.registerMain();
         }
     }
 }
