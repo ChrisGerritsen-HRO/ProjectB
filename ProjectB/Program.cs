@@ -99,7 +99,7 @@ namespace justafile
             if (Console.ReadLine() == "1")
             {
                 Console.Clear();
-                textColor("weet u zeker dat een een account wi aanmaken?", 14, false);
+                textColor("weet u zeker dat u een nieuw account wil aanmaken?", 14, false);
                 textColor("[1] JA, ga door", 10, false); textColor("[2] NEE, terug naar menu", 12, false);
                 string input = Console.ReadLine();
                 if (input == "1") { Console.Clear(); createAccouint(); }
