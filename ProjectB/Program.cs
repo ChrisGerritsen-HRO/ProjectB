@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text.RegularExpressions;
 
-namespace projectB
+namespace justafile
 {
     class Program
     {
@@ -9,7 +9,6 @@ namespace projectB
         //DarkYellow = 6, Gray = 7, DarkGray = 8, Blue = 9, Green = 10
         //Cyan = 11, Red = 12, Magenta = 13, Yellow = 14, White = 15
         static void textColor(string text, int color, bool inputLocation)
-
         {
             Console.ForegroundColor = (ConsoleColor)color;
             if (inputLocation) { Console.Write(text); }
@@ -17,63 +16,96 @@ namespace projectB
             Console.ResetColor();
         }
 
-        static void createAccouint() 
+        static void createAccouint()
         {
             while (true)
             {
-                textColor("Enter full name: ", 14, true);
-                string fullName = Console.ReadLine();
-                if (Regex.IsMatch(fullName, "^[a-zA-Z. ]{1,256}$")) { break; }
-                else { textColor("invalid name, please only enter letters", 12, false); }
+                textColor("Vul uw voornaam in: ", 14, true);
+                string firstName = Console.ReadLine();
+                if (Regex.IsMatch(firstName, "^[a-zA-Z]{1,256}$")) { break; }
+                else { textColor("gebruik a.u.b alleen letters", 12, false); }
             }
+
+            while (true)
+            {
+                textColor("[Optioneel] Vul uw tussenvoegsel in: ", 14, true);
+                string insertion = Console.ReadLine();
+                if (Regex.IsMatch(insertion, @"^[a-zA-Z.]$") || insertion == "") { break; }
+                else { textColor("gebruik a.u.b alleen letters en punten.", 12, false); }
+            }
+
+            while (true)
+            {
+                textColor("Vul uw achternaam in: ", 14, true);
+                string lastName = Console.ReadLine();
+                if (Regex.IsMatch(lastName, "^[a-zA-Z]{1,256}$")) { break; }
+                else { textColor("gebruik a.u.b alleen letters", 12, false); }
+            }
+
+            while (true)
+            {
+                var dateFormats = new[] { "dd.MM.yyyy", "dd-MM-yyyy", "dd/MM/yyyy" };
+                DateTime dateValue;
+                textColor("Vul uw geboortedatum in(dd-MM-yyyy): ", 14, true);
+                string birthDay = Console.ReadLine();
+                if (DateTime.TryParse(birthDay, out dateValue)) { break; }
+                else { textColor("vul een geldig geboorte datum in.", 12, false); }
+            }
+
             while (true) 
             {
-                textColor("Enter age: ", 14, true);
-                string age = Console.ReadLine();
-                if (Regex.IsMatch(age, "^[0-9]{1,3}$")) { break; }
-                else { textColor("invalid age, pleas enter numbers only", 12, false); }
+                textColor("Wat is uw geslacht?\n[1] Man \n[2] Vrouw \n[3] anders ", 14, false);
+                string gender = Console.ReadLine();
+                if (gender == "1") { gender = "man"; break; }
+                else if (gender == "2") { gender = "vrouw"; break; }
+                else if (gender == "3") { gender = "Onbekend"; break; }
+                else { textColor("U heeft niet een van de bovenstaande keuzes gekozen.", 14, false); }
             }
+
             while (true)
             {
-                textColor("Enter email: ", 14, true);
+                textColor("Vul uw email in: ", 14, true);
                 string email = Console.ReadLine();
-                if (Regex.IsMatch(email, "^[A-Za-z0-9_.-]{1,64}@[A-Za-z-]{1,255}.(com|net|nl|org)$")) { break; }
-                else { textColor("invalid email, please enter a valid email", 12, false); }
+                if (Regex.IsMatch(email, "^[A-Za-z0-9_.-]{1,64}@[A-Za-z-]{1,255}.(com|net|nl|org)$"))
+                {
+                    textColor("Herhaal uw email: ", 14, true);
+                    if (email == Console.ReadLine()) { break; }
+                    else { textColor("email heeft geen overeenkomst, probeer opnieuw.", 12, false); }
+                }
+                else { textColor("ongeldig email, gebruik een geldig email", 12, false); }
             }
+
             while (true)
             {
-                textColor("enter password(min length = 4): ", 14, true);
+                textColor("geef een wachtwoord met een minimum lengte van 6: ", 14, true);
                 string password = Console.ReadLine();
-                if (Regex.IsMatch(password, "[a-zA-Z0-9]{4,1000}"))
+                if (password.Length >= 6)
                 {
                     textColor("confirm password: ", 14, true);
                     if (password == Console.ReadLine()) { break; }
-                    else { textColor("wrong password, please try again.", 12, false); }
+                    else { textColor("wachtwoord komt niet overeen, probeer opnieuw.", 12, false); }
                 }
-                else { textColor("invalid password, please try again.", 12, false); }
+                else { textColor("ongeldig wachtwoord.", 12, false); }
             }
+
+            Console.Clear();
+            mainMenu();
         }
-
-
-
-
 
         static void mainMenu()
         {
-            textColor("Welcome, what would you like to do?", 14, false);
-            textColor("[1] create account\n[2] login\n[3] buy ticket\n[4] serch movies\n", 15, false);
+            textColor("Welkom, wat wilt u doen? ", 14, false);
+            textColor("[1] creëer account\n[2] login\n[3] koop een ticket\n[4] zoek naar een film\n", 15, false);
             if (Console.ReadLine() == "1")
             {
                 Console.Clear();
-                textColor("Would you like to create a new account?", 14, false);
-                textColor("[1] YES, continue", 10, false); textColor("[2] NO, back to main menu", 12, false);
+                textColor("weet u zeker dat een een account wi aanmaken?", 14, false);
+                textColor("[1] JA, ga door", 10, false); textColor("[2] NEE, terug naar menu", 12, false);
                 string input = Console.ReadLine();
                 if (input == "1") { Console.Clear(); createAccouint(); }
-                else if(input == "2"){ Console.Clear(); mainMenu(); }
+                else if (input == "2") { Console.Clear(); mainMenu(); }
             }
         }
-
-
 
         static void Main(string[] args)
         {
@@ -81,3 +113,4 @@ namespace projectB
         }
     }
 }
+
