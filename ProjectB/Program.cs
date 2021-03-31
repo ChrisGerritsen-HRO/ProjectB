@@ -9,7 +9,8 @@ namespace ProjectB
         static void Main(string[] args)
         {
             dataStorageHandler.init("storage.json");
-            Register.registerMain();
+            // Register.registerMain();
+            Login.loginMain();
         }
     }
 }
