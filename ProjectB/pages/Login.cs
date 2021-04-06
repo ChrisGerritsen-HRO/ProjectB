@@ -31,7 +31,6 @@ namespace ProjectB.pages
                     if(obj.personAccount[i].userEmail == email && obj.personAccount[i].password == password) {
                         user = obj.personAccount[i];
 
-                        i = len - 1;
                         if(obj.personAccount[i].gender == "man") {
                             Console.WriteLine($"Welkom Dhr. {obj.personAccount[i].lastName}");
                         } else if (obj.personAccount[i].gender == "vrouw") {
