@@ -9,16 +9,16 @@ namespace ProjectB.pages
 {
     class Login
     {
-        public static dataStorage storage { get; set; }
+        public static dynamic user { get; set; }
         public static void loginMain() {
             login();
         }
 
         public static void login() {
+            Console.Clear();
             string fileContent = File.ReadAllText("storage.json");
             dynamic obj = JsonConvert.DeserializeObject(fileContent);
-
-            // List<string> account = new List<string>();
+            
             bool loginBool = true;
             while(loginBool) {
                 Console.WriteLine("Email: ");
@@ -29,13 +29,7 @@ namespace ProjectB.pages
                 var len = ((Newtonsoft.Json.Linq.JArray)obj.personAccount).Count;
                 for(int i = 0; i < len; i++) {
                     if(obj.personAccount[i].userEmail == email && obj.personAccount[i].password == password) {
-                        // account.Add(obj.personAccount[i].userEmail);
-                        // account.Add(obj.personAccount[i].firstName);
-                        // account.Add(obj.personAccount[i].insertion);
-                        // account.Add(obj.personAccount[i].lastName);
-                        // account.Add(obj.personAccount[i].birthday);
-                        // account.Add(obj.personAccount[i].gender);
-                        // account.Add(obj.personAccount[i].role);
+                        user = obj.personAccount[i];
 
                         i = len - 1;
                         if(obj.personAccount[i].gender == "man") {
