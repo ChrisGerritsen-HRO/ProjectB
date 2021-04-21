@@ -11,25 +11,26 @@ namespace ProjectB.pages
     class movieAdmin {
         public static dataStorage storage { get; set; }
         public static void moviesMain() {
+            Console.Clear();
             tools.textColor("Welkom beheerder, wat wilt u doen?", 14, false);
-            tools.textColor("[1] Film toevoegen\n[2] Film \n", 15, false);
+            tools.textColor("[1] Film toevoegen\n[2] Film\n[3] Terug naar hoofdmenu\n", 15, false);
             while(true) {
                 var userinput = Console.ReadLine();
-                if (userinput == "4") {
-                    movieList.filmlijst();
-                    mainMenu();
-                    break;
+                if (userinput == "1") {
+                    createMovie();
                     } 
-                if (userinput == "5") {
-                    movieAdmin.moviesMain();
-                    mainMenu();
+                if (userinput == "2") {
+                    removeMovie();
+                if (userinput == "3") {
+                    break;
+                }
                 } else {
-                    tools.textColor("Alleen optie 4 en 5 zijn beschikbaar", 4, false);
+                    tools.textColor("Deze optie is niet beschikbaar", 4, false);
                 }
             }
-            createMovie();
         }        
         public static void createMovie() {
+            Console.Clear();
             string moviename, moviegenre;
             int movieage;
             while(true){
@@ -49,8 +50,12 @@ namespace ProjectB.pages
             }
             string fileContent = File.ReadAllText("storage.json");
             dynamic obj1 = JsonConvert.DeserializeObject(fileContent);
+            int arrLen = 0;
+            if(obj1.movie != null) {
+                arrLen = ((Newtonsoft.Json.Linq.JArray)obj1.movie).Count;
+            }
             movies obj = new movies {
-                movieID = ((Newtonsoft.Json.Linq.JArray)obj1.movie).Count,
+                movieID = arrLen,
                 movieName = moviename,
                 movieAge = movieage,
                 movieGenre = moviegenre,
@@ -61,6 +66,23 @@ namespace ProjectB.pages
             dataStorageHandler.storage.movie.Add(obj);
             dataStorageHandler.saveChanges();
             Menu.mainMenu();
+        }
+
+        public static void removeMovie() {
+            Console.Clear();
+            string fileContent = File.ReadAllText("storage.json");
+            dynamic obj = JsonConvert.DeserializeObject(fileContent);
+
+            var len = ((Newtonsoft.Json.Linq.JArray)obj.movie).Count;
+            for(int i = 0; i < len; i++) {
+                tools.textColor($"ID: {obj.movie[i].movieID}\nNaam : {obj.movie[i].movieName}\nLeeftijd : {obj.movie[i].movieAge}\nGenre : {obj.movie[i].movieGenre}\n", 14, false);
+            } 
+
+            tools.textColor("[1] Terug gaan\n", 15, false);
+            if(Console.ReadLine() == "1") {
+                Console.Clear();
+                moviesMain();
+            }
         }
     }
 }

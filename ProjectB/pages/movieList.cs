@@ -15,9 +15,9 @@ namespace ProjectB.pages
             string fileContent = File.ReadAllText("storage.json");
             dynamic obj = JsonConvert.DeserializeObject(fileContent);
 
-            var len = ((Newtonsoft.Json.Linq.JArray)obj.personAccount).Count;
+            var len = ((Newtonsoft.Json.Linq.JArray)obj.movie).Count;
             for(int i = 0; i < len; i++) {
-                tools.textColor($"Filmnaam : {obj.movie[i].movieName}\nFilmleeftijd : {obj.movie[i].movieAge}\n", 14, false);
+                tools.textColor($"Naam : {obj.movie[i].movieName}\nLeeftijd : {obj.movie[i].movieAge}\nGenre : {obj.movie[i].movieGenre}\n", 14, false);
             } 
 
             tools.textColor("[1] Terug gaan\n", 15, false);
