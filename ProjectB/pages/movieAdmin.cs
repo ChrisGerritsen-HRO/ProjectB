@@ -18,11 +18,9 @@ namespace ProjectB.pages
                 var userinput = Console.ReadLine();
                 if (userinput == "1") {
                     createMovie();
-                } 
-                if (userinput == "2") {
+                } else if (userinput == "2") {
                     removeMovie();
-                }
-                if (userinput == "3") {
+                } else if (userinput == "3") {
                     Console.Clear();                    
                     Menu.mainMenu();
                 } else {
@@ -32,21 +30,60 @@ namespace ProjectB.pages
         }        
         public static void createMovie() {
             Console.Clear();
-            string moviename, moviegenre;
-            int movieage;
+            string moviename, moviegenre, movietime, moviedescription;
+            int movieage, movietheater, movieduration;
             while(true){
                 Console.Clear();
-                tools.textColor("film naam: ", 14, false);
+                tools.textColor("Film naam: ", 14, false);
                 moviename = Console.ReadLine();
-                tools.textColor("leeftijd film: ", 14, false);
-                movieage = Convert.ToInt32(Console.ReadLine());
-                tools.textColor("genre: ", 14, false);
+
+                tools.textColor("Film beschrijving: ", 14, false);
+                moviedescription = Console.ReadLine();
+
+                while(true) {
+                    tools.textColor("Film minumum leeftijd: ", 14, false);
+                    string ageinput = Console.ReadLine();
+                    int value;
+                    if (int.TryParse(ageinput, out value)) {
+                        movieage = Convert.ToInt32(ageinput);
+                        break;
+                    } else { tools.textColor("Gebruik a.u.b alleen cijfers", 12, false); }
+                }
+
+                tools.textColor("Film genre: ", 14, false);
                 moviegenre = Console.ReadLine();
+
+                tools.textColor("Film tijd: ", 14, false);
+                movietime = Console.ReadLine();
+
+                while(true) {
+                    tools.textColor("Film duur: ", 14, false);
+                    string durationinput = Console.ReadLine();
+                    int value;
+                    if (int.TryParse(durationinput, out value)) {
+                        movieduration = Convert.ToInt32(durationinput);
+                        break;
+                    } else { tools.textColor("Gebruik a.u.b alleen cijfers", 12, false); }
+                }   
+
+                while(true) {
+                    tools.textColor("Film zaal: ", 14, false);
+                    string theatherinput = Console.ReadLine();
+                    int value;
+                    if (int.TryParse(theatherinput, out value)) {
+                        movietheater = Convert.ToInt32(theatherinput);
+                        break;
+                    } else { tools.textColor("Gebruik a.u.b alleen cijfers", 12, false); }
+                }                
 
                 movies obj = new movies {
                     movieName = moviename,
+                    movieDescription = moviedescription,
                     movieAge = movieage,
                     movieGenre = moviegenre,
+                    movieTime = movietime,
+                    movieDuration = movieduration,
+                    movieTheater = movietheater,
 
                 };            
 
@@ -90,24 +127,35 @@ namespace ProjectB.pages
 
                 } else {
                     for(int i = 0; i < arrLen; i++) {
-                     tools.textColor($"ID: {i}\nNaam : {obj.movie[i].movieName}\nLeeftijd : {obj.movie[i].movieAge}\nGenre : {obj.movie[i].movieGenre}\n", 14, false);
+                        tools.textColor("----------------------------", 14, false);
+                        tools.textColor($"ID           | {i}\nNaam         | {obj.movie[i].movieName}\nBeschrijving | {obj.movie[i].movieDescription}\nLeeftijd     | {obj.movie[i].movieAge}+\nGenre        | {obj.movie[i].movieGenre}\nTijdstip     | {obj.movie[i].movieTime}\nDuur         | {obj.movie[i].movieDuration} minuten\nZaal         | {obj.movie[i].movieTheater}\n", 14, false);
                     }
 
-                    int selectedID = Convert.ToInt32(Console.ReadLine());
+                    int selectedID = 0;
+                    while(true){
+                        tools.textColor("ID van het te verwijderen film: ", 14, true);
+                        selectedID = Convert.ToInt32(Console.ReadLine());
+                        if(selectedID > arrLen-1 || selectedID < 0) { // Als de ingevoerde ID hoger is dan de hoogste ID dan onderstaande uitgevoerd
+                            tools.textColor("Dit is geen gelde film ID!", 12, false);
+                        } else {
+                            break;
+                        }
+                    }
                     string deletedMovie = obj.movie[selectedID].movieName;
 
                     dataStorageHandler.storage.movie.RemoveAt(selectedID); // verwijderd de object in de array van de gewenste index(selectedID)
                     dataStorageHandler.saveChanges();
                     Console.Clear();
-                    tools.textColor($"{deletedMovie} is succesvol verwijderd\n", 15, false);                    
+                    tools.textColor("de film ", 15, true); tools.textColor($"{deletedMovie}", 11, true); tools.textColor(" is succesvol verwijderd\n", 15, false);                    
 
                 }
 
 
                 tools.textColor("[1] Nog een film verwijderen\n[2] Terug gaan\n", 15, false);
-                if(Console.ReadLine() == "1") {
+                var userinput = Console.ReadLine();
+                if(userinput == "1") {
                     continue;
-                } else if(Console.ReadLine() == "2") {
+                } else if(userinput == "2") {
                     Console.Clear();
                     moviesMain();
                 }

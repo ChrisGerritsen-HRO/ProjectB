@@ -9,8 +9,8 @@ namespace ProjectB.pages
     {
         public static void mainMenu()
         {
-            tools.textColor("Welcome, what would you like to do?", 14, false);
-            tools.textColor("[1] create account\n[2] login\n[3] buy ticket\n[4] film lijst\n[5] admin\n", 15, false);
+            tools.textColor("Welkom, wat wilt u doen?", 14, false);
+            tools.textColor("[1] Account aanmaken\n[2] Inloggen\n[3] Kaartje reserveren\n[4] Film lijst\n[5] Beheerders\n", 15, false);
             while(true) {
                 var userinput = Console.ReadLine();
                 if (userinput == "4") {
