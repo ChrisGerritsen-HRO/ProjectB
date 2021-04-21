@@ -11,9 +11,25 @@ namespace ProjectB.pages
     class movieAdmin {
         public static dataStorage storage { get; set; }
         public static void moviesMain() {
-            userInput();
+            tools.textColor("Welkom beheerder, wat wilt u doen?", 14, false);
+            tools.textColor("[1] Film toevoegen\n[2] Film \n", 15, false);
+            while(true) {
+                var userinput = Console.ReadLine();
+                if (userinput == "4") {
+                    movieList.filmlijst();
+                    mainMenu();
+                    break;
+                    } 
+                if (userinput == "5") {
+                    movieAdmin.moviesMain();
+                    mainMenu();
+                } else {
+                    tools.textColor("Alleen optie 4 en 5 zijn beschikbaar", 4, false);
+                }
+            }
+            createMovie();
         }        
-        public static void userInput() {
+        public static void createMovie() {
             string moviename, moviegenre;
             int movieage;
             while(true){
@@ -31,7 +47,10 @@ namespace ProjectB.pages
                     break;
                 }
             }
+            string fileContent = File.ReadAllText("storage.json");
+            dynamic obj1 = JsonConvert.DeserializeObject(fileContent);
             movies obj = new movies {
+                movieID = ((Newtonsoft.Json.Linq.JArray)obj1.movie).Count,
                 movieName = moviename,
                 movieAge = movieage,
                 movieGenre = moviegenre,
