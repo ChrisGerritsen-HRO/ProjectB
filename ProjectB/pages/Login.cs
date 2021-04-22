@@ -31,18 +31,18 @@ namespace ProjectB.pages
                     if(obj.personAccount[i].userEmail == email && obj.personAccount[i].password == password) {
                         user = obj.personAccount[i];
 
-                        if(obj.personAccount[i].gender == "man") {
-                            Console.WriteLine($"Welkom Dhr. {obj.personAccount[i].lastName}");
-                        } else if (obj.personAccount[i].gender == "vrouw") {
-                            Console.WriteLine($"Welkom Mevr. {obj.personAccount[i].lastName}");
-                        } else {
-                            Console.WriteLine($"Welkom {obj.personAccount[i].firstName} {obj.personAccount[i].lastName}");
-                        }
+                        // if(obj.personAccount[i].gender == "man") {
+                        //     Console.WriteLine($"Welkom Dhr. {obj.personAccount[i].lastName}");
+                        // } else if (obj.personAccount[i].gender == "vrouw") {
+                        //     Console.WriteLine($"Welkom Mevr. {obj.personAccount[i].lastName}");
+                        // } else {
+                        //     Console.WriteLine($"Welkom {obj.personAccount[i].firstName} {obj.personAccount[i].lastName}");
+                        // }
                         loginBool = false;
                     }
                 }
             }
-            Menu.userMenu();
+            Menu.dashboard();
         }
 
         public static void logout() {

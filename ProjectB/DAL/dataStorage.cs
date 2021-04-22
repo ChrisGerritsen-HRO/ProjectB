@@ -7,5 +7,6 @@ namespace ProjectB.DAL
 {
     public class dataStorage {
         public List<personAccounts> personAccount { get; set; } = new List<personAccounts>();
+        public List<movieRooms> movieRoom { get; set; } = new List<movieRooms>();
     }
 }
