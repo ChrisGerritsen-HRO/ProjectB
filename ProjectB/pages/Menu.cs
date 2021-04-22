@@ -14,7 +14,7 @@ namespace ProjectB.pages
             while(true) {
                 var userinput = Console.ReadLine();
                 if (userinput == "4") {
-                    movieList.filmlijst();
+                    movieList.listMain();
                     mainMenu();
                     break;
                     } 

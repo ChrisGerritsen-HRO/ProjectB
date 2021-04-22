@@ -10,7 +10,7 @@ namespace ProjectB.pages
     class movieList {
         public static dataStorage storage { get; set; }
 
-        public static void filmlijst() {
+        public static void listMain() {
             Console.Clear();
             string fileContent = File.ReadAllText("storage.json");
             dynamic obj = JsonConvert.DeserializeObject(fileContent);
@@ -32,7 +32,6 @@ namespace ProjectB.pages
                 tools.textColor("Er zijn nog geen films geregistreerd!", 12, false);
             } else {
                 for(int i = 0; i < arrLen; i++) {
-                    tools.textColor("----------------------------", 14, false);
                     tools.textColor($"Naam         | {obj.movie[i].movieName}\nBeschrijving | {obj.movie[i].movieDescription}\nLeeftijd     | {obj.movie[i].movieAge}+\nGenre        | {obj.movie[i].movieGenre}\nTijdstip     | {obj.movie[i].movieTime}\nDuur         | {obj.movie[i].movieDuration} minuten\nZaal         | {obj.movie[i].movieTheater}\n", 14, false);
                 } 
             }
