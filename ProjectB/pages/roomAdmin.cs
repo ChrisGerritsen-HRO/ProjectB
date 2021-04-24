@@ -19,7 +19,7 @@ namespace ProjectB.pages
                 if (userinput == "1") {
                     createRoom();
                 } else if (userinput == "2") {
-                    
+                    removeRoom();
                 } else if (userinput == "3") {
                     Console.Clear();                    
                     Menu.dashboard();
@@ -100,6 +100,63 @@ namespace ProjectB.pages
             if(Console.ReadLine() == "1"){
                 Console.Clear();
                 createRoom();
+            } else {
+                Console.Clear();
+                roomMain();
+            }
+        }
+
+        public static void removeRoom() {
+            Console.Clear();
+            string fileContent = File.ReadAllText("storage.json");
+            dynamic obj = JsonConvert.DeserializeObject(fileContent);
+            int arrLen = 0;
+
+            try
+            {
+                if (((Newtonsoft.Json.Linq.JArray)obj.movieRoom).Count > 0) {
+                    arrLen = ((Newtonsoft.Json.Linq.JArray)obj.movieRoom).Count; 
+                }
+            }
+            catch
+            {
+                arrLen = 0;
+            }
+
+            if(arrLen == 0) {
+                tools.textColor("Er zijn nog geen zalen geregistreerd", 12, false);
+            } else {
+                for(int i = 0; i < arrLen; i++) {
+                    tools.textColor($"ID: {i}", 14, false);
+                    tools.textColor($"Nummer: {obj.movieRoom[i].roomNumber}", 14, false);
+                    tools.textColor($"Totale stoelen: {obj.movieRoom[i].totalSeats}", 14, false);
+                    tools.textColor($"Blauwe stoelen: {obj.movieRoom[i].blueSeats}", 14, false);
+                    tools.textColor($"Oranje stoelen: {obj.movieRoom[i].orangeSeats}", 14, false);
+                    tools.textColor($"Rode stoelen: {obj.movieRoom[i].redSeats}\n", 14, false);
+                }
+
+                int selectedID = 0;
+                while(true) {
+                    tools.textColor("ID van de zaal: ", 14, true);
+                    selectedID = Convert.ToInt32(Console.ReadLine());
+                    if(selectedID > arrLen-1 || selectedID < 0) {
+                        tools.textColor("Dit is geen geldig zaal nummer", 12, false);
+                    } else {
+                        break;
+                    }
+                }
+                string deletedRoom = obj.movieRoom[selectedID].roomNumber;
+
+                dataStorageHandler.storage.movieRoom.RemoveAt(selectedID);
+                dataStorageHandler.saveChanges();
+                Console.Clear();
+                tools.textColor("Zaal nummer ", 15, true); tools.textColor($"{deletedRoom}", 11, true); tools.textColor(" is succesvol verwijderd\n", 15, false); 
+            }
+            tools.textColor("Nog een zaal verwijderen [1]", 14, false);
+            tools.textColor("Terug gaan [2]", 14, false);
+            if(Console.ReadLine() == "1"){
+                Console.Clear();
+                removeRoom();
             } else {
                 Console.Clear();
                 roomMain();
