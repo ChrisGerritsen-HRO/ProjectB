@@ -13,7 +13,7 @@ namespace ProjectB.pages
         public static void roomMain() {
             Console.Clear();
             tools.textColor("Welkom beheerder, wat wilt u doen?", 14, false);
-            tools.textColor("[1] Zaal toevoegen\n[2] Zaal verwijderen\n[3] Terug naar hoofdmenu\n", 15, false);
+            tools.textColor("[1] Zaal toevoegen\n[2] Zaal verwijderen\n[3] Bekijk zalen\n[4] Terug naar hoofdmenu\n", 15, false);
             while(true) {
                 var userinput = Console.ReadLine();
                 if (userinput == "1") {
@@ -21,6 +21,8 @@ namespace ProjectB.pages
                 } else if (userinput == "2") {
                     removeRoom();
                 } else if (userinput == "3") {
+                    showRoom();
+                } else if (userinput == "4") {
                     Console.Clear();                    
                     Menu.dashboard();
                 } else {
@@ -29,18 +31,70 @@ namespace ProjectB.pages
             }
         }
 
+        public static void showRoom() {
+            Console.Clear();
+            string fileContent = File.ReadAllText("storage.json");
+            dynamic obj = JsonConvert.DeserializeObject(fileContent);
+            int arrLen = 0;
+
+            try
+            {
+                if (((Newtonsoft.Json.Linq.JArray)obj.movieRoom).Count > 0) {
+                    arrLen = ((Newtonsoft.Json.Linq.JArray)obj.movieRoom).Count; 
+                }
+            }
+            catch
+            {
+                arrLen = 0;
+            }
+
+            if(arrLen == 0) {
+                tools.textColor("Er zijn nog geen zalen geregistreerd", 12, false);
+            } else {
+                while(true) {
+                    for(int i = 0; i < arrLen; i++) {
+                    tools.textColor($"Nummer: {obj.movieRoom[i].roomNumber}", 14, false);
+                    tools.textColor($"Totale stoelen: {obj.movieRoom[i].totalSeats}", 14, false);
+                    tools.textColor($"Blauwe stoelen: {obj.movieRoom[i].blueSeats}", 14, false);
+                    tools.textColor($"Oranje stoelen: {obj.movieRoom[i].orangeSeats}", 14, false);
+                    tools.textColor($"Rode stoelen: {obj.movieRoom[i].redSeats}\n", 14, false);
+                    }
+
+                    Console.WriteLine("[1] Terug?\n");
+                    string userInput = Console.ReadLine();
+
+                    if (userInput == "1") {
+                        break;
+                    }
+                }
+                roomMain();
+            }
+        }
+
         public static void createRoom() {
             Console.Clear();
             int roomNumber, totalSeats, blueSeats, orangeSeats, redSeats;
             while(true) {
                 while(true) {
+                    string fileContent = File.ReadAllText("storage.json");
+                    storage = JsonConvert.DeserializeObject<dataStorage>(fileContent);
+
                     tools.textColor("Zaal nummer: ", 14, true);
                     string roomNumberInput = Console.ReadLine();
                     int value;
-                    if (int.TryParse(roomNumberInput, out value)) {
-                        roomNumber = Convert.ToInt32(roomNumberInput);
-                        break;
-                    } else { tools.textColor("Gebruik a.u.b alleen cijfers", 12, false); }
+                    var storedNumber = 0;
+                    foreach (var item in storage.movieRoom)
+                    {
+                        storedNumber = item.roomNumber;
+                    }
+                    if(storedNumber == Convert.ToInt32(roomNumberInput)) {
+                        Console.WriteLine("Het ingevoerde zaal nummer bestaat al");
+                    } else {
+                        if (int.TryParse(roomNumberInput, out value)) {
+                            roomNumber = Convert.ToInt32(roomNumberInput);
+                            break;
+                        } else { tools.textColor("Gebruik a.u.b alleen cijfers", 12, false); }
+                    }
                 }
                 while(true) {
                     tools.textColor("Totaal aantal stoelen: ", 14, true);
