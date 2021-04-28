@@ -1,0 +1,13 @@
+{
+  "movie": [
+    {
+      "movieName": "Test",
+      "movieDescription": "test",
+      "movieAge": 12,
+      "movieGenre": "test",
+      "movieTime": "11.21",
+      "movieDuration": 90,
+      "movieTheater": 5
+    }
+  ]
+}
