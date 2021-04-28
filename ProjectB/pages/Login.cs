@@ -42,13 +42,13 @@ namespace ProjectB.pages
                     }
                 }
             }
-            // Menu.dashboard();
+            Menu.dashboard();
         }
 
         public static void logout() {
             Console.Clear();
             user = "";
-            // Menu.mainMenu();
+            Menu.Mainmenu();
         }
     }
 }

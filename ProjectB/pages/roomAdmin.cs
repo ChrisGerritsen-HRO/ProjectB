@@ -24,7 +24,7 @@ namespace ProjectB.pages
                     showRoom();
                 } else if (userinput == "4") {
                     Console.Clear();                    
-                    // Menu.dashboard();
+                    Menu.dashboard();
                 } else {
                     tools.textColor("Deze optie is niet beschikbaar", 4, false);
                 }
