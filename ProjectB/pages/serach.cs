@@ -121,7 +121,7 @@ namespace ProjectB.pages
                 
             
             
-            tools.textColor("[1] Volledige filmlijst", 15, false);
+            tools.textColor("[1] Nog een keer zoeken", 15, false);
             tools.textColor("[2] Terug gaan\n", 15, false);
             string userinput = Console.ReadLine();
             if (userinput == "1")
