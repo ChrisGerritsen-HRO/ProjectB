@@ -6,9 +6,10 @@ namespace ProjectB
 {
     class Program
     {
-        static void Main(string[] args) {
-            dataStorageHandler.init("Storage.json");
-            Menu.mainMenu(); 
+        static void Main(string[] args)
+        {
+            dataStorageHandler.init("storage.json");
+            Menu.Mainmenu();
         }
     }
 }
