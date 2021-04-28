@@ -1,12 +1,14 @@
-using System;
+﻿using ProjectB.DAL;
 using ProjectB.pages;
+using System;
 
 namespace ProjectB
 {
-    public class Program
+    class Program
     {
-        public static void Main()
+        static void Main(string[] args)
         {
+            dataStorageHandler.init("storage.json");
             Menu.Mainmenu();
         }
     }

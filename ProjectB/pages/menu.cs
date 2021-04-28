@@ -22,7 +22,57 @@ namespace ProjectB.pages
  |_.__/|_|\___/|___/\___\___/ \___/| .__/  |_| |_|\__,_|\__,_|_| |_| |_|
                                    | |                                  
                                    |_|                                  " + "\n", new string[] { "Registreer", "Inloggen", "Films", "Over", "Afsluiten" }, 12, 14);
+            if (mainmenu == "Registreer") {
+                Console.Clear();
+                Register.registerMain();
+            } else if (mainmenu == "Inloggen") {
+                Console.Clear();
+                Login.loginMain();
+            } else if (mainmenu == "Films") {
+                Console.WriteLine("geen films jammer joh.");
+            } else if (mainmenu == "Over") {
+                Console.WriteLine("Hier komt over");
+            } else if (mainmenu == "Afsluiten") {
+                Environment.Exit(0);
+            }
         }
+
+        public static void dashboard() {
+            Console.Clear();
+            if (Login.user is not null && Login.user.role == "user") {
+                userMenu();
+            } else if (Login.user is not null && Login.user.role == "admin") {
+                adminMenu();
+            }
+        }
+
+        public static void userMenu() {
+            string userMenu = Menubuilder($"Welkom: {Login.user.firstName}" + "\n", new string[] {"Films bekijken", "Reserveren", "Mijn reserveringen", "Uitloggen"}, 12, 14);
+            if (userMenu == "Films bekijken") {
+
+            } else if (userMenu == "Reserveren") {
+
+            } else if (userMenu == "Mijn reserveringen") {
+
+            } else if (userMenu == "Uiloggen") {
+                Login.logout();
+            }
+        } 
+        public static void adminMenu() {
+            string adminMenu = Menubuilder($"Welkom: {Login.user.firstName}" + "\n", new string[] {"Reserveringen beheren", "Films beheren", "Zalen beheren", "Gebruikers beheren", "Uitloggen"}, 12, 14);
+            if (adminMenu == "Reserveringen beheren") {
+
+            } else if (adminMenu == "Films beheren") {
+
+            } else if (adminMenu == "Zalen beheren") {
+                roomAdmin.roomMain();
+            } else if (adminMenu == "Gebruikers beheren") {
+
+            } else if (adminMenu == "Uitloggen") {
+                Login.logout();
+            }
+        }
+
         static string Menubuilder(string title, string[] items, int titleColor, int SelectColor)
         {
             int currentItem = 0; //geselecteerde item
