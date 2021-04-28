@@ -20,7 +20,7 @@ namespace ProjectB.pages
             if (File.Exists(path) == false)
             {
                 tools.textColor("Er zijn nog geen films geregistreerd!", 4, false);
-                Menu.mainMenu();
+                Menu.mainmenu();
             }
             // read file into a string and deserialize JSON to a type
             string fileContent = File.ReadAllText("storage.json");
@@ -44,7 +44,7 @@ namespace ProjectB.pages
             if (Console.ReadLine() == "2")
             {
                 Console.Clear();
-                Menu.mainMenu();
+                Menu.mainmenu();
             }
             else if (Console.ReadLine() == "1")
             {
@@ -53,7 +53,7 @@ namespace ProjectB.pages
             else if (Console.ReadLine() == "2")
             {
                 Console.Clear();
-                Menu.mainMenu();
+                Menu.mainmenu();
             }
             else
             {
@@ -131,7 +131,7 @@ namespace ProjectB.pages
             else if (userinput == "2")
             {
                 Console.Clear();
-                Menu.mainMenu();
+                Menu.mainmenu();
             }
             }
             

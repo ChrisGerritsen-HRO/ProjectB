@@ -17,12 +17,12 @@ namespace ProjectB.pages
                 var userinput = Console.ReadLine();
                 if (userinput == "1") {
                     listMain();
-                    Menu.mainMenu();
+                    Menu.mainmenu();
                     break;
                     } 
                 if (userinput == "2") {
                     search.filmlijst();
-                    Menu.mainMenu();
+                    Menu.mainmenu();
                 } else {
                     tools.textColor("Alleen optie 1 en 2 zijn beschikbaar", 4, false); 
         }}}
@@ -40,7 +40,7 @@ namespace ProjectB.pages
             tools.textColor("[1] Terug gaan\n", 15, false);
             if(Console.ReadLine() == "1") {
                 Console.Clear();
-                Menu.mainMenu();
+                Menu.mainmenu();
             }
 
         }     
