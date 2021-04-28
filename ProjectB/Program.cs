@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ProjectB.DAL;
+using ProjectB.pages;
+using System;
 
 namespace ProjectB
 {
@@ -6,8 +8,8 @@ namespace ProjectB
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
-            Console.WriteLine("Bounjour!");
+            dataStorageHandler.init("storage.json");
+            Menu.Mainmenu();
         }
     }
 }
