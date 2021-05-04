@@ -17,15 +17,17 @@ namespace ProjectB.pages
                 var userinput = Console.ReadLine();
                 if (userinput == "1") {
                     listMain();
-                    Menu.mainMenu();
+                    Menu.Mainmenu();
                     break;
                     } 
                 if (userinput == "2") {
                     search.filmlijst();
-                    Menu.mainMenu();
+                    Menu.Mainmenu();
                 } else {
                     tools.textColor("Alleen optie 1 en 2 zijn beschikbaar", 4, false); 
-        }}}
+                }
+            }
+        }
         public static void listMain() {
             Console.Clear();
             string fileContent = File.ReadAllText("storage.json");
@@ -40,7 +42,7 @@ namespace ProjectB.pages
             tools.textColor("[1] Terug gaan\n", 15, false);
             if(Console.ReadLine() == "1") {
                 Console.Clear();
-                Menu.mainMenu();
+                Menu.dashboard();
             }
 
         }     
