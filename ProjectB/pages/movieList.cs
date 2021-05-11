@@ -44,8 +44,25 @@ namespace ProjectB.pages
                 Console.Clear();
                 Menu.dashboard();
             }
+        }
 
-        }     
+        public static void listMainNoUser() {
+            Console.Clear();
+            string fileContent = File.ReadAllText("storage.json");
+            dynamic obj = JsonConvert.DeserializeObject(fileContent);
+
+            var len = ((Newtonsoft.Json.Linq.JArray)obj.movie).Count;
+            for(int i = 0; i < len; i++) {
+                tools.textColor("----------------------------", 14, false);
+                tools.textColor($"Naam         | {obj.movie[i].movieName}\nBeschrijving | {obj.movie[i].movieDescription}\nLeeftijd     | {obj.movie[i].movieAge}+\nGenre     | {obj.movie[i].movieGenre}\nTijdstip     | {obj.movie[i].movieTime}\nDuur         | {obj.movie[i].movieDuration} minuten\nZaal         | {obj.movie[i].movieTheater}\n", 14, false);
+            } 
+
+            tools.textColor("[1] Terug gaan\n", 15, false);
+            if(Console.ReadLine() == "1") {
+                Console.Clear();
+                Menu.Mainmenu();
+            }
+        }    
     }
 }
 
