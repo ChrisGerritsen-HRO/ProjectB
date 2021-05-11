@@ -22,7 +22,7 @@ namespace ProjectB.pages
                     removeMovie();
                 } else if (userinput == "3") {
                     Console.Clear();                    
-                    Menu.mainMenu();
+                    Menu.Mainmenu();
                 } else {
                     tools.textColor("Deze optie is niet beschikbaar", 4, false);
                 }
