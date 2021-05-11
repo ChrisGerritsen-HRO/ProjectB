@@ -19,30 +19,27 @@ namespace ProjectB.pages
             string fileContent = File.ReadAllText("storage.json");
             dynamic obj = JsonConvert.DeserializeObject(fileContent);
             
-            bool loginBool = true;
-            while(loginBool) {
-                Console.WriteLine("Email: ");
+            int count = 0;
+            while(true) {
+                Console.Clear();
+                tools.textColor("Email: ", 14, true);
                 string email = Console.ReadLine();
-                Console.WriteLine("Wachtwoord: ");
+                tools.textColor("Wachtwoord: ", 14, true);
                 string password = Console.ReadLine();
-
                 var len = ((Newtonsoft.Json.Linq.JArray)obj.personAccount).Count;
                 for(int i = 0; i < len; i++) {
                     if(obj.personAccount[i].userEmail == email && obj.personAccount[i].password == password) {
                         user = obj.personAccount[i];
-
-                        // if(obj.personAccount[i].gender == "man") {
-                        //     Console.WriteLine($"Welkom Dhr. {obj.personAccount[i].lastName}");
-                        // } else if (obj.personAccount[i].gender == "vrouw") {
-                        //     Console.WriteLine($"Welkom Mevr. {obj.personAccount[i].lastName}");
-                        // } else {
-                        //     Console.WriteLine($"Welkom {obj.personAccount[i].firstName} {obj.personAccount[i].lastName}");
-                        // }
-                        loginBool = false;
+                        Menu.dashboard();
+                    } else {
+                        tools.textColor("Email en wachtwoord komen niet overeen", 12, true);
+                        count++;
+                    }
+                    if(count == 4) {
+                        Menu.Mainmenu();
                     }
                 }
             }
-            Menu.dashboard();
         }
 
         public static void logout() {
