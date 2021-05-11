@@ -1,6 +1,6 @@
-﻿using ProjectB.DAL;
+﻿using System;
+using ProjectB.DAL;
 using ProjectB.pages;
-using System;
 
 namespace ProjectB
 {
