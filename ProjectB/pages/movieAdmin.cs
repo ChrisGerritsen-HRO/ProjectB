@@ -12,20 +12,15 @@ namespace ProjectB.pages
         public static dataStorage storage { get; set; }
         public static void moviesMain() {
             Console.Clear();
-            tools.textColor("Welkom beheerder, wat wilt u doen?", 14, false);
-            tools.textColor("[1] Film toevoegen\n[2] Film verwijderen\n[3] Terug naar hoofdmenu\n", 15, false);
-            while(true) {
-                var userinput = Console.ReadLine();
-                if (userinput == "1") {
-                    createMovie();
-                } else if (userinput == "2") {
-                    removeMovie();
-                } else if (userinput == "3") {
-                    Console.Clear();                    
-                    Menu.dashboard();
-                } else {
-                    tools.textColor("Deze optie is niet beschikbaar", 4, false);
-                }
+            string movieMenu = Menu.Menubuilder($"Films beheren" + "\n", new string[] {"Film toevoegen", "Films verwijderen", "Films bekijken", "Terug naar hoofdmenu"}, 10, 14);
+            if(movieMenu == "Film toevoegen") {
+                createMovie();
+            } else if(movieMenu == "Films verwijderen") {
+                removeMovie();
+            } else if(movieMenu == "Films bekijken") {
+                movieList.listMain();
+            } else if(movieMenu == "Terug naar hoofdmenu") {
+                Menu.dashboard();
             }
         }        
         public static void createMovie() {
@@ -91,15 +86,13 @@ namespace ProjectB.pages
                 dataStorageHandler.storage.movie.Add(obj);
                 dataStorageHandler.saveChanges();
 
-                tools.textColor("Nog een film toevoegen [1]", 14, false);
-                tools.textColor("Terug gaan [2]", 14, false);
-                if(Console.ReadLine() == "2"){
-                    Console.Clear();
+                string back = Menu.Menubuilder($"" + "\n", new string[] {"Nog een film toevoegen", "Terug?"}, 14, 14);
+                if(back == "Nog een zaal toevoegen") {
+                    createMovie();
+                } else if(back == "Terug?") {
                     moviesMain();
                 }
             }
-
-
         }
 
         public static void removeMovie() {
@@ -149,14 +142,11 @@ namespace ProjectB.pages
                     tools.textColor("de film ", 15, true); tools.textColor($"{deletedMovie}", 11, true); tools.textColor(" is succesvol verwijderd\n", 15, false);                    
 
                 }
-
-
-                tools.textColor("[1] Nog een film verwijderen\n[2] Terug gaan\n", 15, false);
-                var userinput = Console.ReadLine();
-                if(userinput == "1") {
-                    continue;
-                } else if(userinput == "2") {
-                    Console.Clear();
+                
+                string back = Menu.Menubuilder($"" + "\n", new string[] {"Nog een film verwijderen", "Terug?"}, 14, 14);
+                if(back == "Nog een film verwijderen") {
+                    createMovie();
+                } else if(back == "Terug?") {
                     moviesMain();
                 }
             }

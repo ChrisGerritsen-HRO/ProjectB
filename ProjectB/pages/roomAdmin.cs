@@ -12,22 +12,16 @@ namespace ProjectB.pages
         public static dataStorage storage { get; set; }
         public static void roomMain() {
             Console.Clear();
-            tools.textColor("Welkom beheerder, wat wilt u doen?", 14, false);
-            tools.textColor("[1] Zaal toevoegen\n[2] Zaal verwijderen\n[3] Bekijk zalen\n[4] Terug naar hoofdmenu\n", 15, false);
-            while(true) {
-                var userinput = Console.ReadLine();
-                if (userinput == "1") {
-                    createRoom();
-                } else if (userinput == "2") {
-                    removeRoom();
-                } else if (userinput == "3") {
-                    showRoom();
-                } else if (userinput == "4") {
-                    Console.Clear();                    
-                    Menu.dashboard();
-                } else {
-                    tools.textColor("Deze optie is niet beschikbaar", 4, false);
-                }
+            string roomMenu = Menu.Menubuilder($"Zalen beheren" + "\n", new string[] {"Zaal toevoegen", "Zalen verwijderen", "Zalen bijken", "Terug naar hoofdmenu"}, 10, 14);
+            if(roomMenu == "Zaal toevoegen") {
+                createRoom();
+            } else if(roomMenu == "Zalen verwijderen") {
+                removeRoom();
+            } else if(roomMenu == "Zalen bijken") {
+                showRoom();
+            } else if(roomMenu == "Terug naar hoofdmenu") {
+                Console.Clear();
+                Menu.dashboard();
             }
         }
 
@@ -53,21 +47,18 @@ namespace ProjectB.pages
             } else {
                 while(true) {
                     for(int i = 0; i < arrLen; i++) {
-                    tools.textColor($"Nummer: {obj.movieRoom[i].roomNumber}", 14, false);
-                    tools.textColor($"Totale stoelen: {obj.movieRoom[i].totalSeats}", 14, false);
-                    tools.textColor($"Blauwe stoelen: {obj.movieRoom[i].blueSeats}", 14, false);
-                    tools.textColor($"Oranje stoelen: {obj.movieRoom[i].orangeSeats}", 14, false);
-                    tools.textColor($"Rode stoelen: {obj.movieRoom[i].redSeats}\n", 14, false);
+                        tools.textColor($"Nummer: {obj.movieRoom[i].roomNumber}", 14, false);
+                        tools.textColor($"Totale stoelen: {obj.movieRoom[i].totalSeats}", 14, false);
+                        tools.textColor($"Blauwe stoelen: {obj.movieRoom[i].blueSeats}", 14, false);
+                        tools.textColor($"Oranje stoelen: {obj.movieRoom[i].orangeSeats}", 14, false);
+                        tools.textColor($"Rode stoelen: {obj.movieRoom[i].redSeats}\n", 14, false);
                     }
 
-                    Console.WriteLine("[1] Terug?\n");
-                    string userInput = Console.ReadLine();
-
-                    if (userInput == "1") {
-                        break;
+                    string back = Menu.Menubuilder($"" + "\n", new string[] {"Terug?"}, 14, 14);
+                    if(back == "Terug?") {
+                        roomMain();
                     }
                 }
-                roomMain();
             }
         }
 
@@ -149,13 +140,10 @@ namespace ProjectB.pages
             dataStorageHandler.storage.movieRoom.Add(obj);
             dataStorageHandler.saveChanges();
 
-            tools.textColor("Nog een film toevoegen [1]", 14, false);
-            tools.textColor("Terug gaan [2]", 14, false);
-            if(Console.ReadLine() == "1"){
-                Console.Clear();
+            string back = Menu.Menubuilder($"" + "\n", new string[] {"Nog een zaal toevoegen", "Terug?"}, 14, 14);
+            if(back == "Nog een zaal toevoegen") {
                 createRoom();
-            } else {
-                Console.Clear();
+            } else if(back == "Terug?") {
                 roomMain();
             }
         }
@@ -206,13 +194,11 @@ namespace ProjectB.pages
                 Console.Clear();
                 tools.textColor("Zaal nummer ", 15, true); tools.textColor($"{deletedRoom}", 11, true); tools.textColor(" is succesvol verwijderd\n", 15, false); 
             }
-            tools.textColor("Nog een zaal verwijderen [1]", 14, false);
-            tools.textColor("Terug gaan [2]", 14, false);
-            if(Console.ReadLine() == "1"){
-                Console.Clear();
+
+            string back = Menu.Menubuilder($"" + "\n", new string[] {"Nog een zaal verwijderen", "Terug?"}, 14, 14);
+            if(back == "Nog een zaal verwijderen") {
                 removeRoom();
-            } else {
-                Console.Clear();
+            } else if(back == "Terug?") {
                 roomMain();
             }
         }        
