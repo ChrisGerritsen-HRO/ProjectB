@@ -79,7 +79,7 @@ namespace ProjectB.pages
             }
         }
 
-        static string Menubuilder(string title, string[] items, int titleColor, int SelectColor)
+        public static string Menubuilder(string title, string[] items, int titleColor, int SelectColor)
         {
             int currentItem = 0; //geselecteerde item
             while (true)
