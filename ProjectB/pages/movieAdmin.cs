@@ -12,6 +12,7 @@ namespace ProjectB.pages
         public static dataStorage storage { get; set; }
         public static void moviesMain() {
             Console.Clear();
+<<<<<<< HEAD
             tools.textColor("Welkom beheerder, wat wilt u doen?", 14, false);
             tools.textColor("[1] Film toevoegen\n[2] Film verwijderen\n[3] Terug naar hoofdmenu\n", 15, false);
             while(true) {
@@ -26,6 +27,33 @@ namespace ProjectB.pages
                 } else {
                     tools.textColor("Deze optie is niet beschikbaar", 4, false);
                 }
+=======
+            string movieMenu = Menu.Menubuilder($"Films beheren" + "\n", new string[] {"Film toevoegen", "Films verwijderen", "Films bekijken", "Terug naar hoofdmenu"}, 10, 14);
+            if(movieMenu == "Film toevoegen") {
+                createMovie();
+            } else if(movieMenu == "Films verwijderen") {
+                removeMovie();
+            } else if(movieMenu == "Films bekijken") {
+                listMain();
+            } else if(movieMenu == "Terug naar hoofdmenu") {
+                Menu.dashboard();
+            }
+        }
+        public static void listMain() {
+            Console.Clear();
+            string fileContent = File.ReadAllText("storage.json");
+            dynamic obj = JsonConvert.DeserializeObject(fileContent);
+
+            var len = ((Newtonsoft.Json.Linq.JArray)obj.movie).Count;
+            for(int i = 0; i < len; i++) {
+                tools.textColor("----------------------------", 14, false);
+                tools.textColor($"Naam         | {obj.movie[i].movieName}\nBeschrijving | {obj.movie[i].movieDescription}\nLeeftijd     | {obj.movie[i].movieAge}+\nGenre     | {obj.movie[i].movieGenre}\nTijdstip     | {obj.movie[i].movieTime}\nDuur         | {obj.movie[i].movieDuration} minuten\nZaal         | {obj.movie[i].movieTheater}\n", 14, false);
+            } 
+
+            string back = Menu.Menubuilder($"" + "\n", new string[] {"Terug?"}, 14, 14);
+            if(back == "Terug?") {
+                movieAdmin.moviesMain();
+>>>>>>> master
             }
         }        
         public static void createMovie() {
@@ -53,9 +81,6 @@ namespace ProjectB.pages
                 tools.textColor("Film genre: ", 14, false);
                 moviegenre = Console.ReadLine();
 
-                tools.textColor("Film tijd: ", 14, false);
-                movietime = Console.ReadLine();
-
                 while(true) {
                     tools.textColor("Film duur: ", 14, false);
                     string durationinput = Console.ReadLine();
@@ -65,6 +90,9 @@ namespace ProjectB.pages
                         break;
                     } else { tools.textColor("Gebruik a.u.b alleen cijfers", 12, false); }
                 }   
+
+                tools.textColor("Film begintijd: ", 14, false);
+                movietime = Console.ReadLine();
 
                 while(true) {
                     tools.textColor("Film zaal: ", 14, false);
@@ -91,15 +119,13 @@ namespace ProjectB.pages
                 dataStorageHandler.storage.movie.Add(obj);
                 dataStorageHandler.saveChanges();
 
-                tools.textColor("Nog een film toevoegen [1]", 14, false);
-                tools.textColor("Terug gaan [2]", 14, false);
-                if(Console.ReadLine() == "2"){
-                    Console.Clear();
+                string back = Menu.Menubuilder($"" + "\n", new string[] {"Nog een film toevoegen", "Terug?"}, 14, 14);
+                if(back == "Nog een zaal toevoegen") {
+                    createMovie();
+                } else if(back == "Terug?") {
                     moviesMain();
                 }
             }
-
-
         }
 
         public static void removeMovie() {
@@ -149,14 +175,11 @@ namespace ProjectB.pages
                     tools.textColor("de film ", 15, true); tools.textColor($"{deletedMovie}", 11, true); tools.textColor(" is succesvol verwijderd\n", 15, false);                    
 
                 }
-
-
-                tools.textColor("[1] Nog een film verwijderen\n[2] Terug gaan\n", 15, false);
-                var userinput = Console.ReadLine();
-                if(userinput == "1") {
-                    continue;
-                } else if(userinput == "2") {
-                    Console.Clear();
+                
+                string back = Menu.Menubuilder($"" + "\n", new string[] {"Nog een film verwijderen", "Terug?"}, 14, 14);
+                if(back == "Nog een film verwijderen") {
+                    createMovie();
+                } else if(back == "Terug?") {
                     moviesMain();
                 }
             }

@@ -56,14 +56,22 @@ namespace ProjectB.pages
 
                 textColor("Vul uw email in: ", 14, true);
                 userEmail = Console.ReadLine();
-                
+
                 var storedMail = "";
-                foreach (var item in storage.personAccount)
-                {
-                    storedMail = item.userEmail;
-                }
-                if(userEmail == storedMail) {
-                    textColor("Email is al in gebruik", 12, false);
+                if(storage.personAccount != null) {
+                    foreach (var item in storage.personAccount)
+                    {
+                        storedMail = item.userEmail;
+                    }
+                    if(userEmail == storedMail) {
+                        textColor("Email is al in gebruik", 12, false);
+                    } else {
+                        textColor("Herhaal uw email: ", 14, true);
+                        string userEmailConfirm = Console.ReadLine();
+
+                        if(Regex.IsMatch(userEmail, "^[A-Za-z0-9_.-]{1,64}@[A-Za-z-]{1,255}.(com|net|nl|org)$") && userEmail == userEmailConfirm) { break; }
+                        else { textColor("Ongeldig email, gebruik een geldig email", 12, false); }
+                    }
                 } else {
                     textColor("Herhaal uw email: ", 14, true);
                     string userEmailConfirm = Console.ReadLine();
