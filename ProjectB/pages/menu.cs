@@ -50,7 +50,7 @@ namespace ProjectB.pages
         public static void userMenu() {
             string userMenu = Menubuilder($"Welkom: {Login.user.firstName}" + "\n", new string[] {"Films bekijken", "Reserveren", "Mijn reserveringen", "Uitloggen"}, 12, 14);
             if (userMenu == "Films bekijken") {
-                movieList.choice();
+                movieList.listMain();
             } else if (userMenu == "Reserveren") {
 
             } else if (userMenu == "Mijn reserveringen") {
@@ -79,6 +79,7 @@ namespace ProjectB.pages
             int currentItem = 0; //geselecteerde item
             while (true)
             {
+                Console.Clear();
                 textColor(title, titleColor, false); //print title
                 for (int i = 0; i < items.Length; i++) //print alle items uit het menu, met de geselecteerde item gekleurd
                 {
@@ -108,8 +109,8 @@ namespace ProjectB.pages
                     break;
                 }
                 else { continue; }
-                Console.Clear();
             }
+            Console.Clear();
             return items[currentItem]; //geeft de naam van de item dat geselecteerd is terug 
         }
     }
