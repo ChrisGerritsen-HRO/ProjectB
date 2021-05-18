@@ -1,6 +1,6 @@
-﻿using ProjectB.DAL;
+﻿using System;
+using ProjectB.DAL;
 using ProjectB.pages;
-using System;
 
 namespace ProjectB
 {
@@ -9,6 +9,7 @@ namespace ProjectB
         static void Main(string[] args)
         {
             dataStorageHandler.init("storage.json");
+            dataStorageHandler.saveChanges();
             Menu.Mainmenu();
         }
     }
