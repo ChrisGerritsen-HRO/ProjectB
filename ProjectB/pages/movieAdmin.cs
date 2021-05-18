@@ -12,22 +12,6 @@ namespace ProjectB.pages
         public static dataStorage storage { get; set; }
         public static void moviesMain() {
             Console.Clear();
-<<<<<<< HEAD
-            tools.textColor("Welkom beheerder, wat wilt u doen?", 14, false);
-            tools.textColor("[1] Film toevoegen\n[2] Film verwijderen\n[3] Terug naar hoofdmenu\n", 15, false);
-            while(true) {
-                var userinput = Console.ReadLine();
-                if (userinput == "1") {
-                    createMovie();
-                } else if (userinput == "2") {
-                    removeMovie();
-                } else if (userinput == "3") {
-                    Console.Clear();                    
-                    Menu.dashboard();
-                } else {
-                    tools.textColor("Deze optie is niet beschikbaar", 4, false);
-                }
-=======
             string movieMenu = Menu.Menubuilder($"Films beheren" + "\n", new string[] {"Film toevoegen", "Films verwijderen", "Films bekijken", "Terug naar hoofdmenu"}, 10, 14);
             if(movieMenu == "Film toevoegen") {
                 createMovie();
@@ -53,7 +37,6 @@ namespace ProjectB.pages
             string back = Menu.Menubuilder($"" + "\n", new string[] {"Terug?"}, 14, 14);
             if(back == "Terug?") {
                 movieAdmin.moviesMain();
->>>>>>> master
             }
         }        
         public static void createMovie() {
