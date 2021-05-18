@@ -29,10 +29,9 @@ namespace ProjectB.pages
                 Console.Clear();
                 Login.loginMain();
             } else if (mainmenu == "Films") {
-                movieList.choice();
+                Console.WriteLine("geen films jammer joh.");
             } else if (mainmenu == "Over") {
                 Console.WriteLine("Hier komt over");
-                Menu.Mainmenu();
             } else if (mainmenu == "Afsluiten") {
                 Environment.Exit(0);
             }
@@ -50,36 +49,31 @@ namespace ProjectB.pages
         public static void userMenu() {
             string userMenu = Menubuilder($"Welkom: {Login.user.firstName}" + "\n", new string[] {"Films bekijken", "Reserveren", "Mijn reserveringen", "Uitloggen"}, 12, 14);
             if (userMenu == "Films bekijken") {
-                movieList.choice();
+
             } else if (userMenu == "Reserveren") {
-                textColor("Dit is helaas nog geen optie", 14, false);
-                Menu.dashboard();
+
             } else if (userMenu == "Mijn reserveringen") {
-                textColor("Dit is helaas nog geen optie", 14, false);
-                Menu.dashboard();
-            } else if (userMenu == "Uitloggen") {
+
+            } else if (userMenu == "Uiloggen") {
                 Login.logout();
             }
         } 
         public static void adminMenu() {
             string adminMenu = Menubuilder($"Welkom: {Login.user.firstName}" + "\n", new string[] {"Reserveringen beheren", "Films beheren", "Zalen beheren", "Gebruikers beheren", "Uitloggen"}, 12, 14);
             if (adminMenu == "Reserveringen beheren") {
-                textColor("Dit is helaas nog geen optie", 14, false);
-                Menu.dashboard();
+
             } else if (adminMenu == "Films beheren") {
-                Console.Clear();
-                movieAdmin.moviesMain();
+
             } else if (adminMenu == "Zalen beheren") {
                 roomAdmin.roomMain();
             } else if (adminMenu == "Gebruikers beheren") {
-                textColor("Dit is helaas nog geen optie", 14, false);
-                Menu.dashboard();
+
             } else if (adminMenu == "Uitloggen") {
                 Login.logout();
             }
         }
 
-        public static string Menubuilder(string title, string[] items, int titleColor, int SelectColor)
+        static string Menubuilder(string title, string[] items, int titleColor, int SelectColor)
         {
             int currentItem = 0; //geselecteerde item
             while (true)
