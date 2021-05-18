@@ -33,9 +33,12 @@ namespace ProjectB.pages
                 tools.textColor($"Naam         | {obj.movie[i].movieName}\nBeschrijving | {obj.movie[i].movieDescription}\nLeeftijd     | {obj.movie[i].movieAge}+\nGenre     | {obj.movie[i].movieGenre}\nTijdstip     | {obj.movie[i].movieTime}\nDuur         | {obj.movie[i].movieDuration} minuten\nZaal         | {obj.movie[i].movieTheater}\n", 14, false);
             } 
 
-            string back = Menu.Menubuilder($"" + "\n", new string[] {"Terug?"}, 14, 14);
-            if(back == "Terug?") {
-                Menu.userMenu();
+            tools.textColor(">> Terug", 14, false);
+            while (true) {
+                var key = Console.ReadKey();
+                if (key.Key.ToString() == "Enter" && Login.user == null) {Console.Clear(); Menu.Mainmenu();}
+                else if (key.Key.ToString() == "Enter" && Login.user is not null) {Console.Clear(); Menu.dashboard();}
+                else {continue;}
             }
         }
     }

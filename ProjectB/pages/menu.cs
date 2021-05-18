@@ -31,9 +31,9 @@ namespace ProjectB.pages
             } else if (mainmenu == "Films") {
                 movieList.choice();
             } else if (mainmenu == "Over") {
-                Console.WriteLine("Hier komt over");
-                Menu.Mainmenu();
+                about.aboutPage();
             } else if (mainmenu == "Afsluiten") {
+                
                 Environment.Exit(0);
             }
         }
