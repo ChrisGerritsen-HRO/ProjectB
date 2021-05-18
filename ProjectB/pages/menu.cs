@@ -29,7 +29,7 @@ namespace ProjectB.pages
                 Console.Clear();
                 Login.loginMain();
             } else if (mainmenu == "Films") {
-                movieList.listMainNoUser();
+                movieList.choice();
             } else if (mainmenu == "Over") {
                 Console.WriteLine("Hier komt over");
                 Menu.Mainmenu();
@@ -74,7 +74,7 @@ namespace ProjectB.pages
             }
         }
 
-        static string Menubuilder(string title, string[] items, int titleColor, int SelectColor)
+        public static string Menubuilder(string title, string[] items, int titleColor, int SelectColor)
         {
             int currentItem = 0; //geselecteerde item
             while (true)

@@ -8,7 +8,7 @@ using System.Text.RegularExpressions;
 
 namespace ProjectB.pages
 {
-    class movieAdmin {
+    public class movieAdmin {
         public static dataStorage storage { get; set; }
         public static void moviesMain() {
             Console.Clear();
