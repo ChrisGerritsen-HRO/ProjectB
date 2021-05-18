@@ -4,7 +4,7 @@ using System;
 
 namespace ProjectB.pages
 {
-    class about
+    class About
     {
         public static void aboutPage()
         {

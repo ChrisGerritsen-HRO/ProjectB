@@ -31,8 +31,7 @@ namespace ProjectB.pages
             } else if (mainmenu == "Films") {
                 movieList.choice();
             } else if (mainmenu == "Over") {
-                Console.WriteLine("Hier komt over");
-                Menu.Mainmenu();
+                About.aboutPage();
             } else if (mainmenu == "Afsluiten") {
                 Environment.Exit(0);
             }
@@ -44,6 +43,8 @@ namespace ProjectB.pages
                 userMenu();
             } else if (Login.user is not null && Login.user.role == "admin") {
                 adminMenu();
+            } else {
+                Mainmenu();
             }
         }
 

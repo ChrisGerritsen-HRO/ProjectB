@@ -65,7 +65,7 @@ namespace ProjectB.pages
                 moviegenre = Console.ReadLine();
 
                 while(true) {
-                    tools.textColor("Film duur: ", 14, false);
+                    tools.textColor("Film duur (in minuten): ", 14, false);
                     string durationinput = Console.ReadLine();
                     int value;
                     if (int.TryParse(durationinput, out value)) {

@@ -30,6 +30,10 @@ namespace ProjectB.pages
             for(int i = 0; i < len; i++) {
                 tools.textColor("----------------------------", 14, false);
                 tools.textColor($"Naam         | {obj.movie[i].movieName}\nBeschrijving | {obj.movie[i].movieDescription}\nLeeftijd     | {obj.movie[i].movieAge}+\nGenre        | {obj.movie[i].movieGenre}\nTijdstip     | {obj.movie[i].movieTime}\nDuur         | {obj.movie[i].movieDuration} minuten\nZaal         | {obj.movie[i].movieTheater}\n", 14, false);
+            }
+
+            if(len == 0) {
+                tools.textColor("Er zijn geen films geregistreerd.", 12, false);
             } 
 
             string back = Menu.Menubuilder($"" + "\n", new string[] {"Terug?"}, 14, 14);
