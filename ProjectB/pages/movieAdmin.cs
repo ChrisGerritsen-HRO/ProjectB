@@ -114,12 +114,15 @@ namespace ProjectB.pages
                 // JSON
                 dataStorageHandler.storage.movie.Add(obj);
                 dataStorageHandler.saveChanges();
-
-                string back = Menu.Menubuilder($"" + "\n", new string[] {"Nog een film toevoegen", "Terug?"}, 14, 14);
+                
+                Console.Clear();
+                string back = Menu.Menubuilder("Film " + moviename + "is toegevoegd" + "\n", new string[] {"Nog een film toevoegen", "Film lijs bekijken", "Terug?"}, 10, 14);
                 if(back == "Nog een zaal toevoegen") {
                     createMovie();
                 } else if(back == "Terug?") {
                     moviesMain();
+                } else if(back == "Film lijst bekijken") {
+                    movieList.listMain();
                 }
             }
         }
