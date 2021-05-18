@@ -56,6 +56,7 @@ namespace ProjectB.pages
             } else if (userMenu == "Mijn reserveringen") {
 
             } else if (userMenu == "Uitloggen") {
+
                 Login.logout();
             }
         } 

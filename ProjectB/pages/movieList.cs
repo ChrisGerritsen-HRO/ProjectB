@@ -12,21 +12,14 @@ namespace ProjectB.pages
 
         public static void choice() {
             Console.Clear();
-            tools.textColor("[1] Hele filmlijst\n[2] Zoeken in filmlijst\n",14, false);
-             while(true) {
-                var userinput = Console.ReadLine();
-                if (userinput == "1") {
-                    listMain();
-                    Menu.Mainmenu();
-                    break;
-                    } 
-                if (userinput == "2") {
-                    search.filmlijst();
-                    Menu.Mainmenu();
-                } else {
-                    tools.textColor("Alleen optie 1 en 2 zijn beschikbaar", 4, false); 
-                }
-            }
+            string userinput = Menu.Menubuilder(@" ______   __     __         __    __     ______    
+/\  ___\ /\ \   /\ \       /\ '-./  \   /\  ___\   
+\ \  __\ \ \ \  \ \ \____  \ \ \-./\ \  \ \___  \  
+ \ \_\    \ \_\  \ \_____\  \ \_\ \ \_\  \/\_____\ 
+  \/_/     \/_/   \/_____/   \/_/  \/_/   \/_____/ " + "\n", new string[] {"Hele filmlijst", "Zoeken in filmlijst", "Terug"}, 12, 14);
+            if (userinput == "Hele filmlijst" ) {listMain();}
+            else if (userinput == "Zoeken in filmlijst") {search.filmlijst();}
+            else if (userinput == "Terug") {Menu.Mainmenu();}
         }
         public static void listMain() {
             Console.Clear();
