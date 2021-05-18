@@ -41,7 +41,7 @@ namespace ProjectB.pages
 
             string back = Menu.Menubuilder($"" + "\n", new string[] {"Terug?"}, 14, 14);
             if(back == "Terug?") {
-                movieAdmin.moviesMain();
+                Menu.userMenu();
             }
         }
 
