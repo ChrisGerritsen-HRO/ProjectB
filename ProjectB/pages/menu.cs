@@ -78,7 +78,11 @@ namespace ProjectB.pages
             int currentItem = 0; //geselecteerde item
             while (true)
             {
+<<<<<<<< HEAD:ProjectB/pages/menu.cs
+                Console.Clear();
+========
                 
+>>>>>>>> master:ProjectB/pages/Menu.cs
                 textColor(title, titleColor, false); //print title
                 for (int i = 0; i < items.Length; i++) //print alle items uit het menu, met de geselecteerde item gekleurd
                 {
@@ -109,7 +113,6 @@ namespace ProjectB.pages
                     break;
                 }
                 else { continue; }
-                Console.Clear();
             }
             
             return items[currentItem]; //geeft de naam van de item dat geselecteerd is terug 

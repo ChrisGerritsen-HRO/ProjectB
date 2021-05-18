@@ -12,14 +12,14 @@ namespace ProjectB.pages
 
         public static void choice() {
             Console.Clear();
-            string userinput = Menu.Menubuilder(@" ______   __     __         __    __     ______    
-/\  ___\ /\ \   /\ \       /\ '-./  \   /\  ___\   
-\ \  __\ \ \ \  \ \ \____  \ \ \-./\ \  \ \___  \  
- \ \_\    \ \_\  \ \_____\  \ \_\ \ \_\  \/\_____\ 
-  \/_/     \/_/   \/_____/   \/_/  \/_/   \/_____/ " + "\n", new string[] {"Hele filmlijst", "Zoeken in filmlijst", "Terug"}, 12, 14);
-            if (userinput == "Hele filmlijst" ) {listMain();}
-            else if (userinput == "Zoeken in filmlijst") {search.filmlijst();}
-            else if (userinput == "Terug") {Menu.Mainmenu();}
+            string listMenu = Menu.Menubuilder($"Films bekijken" + "\n", new string[] {"Hele filmlijst", "Zoeken in filmlijst", "Terug naar hoofdmenu"}, 10, 14);
+            if(listMenu == "Hele filmlijst") {
+                listMain();
+            } else if(listMenu == "Zoeken in filmlijst") {
+                search.movieSearch();
+            } else if(listMenu == "Terug naar hoofdmenu") {
+                Menu.dashboard();
+            }
         }
         public static void listMain() {
             Console.Clear();
@@ -29,31 +29,13 @@ namespace ProjectB.pages
             var len = ((Newtonsoft.Json.Linq.JArray)obj.movie).Count;
             for(int i = 0; i < len; i++) {
                 tools.textColor("----------------------------", 14, false);
-                tools.textColor($"Naam         | {obj.movie[i].movieName}\nBeschrijving | {obj.movie[i].movieDescription}\nLeeftijd     | {obj.movie[i].movieAge}+\nGenre     | {obj.movie[i].movieGenre}\nTijdstip     | {obj.movie[i].movieTime}\nDuur         | {obj.movie[i].movieDuration} minuten\nZaal         | {obj.movie[i].movieTheater}\n", 14, false);
+                tools.textColor($"Naam         | {obj.movie[i].movieName}\nBeschrijving | {obj.movie[i].movieDescription}\nLeeftijd     | {obj.movie[i].movieAge}+\nGenre        | {obj.movie[i].movieGenre}\nTijdstip     | {obj.movie[i].movieTime}\nDuur         | {obj.movie[i].movieDuration} minuten\nZaal         | {obj.movie[i].movieTheater}\n", 14, false);
             } 
 
             string back = Menu.Menubuilder($"" + "\n", new string[] {"Terug?"}, 14, 14);
             if(back == "Terug?") {
-                Menu.userMenu();
+                choice();
             }
-        }
-
-        public static void listMainNoUser() {
-            Console.Clear();
-            string fileContent = File.ReadAllText("storage.json");
-            dynamic obj = JsonConvert.DeserializeObject(fileContent);
-
-            var len = ((Newtonsoft.Json.Linq.JArray)obj.movie).Count;
-            for(int i = 0; i < len; i++) {
-                tools.textColor("----------------------------", 14, false);
-                tools.textColor($"Naam         | {obj.movie[i].movieName}\nBeschrijving | {obj.movie[i].movieDescription}\nLeeftijd     | {obj.movie[i].movieAge}+\nGenre     | {obj.movie[i].movieGenre}\nTijdstip     | {obj.movie[i].movieTime}\nDuur         | {obj.movie[i].movieDuration} minuten\nZaal         | {obj.movie[i].movieTheater}\n", 14, false);
-            } 
-
-            string back = Menu.Menubuilder($"" + "\n", new string[] {"Terug?"}, 14, 14);
-            if(back == "Terug?") {
-                Console.Clear();
-                Menu.dashboard();
-            }
-        }    
+        }   
     }
 }
