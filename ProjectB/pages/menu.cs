@@ -48,7 +48,7 @@ namespace ProjectB.pages
         }
 
         public static void userMenu() {
-            string userMenu = Menubuilder($"Welkom: {Login.user.firstName}" + "\n", new string[] {"Films bekijken", "Reserveren", "Mijn reserveringen", "Uitloggen"}, 12, 14);
+            string userMenu = Menubuilder($"Welkom: {Login.user.firstName}" + "\n", new string[] {"Films bekijken", "Reserveren", "Mijn reserveringen", "Uitloggen"}, 14, 14);
             if (userMenu == "Films bekijken") {
                 movieList.choice();
             } else if (userMenu == "Reserveren") {
@@ -60,7 +60,7 @@ namespace ProjectB.pages
             }
         } 
         public static void adminMenu() {
-            string adminMenu = Menubuilder($"Welkom: {Login.user.firstName}" + "\n", new string[] {"Reserveringen beheren", "Films beheren", "Zalen beheren", "Gebruikers beheren", "Uitloggen"}, 12, 14);
+            string adminMenu = Menubuilder($"Welkom: {Login.user.firstName}" + "\n", new string[] {"Reserveringen beheren", "Films beheren", "Zalen beheren", "Gebruikers beheren", "Uitloggen"}, 14, 14);
             if (adminMenu == "Reserveringen beheren") {
                 Menu.dashboard();
             } else if (adminMenu == "Films beheren") {
@@ -79,7 +79,6 @@ namespace ProjectB.pages
             int currentItem = 0; //geselecteerde item
             while (true)
             {
-                Console.Clear();
                 textColor(title, titleColor, false); //print title
                 for (int i = 0; i < items.Length; i++) //print alle items uit het menu, met de geselecteerde item gekleurd
                 {
@@ -109,8 +108,8 @@ namespace ProjectB.pages
                     break;
                 }
                 else { continue; }
+                Console.Clear();
             }
-            Console.Clear();
             return items[currentItem]; //geeft de naam van de item dat geselecteerd is terug 
         }
     }
