@@ -22,6 +22,7 @@ namespace ProjectB.pages
             } else if(movieMenu == "Terug naar hoofdmenu") {
                 Menu.dashboard();
             }
+
         }
         public static void listMain() {
             Console.Clear();

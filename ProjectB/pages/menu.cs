@@ -61,7 +61,7 @@ namespace ProjectB.pages
         public static void adminMenu() {
             string adminMenu = Menubuilder($"Welkom: {Login.user.firstName}" + "\n", new string[] {"Reserveringen beheren", "Films beheren", "Zalen beheren", "Gebruikers beheren", "Uitloggen"}, 12, 14);
             if (adminMenu == "Reserveringen beheren") {
-
+                Reserve.ReserveMain();
             } else if (adminMenu == "Films beheren") {
                 movieAdmin.moviesMain();
             } else if (adminMenu == "Zalen beheren") {
@@ -78,11 +78,11 @@ namespace ProjectB.pages
             int currentItem = 0; //geselecteerde item
             while (true)
             {
-<<<<<<<< HEAD:ProjectB/pages/menu.cs
+
                 Console.Clear();
-========
+
                 
->>>>>>>> master:ProjectB/pages/Menu.cs
+
                 textColor(title, titleColor, false); //print title
                 for (int i = 0; i < items.Length; i++) //print alle items uit het menu, met de geselecteerde item gekleurd
                 {
@@ -109,7 +109,7 @@ namespace ProjectB.pages
                 }
                 else if (key.Key.ToString() == "Enter")
                 {
-                    movieAdmin.moviesMain();
+                    
                     break;
                 }
                 else { continue; }

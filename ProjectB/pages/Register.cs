@@ -29,12 +29,17 @@ namespace ProjectB.pages
             var dateFormats = new[] {"dd.MM.yyyy", "dd-MM-yyyy", "dd/MM/yyyy"};
             DateTime dateValue;
 
+            int count = 0;
+            
             while(true) {
                 textColor("Vul uw voornaam in: ", 14, true);
                 firstName = Console.ReadLine();
 
                 if(Regex.IsMatch(firstName, @"^[a-zA-Z]+$")) { break; }
                 else { textColor("Gebruik a.u.b alleen letters", 12, false); }
+                
+                if(count == 4) {
+                    Menu.Mainmenu();}
             }
             while(true) {
                 textColor("[Optioneel] Vul uw tussenvoegsel in: ", 14, true);
@@ -51,8 +56,8 @@ namespace ProjectB.pages
                 else { textColor("Gebruik a.u.b alleen letters", 12, false); }
             }
             while(true) {
-                string fileContent = File.ReadAllText("storage.json");
-                storage = JsonConvert.DeserializeObject<dataStorage>(fileContent);
+                
+                
 
                 textColor("Vul uw email in: ", 14, true);
                 userEmail = Console.ReadLine();
