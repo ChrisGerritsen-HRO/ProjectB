@@ -43,8 +43,6 @@ namespace ProjectB.pages
                 userMenu();
             } else if (Login.user is not null && Login.user.role == "admin") {
                 adminMenu();
-            } else {
-                Mainmenu();
             }
         }
 

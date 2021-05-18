@@ -11,6 +11,7 @@ namespace ProjectB
             dataStorageHandler.init("storage.json");
             dataStorageHandler.saveChanges();
             Menu.Mainmenu();
+            Login.user = "";
         }
     }
 }

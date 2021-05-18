@@ -48,6 +48,7 @@ namespace ProjectB.pages
                 while(true) {
                     for(int i = 0; i < arrLen; i++) {
                         tools.textColor($"Nummer: {obj.movieRoom[i].roomNumber}", 14, false);
+                        tools.textColor($"Soort zaal: {obj.movieRoom[i].roomKind}", 14, false);
                         tools.textColor($"Totale stoelen: {obj.movieRoom[i].totalSeats}", 14, false);
                         tools.textColor($"Blauwe stoelen: {obj.movieRoom[i].blueSeats}", 14, false);
                         tools.textColor($"Oranje stoelen: {obj.movieRoom[i].orangeSeats}", 14, false);
@@ -65,6 +66,7 @@ namespace ProjectB.pages
         public static void createRoom() {
             Console.Clear();
             int roomNumber, totalSeats, blueSeats, orangeSeats, redSeats;
+            string roomKind;
             while(true) {
                 while(true) {
                     string fileContent = File.ReadAllText("storage.json");
@@ -87,6 +89,9 @@ namespace ProjectB.pages
                         } else { tools.textColor("Gebruik a.u.b alleen cijfers", 12, false); }
                     }
                 }
+
+                roomKind = Menu.Menubuilder($"Soort zaal" + "\n", new string[] {"2D", "4D", "IMAX"}, 10, 14);
+
                 while(true) {
                     tools.textColor("Totaal aantal stoelen: ", 14, true);
                     string totalSeatsInput = Console.ReadLine();
@@ -131,6 +136,7 @@ namespace ProjectB.pages
 
             movieRooms obj = new movieRooms {
                 roomNumber = roomNumber,
+                roomKind = roomKind,
                 totalSeats = totalSeats,
                 blueSeats = blueSeats,
                 orangeSeats = orangeSeats,
