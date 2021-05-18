@@ -50,7 +50,7 @@ namespace ProjectB.pages
         public static void userMenu() {
             string userMenu = Menubuilder($"Welkom: {Login.user.firstName}" + "\n", new string[] {"Films bekijken", "Reserveren", "Mijn reserveringen", "Uitloggen"}, 12, 14);
             if (userMenu == "Films bekijken") {
-                movieList.listMain();
+                movieList.choice();
             } else if (userMenu == "Reserveren") {
 
             } else if (userMenu == "Mijn reserveringen") {
