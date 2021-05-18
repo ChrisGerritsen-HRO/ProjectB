@@ -49,7 +49,7 @@ namespace ProjectB.pages
         public static void userMenu() {
             string userMenu = Menubuilder($"Welkom: {Login.user.firstName}" + "\n", new string[] {"Films bekijken", "Reserveren", "Mijn reserveringen", "Uitloggen"}, 12, 14);
             if (userMenu == "Films bekijken") {
-
+                movieList.choice();
             } else if (userMenu == "Reserveren") {
 
             } else if (userMenu == "Mijn reserveringen") {
@@ -63,7 +63,7 @@ namespace ProjectB.pages
             if (adminMenu == "Reserveringen beheren") {
 
             } else if (adminMenu == "Films beheren") {
-
+                movieAdmin.moviesMain();
             } else if (adminMenu == "Zalen beheren") {
                 roomAdmin.roomMain();
             } else if (adminMenu == "Gebruikers beheren") {
@@ -73,7 +73,7 @@ namespace ProjectB.pages
             }
         }
 
-        static string Menubuilder(string title, string[] items, int titleColor, int SelectColor)
+        public static string Menubuilder(string title, string[] items, int titleColor, int SelectColor)
         {
             int currentItem = 0; //geselecteerde item
             while (true)
