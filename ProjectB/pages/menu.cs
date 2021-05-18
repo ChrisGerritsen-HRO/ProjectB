@@ -29,7 +29,7 @@ namespace ProjectB.pages
                 Console.Clear();
                 Login.loginMain();
             } else if (mainmenu == "Films") {
-                movieList.listMainNoUser();
+                movieList.choice();
             } else if (mainmenu == "Over") {
                 Console.WriteLine("Hier komt over");
                 Menu.Mainmenu();
@@ -50,7 +50,7 @@ namespace ProjectB.pages
         public static void userMenu() {
             string userMenu = Menubuilder($"Welkom: {Login.user.firstName}" + "\n", new string[] {"Films bekijken", "Reserveren", "Mijn reserveringen", "Uitloggen"}, 10, 14);
             if (userMenu == "Films bekijken") {
-                movieList.listMain();
+                movieList.choice();
             } else if (userMenu == "Reserveren") {
 
             } else if (userMenu == "Mijn reserveringen") {

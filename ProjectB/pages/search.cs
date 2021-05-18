@@ -9,59 +9,8 @@ using System.Text.RegularExpressions;
 
 namespace ProjectB.pages
 {
-    class search {
-
-        
-        public static void filmlijst()
-        {
-            Console.Clear();
-            string path = "storage.json";
-            string filePath = Directory.GetCurrentDirectory() + "\\" + path;
-            if (File.Exists(path) == false)
-            {
-                tools.textColor("Er zijn nog geen films geregistreerd!", 4, false);
-                Menu.Mainmenu();
-            }
-            // read file into a string and deserialize JSON to a type
-            string fileContent = File.ReadAllText("storage.json");
-            dynamic obj = JsonConvert.DeserializeObject(fileContent);
-
-            
-            
-            FilmSearch();
-            
-            tools.textColor("[1] Nog een film zoeken\n[2] Terug gaan\n", 15, false);   
-                
-            if (Console.ReadLine() == "1")
-            {
-                FilmSearch();
-            }
-            else
-            {
-                tools.textColor("Alleen optie 1 en 2 zijn beschikbaar", 4, false);
-            }
-            
-            if (Console.ReadLine() == "2")
-            {
-                Console.Clear();
-                Menu.Mainmenu();
-            }
-            else if (Console.ReadLine() == "1")
-            {
-                filmlijst();
-            }
-            else if (Console.ReadLine() == "2")
-            {
-                Console.Clear();
-                Menu.Mainmenu();
-            }
-            else
-            {
-                tools.textColor("Alleen optie 1 t/m 3 zijn beschikbaar", 4, false);
-            }
-        }
-        public static void FilmSearch()
-        {   
+    public class search {
+        public static void movieSearch() {   
             tools.textColor("Voer een tijd of naam van een film in:", 15, false);  
             string path = "storage.json";
             string filePath = Directory.GetCurrentDirectory() + "\\" + path;
@@ -126,7 +75,7 @@ namespace ProjectB.pages
             string userinput = Console.ReadLine();
             if (userinput == "1")
             {
-                filmlijst();
+                movieList.choice();
             }
             else if (userinput == "2")
             {

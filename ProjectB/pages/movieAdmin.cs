@@ -18,7 +18,7 @@ namespace ProjectB.pages
             } else if(movieMenu == "Films verwijderen") {
                 removeMovie();
             } else if(movieMenu == "Films bekijken") {
-                listMain();
+                movieList.choice();
             } else if(movieMenu == "Terug naar hoofdmenu") {
                 Menu.dashboard();
             }
