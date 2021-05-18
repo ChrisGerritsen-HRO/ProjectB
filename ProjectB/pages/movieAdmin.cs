@@ -8,7 +8,7 @@ using System.Text.RegularExpressions;
 
 namespace ProjectB.pages
 {
-    class movieAdmin {
+    public class movieAdmin {
         public static dataStorage storage { get; set; }
         public static void moviesMain() {
             Console.Clear();
@@ -18,7 +18,7 @@ namespace ProjectB.pages
             } else if(movieMenu == "Films verwijderen") {
                 removeMovie();
             } else if(movieMenu == "Films bekijken") {
-                listMain();
+                movieList.choice();
             } else if(movieMenu == "Terug naar hoofdmenu") {
                 Menu.dashboard();
             }
