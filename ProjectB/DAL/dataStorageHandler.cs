@@ -13,6 +13,7 @@ namespace ProjectB.DAL
         public static void init(string fileName) {
             if(!(File.Exists(fileName))) {
                 using StreamWriter sw = File.CreateText(fileName);
+                storage = new dataStorage();
             }
 
             StorageFilelocation = fileName;
