@@ -29,7 +29,7 @@ namespace ProjectB.pages
                 Console.Clear();
                 Login.loginMain();
             } else if (mainmenu == "Films") {
-                movieList.listMainNoUser();
+                movieList.choice();
             } else if (mainmenu == "Over") {
                 Console.WriteLine("Hier komt over");
                 Menu.Mainmenu();
@@ -80,7 +80,6 @@ namespace ProjectB.pages
             int currentItem = 0; //geselecteerde item
             while (true)
             {
-                Console.Clear();
                 textColor(title, titleColor, false); //print title
                 for (int i = 0; i < items.Length; i++) //print alle items uit het menu, met de geselecteerde item gekleurd
                 {
@@ -110,6 +109,7 @@ namespace ProjectB.pages
                     break;
                 }
                 else { continue; }
+                Console.Clear();
             }
             Console.Clear();
             return items[currentItem]; //geeft de naam van de item dat geselecteerd is terug 
