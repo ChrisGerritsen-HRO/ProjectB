@@ -36,8 +36,10 @@ namespace ProjectB.pages
             tools.textColor(">> Terug", 14, false);
             while (true) {
                 var key = Console.ReadKey();
-                if (key.Key.ToString() == "Enter" && Login.user == null) {Console.Clear(); Menu.Mainmenu();}
-                else if (key.Key.ToString() == "Enter" && Login.user is not null) {Console.Clear(); Menu.dashboard();}
+                if (key.Key.ToString() == "Enter") {
+                    if (Login.user is not null) {Console.Clear(); Menu.dashboard();}
+                    else {Console.Clear(); Menu.Mainmenu();}
+                }
                 else {continue;}
             }
         }
