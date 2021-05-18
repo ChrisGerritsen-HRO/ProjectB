@@ -18,9 +18,25 @@ namespace ProjectB.pages
             } else if(movieMenu == "Films verwijderen") {
                 removeMovie();
             } else if(movieMenu == "Films bekijken") {
-                movieList.listMain();
+                listMain();
             } else if(movieMenu == "Terug naar hoofdmenu") {
                 Menu.dashboard();
+            }
+        }
+        public static void listMain() {
+            Console.Clear();
+            string fileContent = File.ReadAllText("storage.json");
+            dynamic obj = JsonConvert.DeserializeObject(fileContent);
+
+            var len = ((Newtonsoft.Json.Linq.JArray)obj.movie).Count;
+            for(int i = 0; i < len; i++) {
+                tools.textColor("----------------------------", 14, false);
+                tools.textColor($"Naam         | {obj.movie[i].movieName}\nBeschrijving | {obj.movie[i].movieDescription}\nLeeftijd     | {obj.movie[i].movieAge}+\nGenre     | {obj.movie[i].movieGenre}\nTijdstip     | {obj.movie[i].movieTime}\nDuur         | {obj.movie[i].movieDuration} minuten\nZaal         | {obj.movie[i].movieTheater}\n", 14, false);
+            } 
+
+            string back = Menu.Menubuilder($"" + "\n", new string[] {"Terug?"}, 14, 14);
+            if(back == "Terug?") {
+                movieAdmin.moviesMain();
             }
         }        
         public static void createMovie() {
@@ -48,9 +64,6 @@ namespace ProjectB.pages
                 tools.textColor("Film genre: ", 14, false);
                 moviegenre = Console.ReadLine();
 
-                tools.textColor("Film tijd: ", 14, false);
-                movietime = Console.ReadLine();
-
                 while(true) {
                     tools.textColor("Film duur: ", 14, false);
                     string durationinput = Console.ReadLine();
@@ -60,6 +73,9 @@ namespace ProjectB.pages
                         break;
                     } else { tools.textColor("Gebruik a.u.b alleen cijfers", 12, false); }
                 }   
+
+                tools.textColor("Film begintijd: ", 14, false);
+                movietime = Console.ReadLine();
 
                 while(true) {
                     tools.textColor("Film zaal: ", 14, false);
