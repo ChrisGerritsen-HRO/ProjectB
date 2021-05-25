@@ -48,7 +48,7 @@ namespace ProjectB.pages
         }
 
         public static void userMenu() {
-            string userMenu = Menubuilder($"Welkom: {Login.user.firstName}" + "\n", new string[] {"Films bekijken", "Reserveren", "Mijn reserveringen", "Uitloggen"}, 10, 14);
+            string userMenu = Menubuilder($"Welkom: {Login.user.firstName}" + "\n", new string[] {"Films bekijken", "Reserveren", "Mijn reserveringen", "Uitloggen"}, 12, 14);
             if (userMenu == "Films bekijken") {
                 movieList.listMain();
             } else if (userMenu == "Reserveren") {
@@ -60,7 +60,7 @@ namespace ProjectB.pages
             }
         } 
         public static void adminMenu() {
-            string adminMenu = Menubuilder($"Welkom: {Login.user.firstName}" + "\n", new string[] {"Reserveringen beheren", "Films beheren", "Zalen beheren", "Gebruikers beheren", "Film schema beheren", "Uitloggen"}, 10, 14);
+            string adminMenu = Menubuilder($"Welkom: {Login.user.firstName}" + "\n", new string[] {"Reserveringen beheren", "Films beheren", "Zalen beheren", "Gebruikers beheren", "Snacks beheren", "Uitloggen"}, 12, 14);
             if (adminMenu == "Reserveringen beheren") {
                 Menu.dashboard();
             } else if (adminMenu == "Films beheren") {
@@ -69,8 +69,8 @@ namespace ProjectB.pages
                 roomAdmin.roomMain();
             } else if (adminMenu == "Gebruikers beheren") {
                 Menu.dashboard();
-            } else if (adminMenu == "Film schema beheren") {
-                movieRosterAdmin.movieRosterMain();
+            } else if (adminMenu == "Snacks beheren") {
+                snacksAdmin.snacksMain();
             } else if (adminMenu == "Uitloggen") {
                 Login.logout();
             }
