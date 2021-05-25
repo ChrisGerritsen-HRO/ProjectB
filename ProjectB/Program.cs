@@ -12,6 +12,7 @@ namespace ProjectB
             dataStorageHandler.saveChanges();
             Console.Clear();
             Menu.Mainmenu();
+            Login.user = "";
         }
     }
 }

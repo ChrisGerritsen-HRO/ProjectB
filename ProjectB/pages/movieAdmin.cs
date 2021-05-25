@@ -8,7 +8,7 @@ using System.Text.RegularExpressions;
 
 namespace ProjectB.pages
 {
-    class movieAdmin {
+    public class movieAdmin {
         public static dataStorage storage { get; set; }
         public static void moviesMain() {
             Console.Clear();
@@ -18,13 +18,14 @@ namespace ProjectB.pages
             } else if(movieMenu == "Films verwijderen") {
                 removeMovie();
             } else if(movieMenu == "Films bekijken") {
-                listMain();
+                movieList.choice();
             } else if(movieMenu == "Terug naar hoofdmenu") {
                 Menu.dashboard();
             }
         }
         public static void listMain() {
             Console.Clear();
+
             string fileContent = File.ReadAllText("storage.json");
             dynamic obj = JsonConvert.DeserializeObject(fileContent);
 
@@ -65,7 +66,7 @@ namespace ProjectB.pages
                 moviegenre = Console.ReadLine();
 
                 while(true) {
-                    tools.textColor("Film duur: ", 14, false);
+                    tools.textColor("Film duur (in minuten): ", 14, false);
                     string durationinput = Console.ReadLine();
                     int value;
                     if (int.TryParse(durationinput, out value)) {
@@ -78,6 +79,18 @@ namespace ProjectB.pages
                 movietime = Console.ReadLine();
 
                 while(true) {
+                    string fileContent = File.ReadAllText("storage.json");
+                    dynamic room = JsonConvert.DeserializeObject(fileContent);
+
+                    var len = ((Newtonsoft.Json.Linq.JArray)room.movieRoom).Count;
+                    for(int i = 0; i < len; i++) {
+                        tools.textColor("----------------------------", 14, false);
+                        //tools.textColor($"Zaal nummer     | {obj.movie[i].movieName}\nSoort zaal | {obj.movie[i].movieDescription}\nLeeftijd     | {obj.movie[i].movieAge}+\nGenre        | {obj.movie[i].movieGenre}\nTijdstip     | {obj.movie[i].movieTime}\nDuur         | {obj.movie[i].movieDuration} minuten\nZaal         | {obj.movie[i].movieTheater}\n", 14, false);
+                    }
+
+                    if(len == 0) {
+                        tools.textColor("Er zijn geen films geregistreerd.", 12, false);
+                    } 
                     tools.textColor("Film zaal: ", 14, false);
                     string theatherinput = Console.ReadLine();
                     int value;
@@ -119,21 +132,7 @@ namespace ProjectB.pages
                 Console.Clear();
                 string fileContent = File.ReadAllText("storage.json");
                 dynamic obj = JsonConvert.DeserializeObject(fileContent);
-                int arrLen = 0;
-
-                try // Gaat hier controleren of er al een object bestaat in de JSON array
-                {
-                    dynamic obj1 = JsonConvert.DeserializeObject(fileContent);
-
-                    if (((Newtonsoft.Json.Linq.JArray)obj1.movie).Count > 0) {  // Zo ja geef de aantal door
-                        arrLen = ((Newtonsoft.Json.Linq.JArray)obj1.movie).Count; 
-                    }
-                }
-                catch
-                {
-                    arrLen = 0;
-                }
-
+                int arrLen = ((Newtonsoft.Json.Linq.JArray)obj.movie).Count; 
                 if(arrLen == 0) {
                     tools.textColor("Er zijn nog geen films geregistreerd!", 12, false);
 

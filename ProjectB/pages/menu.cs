@@ -31,9 +31,8 @@ namespace ProjectB.pages
             } else if (mainmenu == "Films") {
                 movieList.choice();
             } else if (mainmenu == "Over") {
-                about.aboutPage();
+                About.aboutPage();
             } else if (mainmenu == "Afsluiten") {
-                
                 Environment.Exit(0);
             }
         }
@@ -48,20 +47,19 @@ namespace ProjectB.pages
         }
 
         public static void userMenu() {
-            string userMenu = Menubuilder($"Welkom: {Login.user.firstName}" + "\n", new string[] {"Films bekijken", "Reserveren", "Mijn reserveringen", "Uitloggen"}, 12, 14);
+            string userMenu = Menubuilder($"Welkom: {Login.user.firstName}" + "\n", new string[] {"Films bekijken", "Reserveren", "Mijn reserveringen", "Uitloggen"}, 14, 14);
             if (userMenu == "Films bekijken") {
-                movieList.listMain();
+                movieList.choice();
             } else if (userMenu == "Reserveren") {
 
             } else if (userMenu == "Mijn reserveringen") {
 
             } else if (userMenu == "Uitloggen") {
-
                 Login.logout();
             }
         } 
         public static void adminMenu() {
-            string adminMenu = Menubuilder($"Welkom: {Login.user.firstName}" + "\n", new string[] {"Reserveringen beheren", "Films beheren", "Zalen beheren", "Gebruikers beheren", "Uitloggen"}, 12, 14);
+            string adminMenu = Menubuilder($"Welkom: {Login.user.firstName}" + "\n", new string[] {"Reserveringen beheren", "Films beheren", "Zalen beheren", "Gebruikers beheren", "Uitloggen"}, 14, 14);
             if (adminMenu == "Reserveringen beheren") {
                 Menu.dashboard();
             } else if (adminMenu == "Films beheren") {
@@ -111,7 +109,6 @@ namespace ProjectB.pages
                 else { continue; }
                 Console.Clear();
             }
-            Console.Clear();
             return items[currentItem]; //geeft de naam van de item dat geselecteerd is terug 
         }
     }

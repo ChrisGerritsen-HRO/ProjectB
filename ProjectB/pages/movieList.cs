@@ -12,14 +12,14 @@ namespace ProjectB.pages
 
         public static void choice() {
             Console.Clear();
-            string userinput = Menu.Menubuilder(@" ______   __     __         __    __     ______    
-/\  ___\ /\ \   /\ \       /\ '-./  \   /\  ___\   
-\ \  __\ \ \ \  \ \ \____  \ \ \-./\ \  \ \___  \  
- \ \_\    \ \_\  \ \_____\  \ \_\ \ \_\  \/\_____\ 
-  \/_/     \/_/   \/_____/   \/_/  \/_/   \/_____/ " + "\n", new string[] {"Hele filmlijst", "Zoeken in filmlijst", "Terug"}, 12, 14);
-            if (userinput == "Hele filmlijst" ) {listMain();}
-            else if (userinput == "Zoeken in filmlijst") {search.filmlijst();}
-            else if (userinput == "Terug") {Menu.Mainmenu();}
+            string listMenu = Menu.Menubuilder($"Films bekijken" + "\n", new string[] {"Hele filmlijst", "Zoeken in filmlijst", "Terug naar hoofdmenu"}, 10, 14);
+            if(listMenu == "Hele filmlijst") {
+                listMain();
+            } else if(listMenu == "Zoeken in filmlijst") {
+                search.movieSearch();
+            } else if(listMenu == "Terug naar hoofdmenu") {
+                Menu.dashboard();
+            }
         }
         public static void listMain() {
             Console.Clear();
