@@ -17,5 +17,6 @@ namespace ProjectB.classes
         public int movieDuration { get; set; }
 
         public int movieTheater { get; set; }
+        public int movieID { get; set; }
     }
 }

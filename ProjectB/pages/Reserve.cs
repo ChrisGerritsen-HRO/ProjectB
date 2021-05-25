@@ -114,6 +114,7 @@ namespace ProjectB.pages
                     double flt = random.NextDouble();
                     int shift = Convert.ToInt32(Math.Floor(25 * flt));
                     letter = Convert.ToChar(shift + 65);
+                    
                     str_build.Append(letter);  
                 }  
                 rndCode = str_build.ToString();
@@ -128,12 +129,6 @@ namespace ProjectB.pages
                     if (key.Key.ToString() == "Enter" && Login.user == null) {Console.Clear(); Menu.Mainmenu();}
                     else {continue;}
                 
-            
-
-            
-            
-            
-
             Reserves obj = new Reserves {
                 userEmail = userEmail,
                 firstName = firstName,

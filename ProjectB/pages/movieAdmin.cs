@@ -44,7 +44,7 @@ namespace ProjectB.pages
         public static void createMovie() {
             Console.Clear();
             string moviename, moviegenre, movietime, moviedescription;
-            int movieage, movietheater, movieduration;
+            int movieage, movietheater, movieduration, movieID;
             while(true){
                 Console.Clear();
                 tools.textColor("Film naam: ", 14, false);
@@ -99,8 +99,16 @@ namespace ProjectB.pages
                         movietheater = Convert.ToInt32(theatherinput);
                         break;
                     } else { tools.textColor("Gebruik a.u.b alleen cijfers", 12, false); }
-                }                
-
+                }               
+                while(true) {
+                    tools.textColor("Film ID: ", 14, false);
+                    string IDinput = Console.ReadLine();
+                    int value;
+                    if (int.TryParse(IDinput, out value)) {
+                        movieID = Convert.ToInt32(IDinput);
+                        break;
+                    } else { tools.textColor("Gebruik a.u.b alleen cijfers", 12, false); }
+                }
                 movies obj = new movies {
                     movieName = moviename,
                     movieDescription = moviedescription,
@@ -109,6 +117,7 @@ namespace ProjectB.pages
                     movieTime = movietime,
                     movieDuration = movieduration,
                     movieTheater = movietheater,
+                    movieID = movieID,
 
                 };            
 

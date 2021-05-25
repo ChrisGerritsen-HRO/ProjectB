@@ -12,5 +12,10 @@ namespace ProjectB.classes
         public string birthDay { get; set; }
         public string gender { get; set; }
         public string rndcode { get; set; }
+        public string movieName { get; set; } 
+        public int movieAge { get; set; }
+        public string movieTime { get; set; }
+        public int movieDuration { get; set; }
+        public int movieTheater { get; set; }
     }
 }
