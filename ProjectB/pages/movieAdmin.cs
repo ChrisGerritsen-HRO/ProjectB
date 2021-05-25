@@ -44,6 +44,17 @@ namespace ProjectB.pages
             Console.Clear();
             string moviename, moviegenre, movietime, moviedescription;
             int movieage, movietheater, movieduration;
+            string fileContent = File.ReadAllText("storage.json");
+            dynamic room = JsonConvert.DeserializeObject(fileContent);
+            var lenRoom = ((Newtonsoft.Json.Linq.JArray)room.movieRoom).Count;
+
+            if(lenRoom == 0) {
+                tools.textColor("Er zijn nog geen zalen, maak een zaal aan!", 12, false);
+                string back = Menu.Menubuilder($"" + "\n", new string[] {"Terug?"}, 14, 14);
+                if(back == "Terug?") {
+                    moviesMain();
+                }
+            } 
             while(true){
                 Console.Clear();
                 tools.textColor("Film naam: ", 14, false);
@@ -79,26 +90,35 @@ namespace ProjectB.pages
                 movietime = Console.ReadLine();
 
                 while(true) {
-                    string fileContent = File.ReadAllText("storage.json");
-                    dynamic room = JsonConvert.DeserializeObject(fileContent);
-
                     var len = ((Newtonsoft.Json.Linq.JArray)room.movieRoom).Count;
                     for(int i = 0; i < len; i++) {
                         tools.textColor("----------------------------", 14, false);
-                        //tools.textColor($"Zaal nummer     | {obj.movie[i].movieName}\nSoort zaal | {obj.movie[i].movieDescription}\nLeeftijd     | {obj.movie[i].movieAge}+\nGenre        | {obj.movie[i].movieGenre}\nTijdstip     | {obj.movie[i].movieTime}\nDuur         | {obj.movie[i].movieDuration} minuten\nZaal         | {obj.movie[i].movieTheater}\n", 14, false);
+                        tools.textColor($"Zaal nummer  | {room.movieRoom[i].roomNumber}\nSoort zaal   | {room.movieRoom[i].roomKind}", 14, false);
                     }
 
-                    if(len == 0) {
-                        tools.textColor("Er zijn geen films geregistreerd.", 12, false);
-                    } 
-                    tools.textColor("Film zaal: ", 14, false);
+                    tools.textColor("Film zaal nummer: ", 14, false);
                     string theatherinput = Console.ReadLine();
                     int value;
                     if (int.TryParse(theatherinput, out value)) {
                         movietheater = Convert.ToInt32(theatherinput);
-                        break;
-                    } else { tools.textColor("Gebruik a.u.b alleen cijfers", 12, false); }
-                }                
+                        bool check = false;
+                        for(int i = 0; i < len; i++) {
+                            int roomNumber = room.movieRoom[i].roomNumber;
+                            if(movietheater == roomNumber ) {
+                                check = true;
+                                break;
+                            }
+                        }
+                        if(check == false) {
+                            tools.textColor("De zaal bestaat niet probeer het opnieuw", 12, false);
+                            continue;
+                        } else {
+                            break;
+                        }
+                    } else { 
+                        tools.textColor("Gebruik a.u.b alleen cijfers", 12, false); 
+                    }
+                } 
 
                 movies obj = new movies {
                     movieName = moviename,
@@ -116,7 +136,7 @@ namespace ProjectB.pages
                 dataStorageHandler.saveChanges();
                 
                 Console.Clear();
-                string back = Menu.Menubuilder("Film " + moviename + "is toegevoegd" + "\n", new string[] {"Nog een film toevoegen", "Film lijs bekijken", "Terug?"}, 10, 14);
+                string back = Menu.Menubuilder("Film " + moviename + " is toegevoegd" + "\n", new string[] {"Nog een film toevoegen", "Film lijst bekijken", "Terug?"}, 10, 14);
                 if(back == "Nog een zaal toevoegen") {
                     createMovie();
                 } else if(back == "Terug?") {

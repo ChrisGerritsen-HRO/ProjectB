@@ -90,7 +90,9 @@ namespace ProjectB.pages
                     }
                 }
 
-                roomKind = Menu.Menubuilder($"Soort zaal" + "\n", new string[] {"2D", "4D", "IMAX"}, 10, 14);
+                roomKind = Menu.Menubuilder($"Soort zaal" + "\n", new string[] {"2D", "4D", "IMAX"}, 14, 14);
+
+                Console.Clear();
 
                 while(true) {
                     tools.textColor("Totaal aantal stoelen: ", 14, true);
