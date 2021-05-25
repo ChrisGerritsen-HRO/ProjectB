@@ -21,13 +21,16 @@ namespace ProjectB.pages
  | |_) | | (_) \__ \ (_| (_) | (_) | |_) | | | | | (_| | (_| | | | | | |
  |_.__/|_|\___/|___/\___\___/ \___/| .__/  |_| |_|\__,_|\__,_|_| |_| |_|
                                    | |                                  
-                                   |_|                                  " + "\n", new string[] { "Registreer", "Inloggen", "Films", "Over", "Afsluiten" }, 12, 14);
+                                   |_|                                  " + "\n", new string[] { "Registreer", "Inloggen", "Reserveren","Films", "Over", "Afsluiten" }, 12, 14);
             if (mainmenu == "Registreer") {
                 Console.Clear();
                 Register.registerMain();
             } else if (mainmenu == "Inloggen") {
                 Console.Clear();
                 Login.loginMain();
+            } else if (mainmenu == "Reserveren") {
+                Console.Clear();
+                Reserve.ReserveMain();
             } else if (mainmenu == "Films") {
                 movieList.choice();
             } else if (mainmenu == "Over") {
@@ -51,7 +54,7 @@ namespace ProjectB.pages
             if (userMenu == "Films bekijken") {
                 movieList.choice();
             } else if (userMenu == "Reserveren") {
-
+                Reserve.ReserveMain();
             } else if (userMenu == "Mijn reserveringen") {
 
             } else if (userMenu == "Uitloggen") {
@@ -61,7 +64,7 @@ namespace ProjectB.pages
         public static void adminMenu() {
             string adminMenu = Menubuilder($"Welkom: {Login.user.firstName}" + "\n", new string[] {"Reserveringen beheren", "Films beheren", "Zalen beheren", "Gebruikers beheren", "Uitloggen"}, 14, 14);
             if (adminMenu == "Reserveringen beheren") {
-                Menu.dashboard();
+                Reserve.ReserveMain();
             } else if (adminMenu == "Films beheren") {
                 movieAdmin.moviesMain();
             } else if (adminMenu == "Zalen beheren") {
