@@ -9,7 +9,7 @@ namespace ProjectB.classes
         public string insertion { get; set; }
         public string firstName { get; set; }
         public string lastName { get; set; }
-        public string birthDay { get; set; }
+        public DateTime birthDay { get; set; }
         public string gender { get; set; }
         public string password { get; set; }
         public string role { get; set; }

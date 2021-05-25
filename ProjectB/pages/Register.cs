@@ -25,9 +25,9 @@ namespace ProjectB.pages
 
         public static void userInput() {
             Console.Clear();
-            string firstName, lastName, insertion, userEmail, birthDay, password, gender;
+            string firstName, lastName, insertion, userEmail, password, gender;
             var dateFormats = new[] {"dd.MM.yyyy", "dd-MM-yyyy", "dd/MM/yyyy"};
-            DateTime dateValue;
+            DateTime birthDay;
 
             while(true) {
                 textColor("Vul uw voornaam in: ", 14, true);
@@ -81,11 +81,21 @@ namespace ProjectB.pages
                 }
             }
             while(true) {
-                textColor("Vul uw geboortedatum in(dd-MM-yyyy): ", 14, true);
-                birthDay = Console.ReadLine();
+                tools.textColor("Vul uw geboortedatum in (dd-MM-yyyy): ", 14, true);
+                string birthDayInput = Console.ReadLine();
 
-                if(DateTime.TryParse(birthDay, out dateValue)) { break; }
-                else { textColor("Vul een geldig geboorte datum in.", 12, false); }
+                try 
+                {
+                    birthDay = DateTime.Parse(birthDayInput);
+                    break;
+                }
+                catch (FormatException) 
+                {
+                    tools.textColor("Verkeerde opmaak, gebruik dd-MM-yyyy", 12, false);
+                }
+
+                // if(DateTime.TryParse(birthDay, out dateValue)) { break; }
+                // else { textColor("Vul een geldig geboorte datum in.", 12, false); }
             }
             while(true) {
                 textColor("Wat is uw geslacht?\n[1] Man \n[2] Vrouw \n[3] anders ", 14, false);
