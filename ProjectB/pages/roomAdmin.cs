@@ -12,12 +12,12 @@ namespace ProjectB.pages
         public static dataStorage storage { get; set; }
         public static void roomMain() {
             Console.Clear();
-            string roomMenu = Menu.Menubuilder($"Zalen beheren" + "\n", new string[] {"Zaal toevoegen", "Zalen verwijderen", "Zalen bijken", "Terug naar hoofdmenu"}, 10, 14);
+            string roomMenu = Menu.Menubuilder($"Zalen beheren" + "\n", new string[] {"Zaal toevoegen", "Zalen verwijderen", "Zalen bekijken", "Terug naar hoofdmenu"}, 10, 14);
             if(roomMenu == "Zaal toevoegen") {
                 createRoom();
             } else if(roomMenu == "Zalen verwijderen") {
                 removeRoom();
-            } else if(roomMenu == "Zalen bijken") {
+            } else if(roomMenu == "Zalen bekijken") {
                 showRoom();
             } else if(roomMenu == "Terug naar hoofdmenu") {
                 Console.Clear();

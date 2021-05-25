@@ -26,7 +26,7 @@ namespace ProjectB.pages
         public static void createMovie() {
             Console.Clear();
             string moviename, moviegenre, movietime, moviedescription;
-            int movieage, movietheater, movieduration;
+            int movieage, movieduration;
             while(true){
                 Console.Clear();
                 tools.textColor("Film naam: ", 14, false);
@@ -59,17 +59,7 @@ namespace ProjectB.pages
                         movieduration = Convert.ToInt32(durationinput);
                         break;
                     } else { tools.textColor("Gebruik a.u.b alleen cijfers", 12, false); }
-                }   
-
-                while(true) {
-                    tools.textColor("Film zaal: ", 14, false);
-                    string theatherinput = Console.ReadLine();
-                    int value;
-                    if (int.TryParse(theatherinput, out value)) {
-                        movietheater = Convert.ToInt32(theatherinput);
-                        break;
-                    } else { tools.textColor("Gebruik a.u.b alleen cijfers", 12, false); }
-                }                
+                }               
 
                 movies obj = new movies {
                     movieName = moviename,
@@ -78,8 +68,6 @@ namespace ProjectB.pages
                     movieGenre = moviegenre,
                     movieTime = movietime,
                     movieDuration = movieduration,
-                    movieTheater = movietheater,
-
                 };            
 
                 // JSON
@@ -87,7 +75,7 @@ namespace ProjectB.pages
                 dataStorageHandler.saveChanges();
 
                 string back = Menu.Menubuilder($"" + "\n", new string[] {"Nog een film toevoegen", "Terug?"}, 14, 14);
-                if(back == "Nog een zaal toevoegen") {
+                if(back == "Nog een film toevoegen") {
                     createMovie();
                 } else if(back == "Terug?") {
                     moviesMain();
