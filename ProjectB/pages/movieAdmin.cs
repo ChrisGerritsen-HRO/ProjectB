@@ -29,11 +29,12 @@ namespace ProjectB.pages
             string fileContent = File.ReadAllText("storage.json");
             dynamic obj = JsonConvert.DeserializeObject(fileContent);
 
-            var len = ((Newtonsoft.Json.Linq.JArray)obj.movie).Count;
-            for(int i = 0; i < len; i++) {
+         //   var len = ((Newtonsoft.Json.Linq.JArray)obj.movie).Count;
+            foreach(var item in dataStorageHandler.storage.movie)
+{
                 tools.textColor("----------------------------", 14, false);
-                tools.textColor($"Naam         | {obj.movie[i].movieName}\nBeschrijving | {obj.movie[i].movieDescription}\nLeeftijd     | {obj.movie[i].movieAge}+\nGenre     | {obj.movie[i].movieGenre}\nTijdstip     | {obj.movie[i].movieTime}\nDuur         | {obj.movie[i].movieDuration} minuten\nZaal         | {obj.movie[i].movieTheater}\n", 14, false);
-            } 
+                tools.textColor($"Naam         | {item.movieName}\nBeschrijving | {item.movieDescription}\nLeeftijd     | {item.movieAge}+\nGenre        | {item.movieGenre}\nTijdstip     | " + movieAdmin.movieSequence(item) + $"\nDuur         | {item.movieDuration} minuten\nZaal         | {item.movieTheater}\n", 14, false);
+            }  
 
             string back = Menu.Menubuilder($"" + "\n", new string[] {"Terug?"}, 14, 14);
             if(back == "Terug?") {
@@ -42,8 +43,9 @@ namespace ProjectB.pages
         }        
         public static void createMovie() {
             Console.Clear();
-            string moviename, moviegenre, movietime, moviedescription;
+            string moviename, moviegenre, moviedescription;
             int movieage, movietheater, movieduration;
+            DateTime movietime;
             string fileContent = File.ReadAllText("storage.json");
             dynamic room = JsonConvert.DeserializeObject(fileContent);
             var lenRoom = ((Newtonsoft.Json.Linq.JArray)room.movieRoom).Count;
@@ -66,8 +68,8 @@ namespace ProjectB.pages
                 while(true) {
                     tools.textColor("Film minumum leeftijd: ", 14, false);
                     string ageinput = Console.ReadLine();
-                    int value;
-                    if (int.TryParse(ageinput, out value)) {
+                    int avalue;
+                    if (int.TryParse(ageinput, out avalue)) {
                         movieage = Convert.ToInt32(ageinput);
                         break;
                     } else { tools.textColor("Gebruik a.u.b alleen cijfers", 12, false); }
@@ -86,8 +88,22 @@ namespace ProjectB.pages
                     } else { tools.textColor("Gebruik a.u.b alleen cijfers", 12, false); }
                 }   
 
-                tools.textColor("Film begintijd: ", 14, false);
-                movietime = Console.ReadLine();
+                while(true) {
+                    tools.textColor("Begintijd (HH:MM): ", 14, false);
+                    string timeinput = Console.ReadLine();
+                    try 
+                    {
+                        movietime = DateTime.Parse(timeinput);
+                        break;
+                    }
+                    catch (FormatException) 
+                    {
+                        tools.textColor("Verkeerde opmaak, gebruik HH:mm", 12, false);
+                    }
+                    
+                }  
+
+                
 
                 while(true) {
                     var len = ((Newtonsoft.Json.Linq.JArray)room.movieRoom).Count;
@@ -122,10 +138,12 @@ namespace ProjectB.pages
 
                 movies obj = new movies {
                     movieName = moviename,
+                    movieID = moviename.GetHashCode(),
                     movieDescription = moviedescription,
                     movieAge = movieage,
                     movieGenre = moviegenre,
                     movieTime = movietime,
+                    movieEndTime = movietime.Add(new TimeSpan(0,movieduration,0)),
                     movieDuration = movieduration,
                     movieTheater = movietheater,
 
@@ -159,7 +177,7 @@ namespace ProjectB.pages
                 } else {
                     for(int i = 0; i < arrLen; i++) {
                         tools.textColor("----------------------------", 14, false);
-                        tools.textColor($"ID           | {i}\nNaam         | {obj.movie[i].movieName}\nBeschrijving | {obj.movie[i].movieDescription}\nLeeftijd     | {obj.movie[i].movieAge}+\nGenre        | {obj.movie[i].movieGenre}\nTijdstip     | {obj.movie[i].movieTime}\nDuur         | {obj.movie[i].movieDuration} minuten\nZaal         | {obj.movie[i].movieTheater}\n", 14, false);
+                        tools.textColor($"ID           | {i}\nNaam         | {obj.movie[i].movieName}\nBeschrijving | {obj.movie[i].movieDescription}\nLeeftijd     | {obj.movie[i].movieAge}+\nGenre        | {obj.movie[i].movieGenre}\nTijden     | {obj.movie[i].movieTime}\nDuur         | {obj.movie[i].movieDuration} minuten\nZaal         | {obj.movie[i].movieTheater}\n", 14, false);
                     }
 
                     int selectedID = 0;
@@ -188,6 +206,35 @@ namespace ProjectB.pages
                     moviesMain();
                 }
             }
+        }
+        public static string movieSequence(movies thename) {
+        //     string fileContent = File.ReadAllText("storage.json");
+        //     dynamic movie = JsonConvert.DeserializeObject(fileContent);
+        //     movies themovie = dataStorageHandler.storage.movie[0];
+        //   //  var len = ((Newtonsoft.Json.Linq.JArray)movie.movie).Count;
+        //     // foreach(var item in dataStorageHandler.storage.movie)
+        //     // {
+        //     //     if(item.movieName == thename);
+        //     //         themovie = item;
+        //     //         break;
+        //     // }
+        //     DateTime endDay = new DateTime(2021, 4 , 2, 22, 00, 00);
+        // //    DateTime thetime = themovie.movieTime;
+        //     // int hour = themovie.movieDuration / 60;
+        //     // int minutes = (hour * 60) - themovie.movieDuration;
+        //     // if (minutes >= 60) {
+        //     //     minutes =- 60;
+        //     //     hour++;
+        //     // }
+            
+        //   //  DateTime startnewmovie = themovie.movieEndTime.Add(new TimeSpan(0,30,0));
+
+        //     string thewholestring = themovie.movieTime;
+        string thewholestring = thename.movieTime.Add()
+           
+             
+            
+            return thewholestring;
         }
     }
 }

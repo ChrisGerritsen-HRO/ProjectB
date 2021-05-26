@@ -29,18 +29,7 @@ namespace ProjectB.pages
             Console.Clear();
             string fileContent = File.ReadAllText("storage.json");
             dynamic obj = JsonConvert.DeserializeObject(fileContent);
-            int arrLen = 0;
-
-            try
-            {
-                if (((Newtonsoft.Json.Linq.JArray)obj.movieRoom).Count > 0) {
-                    arrLen = ((Newtonsoft.Json.Linq.JArray)obj.movieRoom).Count; 
-                }
-            }
-            catch
-            {
-                arrLen = 0;
-            }
+            int arrLen = ((Newtonsoft.Json.Linq.JArray)obj.movieRoom).Count; 
 
             if(arrLen == 0) {
                 tools.textColor("Er zijn nog geen zalen geregistreerd", 12, false);
@@ -53,13 +42,12 @@ namespace ProjectB.pages
                         tools.textColor($"Blauwe stoelen: {obj.movieRoom[i].blueSeats}", 14, false);
                         tools.textColor($"Oranje stoelen: {obj.movieRoom[i].orangeSeats}", 14, false);
                         tools.textColor($"Rode stoelen: {obj.movieRoom[i].redSeats}\n", 14, false);
-                    }
-
-                    string back = Menu.Menubuilder($"" + "\n", new string[] {"Terug?"}, 14, 14);
-                    if(back == "Terug?") {
-                        roomMain();
+                        }
                     }
                 }
+                string back = Menu.Menubuilder($"" + "\n", new string[] {"Terug?"}, 14, 14);
+                if(back == "Terug?") {
+                    roomMain();
             }
         }
 
