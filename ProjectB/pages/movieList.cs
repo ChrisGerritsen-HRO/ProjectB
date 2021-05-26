@@ -35,7 +35,7 @@ namespace ProjectB.pages
             foreach(var item in dataStorageHandler.storage.movie)
 {
                 tools.textColor("----------------------------", 14, false);
-                tools.textColor($"Naam         | {item.movieName}\nBeschrijving | {item.movieDescription}\nLeeftijd     | {item.movieAge}+\nGenre        | {item.movieGenre}\nTijdstip     | " + movieAdmin.movieSequence(item.movieName) + $"\nDuur         | {item.movieDuration} minuten\nZaal         | {item.movieTheater}\n", 14, false);
+                tools.textColor($"Naam         | {item.movieName}\nBeschrijving | {item.movieDescription}\nLeeftijd     | {item.movieAge}+\nGenre        | {item.movieGenre}\nTijdstip     | {movieAdmin.movieSequence(item)}\nDuur         | {item.movieDuration} minuten\nZaal         | {item.movieTheater}\n", 14, false);
             } 
             tools.textColor(">> Terug", 14, false);
             while (true) {

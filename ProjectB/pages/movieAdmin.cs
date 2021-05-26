@@ -94,11 +94,18 @@ namespace ProjectB.pages
                     try 
                     {
                         movietime = DateTime.Parse(timeinput);
-                        break;
                     }
                     catch (FormatException) 
                     {
                         tools.textColor("Verkeerde opmaak, gebruik HH:mm", 12, false);
+                    }
+                    DateTime startDay = new DateTime(2021, 4 , 2, 9, 00, 00);
+                    DateTime endDay = new DateTime(2021, 4 , 2, 22, 00, 00);
+                    movietime = DateTime.Parse(timeinput);
+                    if(movietime.TimeOfDay > startDay.TimeOfDay && movietime.TimeOfDay < endDay.TimeOfDay) {
+                        break;
+                    } else {
+                        tools.textColor("De bioscoop gaat om 09:00 open en sluit om 22:00", 12, false);
                     }
                     
                 }  
@@ -201,39 +208,21 @@ namespace ProjectB.pages
                 
                 string back = Menu.Menubuilder($"" + "\n", new string[] {"Nog een film verwijderen", "Terug?"}, 14, 14);
                 if(back == "Nog een film verwijderen") {
-                    createMovie();
+                    removeMovie();
                 } else if(back == "Terug?") {
                     moviesMain();
                 }
             }
         }
         public static string movieSequence(movies thename) {
-        //     string fileContent = File.ReadAllText("storage.json");
-        //     dynamic movie = JsonConvert.DeserializeObject(fileContent);
-        //     movies themovie = dataStorageHandler.storage.movie[0];
-        //   //  var len = ((Newtonsoft.Json.Linq.JArray)movie.movie).Count;
-        //     // foreach(var item in dataStorageHandler.storage.movie)
-        //     // {
-        //     //     if(item.movieName == thename);
-        //     //         themovie = item;
-        //     //         break;
-        //     // }
-        //     DateTime endDay = new DateTime(2021, 4 , 2, 22, 00, 00);
-        // //    DateTime thetime = themovie.movieTime;
-        //     // int hour = themovie.movieDuration / 60;
-        //     // int minutes = (hour * 60) - themovie.movieDuration;
-        //     // if (minutes >= 60) {
-        //     //     minutes =- 60;
-        //     //     hour++;
-        //     // }
-            
-        //   //  DateTime startnewmovie = themovie.movieEndTime.Add(new TimeSpan(0,30,0));
-
-        //     string thewholestring = themovie.movieTime;
-        string thewholestring = thename.movieTime.Add()
-           
-             
-            
+            DateTime endDay = new DateTime(2021, 4 , 2, 22, 00, 00);
+            DateTime themovietime = thename.movieTime;
+            string thewholestring = "";
+            while(themovietime.TimeOfDay < endDay.TimeOfDay) {
+                thewholestring += themovietime.ToString("HH:mm");
+                themovietime = themovietime.AddMinutes(thename.movieDuration+30);
+                thewholestring += ", ";
+            }
             return thewholestring;
         }
     }
