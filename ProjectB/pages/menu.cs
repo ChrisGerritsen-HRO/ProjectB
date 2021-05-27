@@ -51,7 +51,7 @@ namespace ProjectB.pages
             if (userMenu == "Films bekijken") {
                 movieList.choice();
             } else if (userMenu == "Reserveren") {
-
+                reserveMovie.reserveMain();
             } else if (userMenu == "Mijn reserveringen") {
 
             } else if (userMenu == "Uitloggen") {

@@ -31,7 +31,7 @@ namespace ProjectB.pages
 
          //   var len = ((Newtonsoft.Json.Linq.JArray)obj.movie).Count;
             foreach(var item in dataStorageHandler.storage.movie)
-{
+            {
                 tools.textColor("----------------------------", 14, false);
                 tools.textColor($"Naam         | {item.movieName}\nBeschrijving | {item.movieDescription}\nLeeftijd     | {item.movieAge}+\nGenre        | {item.movieGenre}\nTijdstip     | " + movieAdmin.movieSequence(item) + $"\nDuur         | {item.movieDuration} minuten\nZaal         | {item.movieTheater}\n", 14, false);
             }  
@@ -155,7 +155,7 @@ namespace ProjectB.pages
                     movieTheater = movietheater,
 
                 };            
-
+                moviesInPlanning(obj);
                 // JSON
                 dataStorageHandler.storage.movie.Add(obj);
                 dataStorageHandler.saveChanges();
@@ -224,6 +224,29 @@ namespace ProjectB.pages
                 thewholestring += ", ";
             }
             return thewholestring;
+        }
+
+        public static void moviesInPlanning(movies themovie) {
+            DateTime endDay = new DateTime(2021, 4 , 2, 22, 00, 00);
+            DateTime themovietime = themovie.movieTime;
+            int movieDuration = themovie.movieDuration;
+            int movieTheater = themovie.movieTheater;
+            int movieID = themovie.movieID;
+            string movieName = themovie.movieName;
+            while(themovietime.TimeOfDay < endDay.TimeOfDay) {
+                moviesPlanning obj = new moviesPlanning {
+                    movieTimeID = themovie.GetHashCode(),
+                    movieID = movieID,
+                    movieName = movieName,
+                    movieDuration = movieDuration,
+                    movieTime = themovietime,
+                    movieEndTime = themovietime.Add(new TimeSpan(0,movieDuration,0)),
+                    movieTheater = movieTheater
+                };
+                dataStorageHandler.storage.MoviePlanning.Add(obj);
+                themovietime = themovietime.AddMinutes(themovie.movieDuration+30);
+            }       
+            dataStorageHandler.saveChanges();  
         }
     }
 }
