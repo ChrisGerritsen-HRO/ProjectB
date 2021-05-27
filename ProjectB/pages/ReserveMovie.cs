@@ -14,7 +14,7 @@ namespace ProjectB.pages
             for(int i = 0; i < dataStorageHandler.storage.movie.Count; i++)
             {
                 tools.textColor("----------------------------", 14, false);
-                tools.textColor($"ID          | {i}\nNaam         | {obj.movie[i].movieName}\nBeschrijving | {obj.movie[i].movieDescription}\nLeeftijd     | {obj.movie[i].movieAge}+\nGenre        | {obj.movie[i].movieGenre}\nDuur         | {obj.movie[i].movieDuration} minuten", 14, false);
+                tools.textColor($"ID           | {i}\nNaam         | {obj.movie[i].movieName}\nBeschrijving | {obj.movie[i].movieDescription}\nLeeftijd     | {obj.movie[i].movieAge}+\nGenre        | {obj.movie[i].movieGenre}\nDuur         | {obj.movie[i].movieDuration} minuten", 14, false);
             }
             
             while(true){
@@ -31,16 +31,27 @@ namespace ProjectB.pages
             }
         }
         public static void reserveTimesheet(int movieID) {
+            Console.Clear();
             string fileContent = File.ReadAllText("storage.json");
             dynamic obj = JsonConvert.DeserializeObject(fileContent);
             tools.textColor("Hieronder de beschikbare films", 14, false);
+
             foreach(var item in dataStorageHandler.storage.MoviePlanning) {
                 if(item.movieID == movieID) {
                     tools.textColor("----------------------------", 14, false);
-                    tools.textColor($"Naam         | {item.movieName}\nTijdstip      | {item.movieTime.ToString("HH:mm")}", 14, false);
+                    tools.textColor($"Naam       | {item.movieName}\nTijdstip   | {item.movieTime.ToString("HH:mm")}", 14, false);
                 }
             }
-            string test = Console.ReadLine(); 
+
+            tools.textColor("Type de gewenste tijd over", 14, false);
+            string timeSelected = Console.ReadLine();
+            foreach(var item in dataStorageHandler.storage.MoviePlanning) {
+                if(timeSelected == item.movieTime.ToString("HH:mm") && item.movieID == movieID) {
+                    Console.WriteLine(timeSelected); // hier kan je naar de functie gaan van stoel selecteren en aantal
+                    break;
+                }
+            }
+            tools.textColor("Dit is geen geldig tijdstip!", 12, false);
         }
     }
 }
