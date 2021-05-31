@@ -29,10 +29,9 @@ namespace ProjectB.pages
                 Console.Clear();
                 Login.loginMain();
             } else if (mainmenu == "Films") {
-                movieList.listMainNoUser();
+                movieList.choice();
             } else if (mainmenu == "Over") {
-                Console.WriteLine("Hier komt over");
-                Menu.Mainmenu();
+                About.aboutPage();
             } else if (mainmenu == "Afsluiten") {
                 Environment.Exit(0);
             }
@@ -48,11 +47,11 @@ namespace ProjectB.pages
         }
 
         public static void userMenu() {
-            string userMenu = Menubuilder($"Welkom: {Login.user.firstName}" + "\n", new string[] {"Films bekijken", "Reserveren", "Mijn reserveringen", "Uitloggen"}, 12, 14);
+            string userMenu = Menubuilder($"Welkom: {Login.user.firstName}" + "\n", new string[] {"Films bekijken", "Reserveren", "Mijn reserveringen", "Uitloggen"}, 14, 14);
             if (userMenu == "Films bekijken") {
-                movieList.listMain();
+                movieList.choice();
             } else if (userMenu == "Reserveren") {
-
+                reserveMovie.reserveMain();
             } else if (userMenu == "Mijn reserveringen") {
 
             } else if (userMenu == "Uitloggen") {
@@ -60,11 +59,7 @@ namespace ProjectB.pages
             }
         } 
         public static void adminMenu() {
-            foreach (var item in reserveSnack.snackBasket)
-            {
-                Console.WriteLine(item);   
-            }
-            string adminMenu = Menubuilder($"Welkom: {Login.user.firstName}" + "\n", new string[] {"Reserveringen beheren", "Films beheren", "Zalen beheren", "Gebruikers beheren", "Snacks beheren", "Uitloggen"}, 12, 14);
+            string adminMenu = Menubuilder($"Welkom: {Login.user.firstName}" + "\n", new string[] {"Reserveringen beheren", "Films beheren", "Zalen beheren", "Gebruikers beheren", "Uitloggen"}, 14, 14);
             if (adminMenu == "Reserveringen beheren") {
                 Menu.dashboard();
             } else if (adminMenu == "Films beheren") {
@@ -73,8 +68,6 @@ namespace ProjectB.pages
                 roomAdmin.roomMain();
             } else if (adminMenu == "Gebruikers beheren") {
                 Menu.dashboard();
-            } else if (adminMenu == "Snacks beheren") {
-                snacksAdmin.snacksMain();
             } else if (adminMenu == "Uitloggen") {
                 Login.logout();
             }
@@ -116,7 +109,6 @@ namespace ProjectB.pages
                 else { continue; }
                 Console.Clear();
             }
-            Console.Clear();
             return items[currentItem]; //geeft de naam van de item dat geselecteerd is terug 
         }
     }

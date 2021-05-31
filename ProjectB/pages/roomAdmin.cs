@@ -29,64 +29,36 @@ namespace ProjectB.pages
             Console.Clear();
             string fileContent = File.ReadAllText("storage.json");
             dynamic obj = JsonConvert.DeserializeObject(fileContent);
-            int arrLen = 0;
 
-            try
-            {
-                if (((Newtonsoft.Json.Linq.JArray)obj.movieRoom).Count > 0) {
-                    arrLen = ((Newtonsoft.Json.Linq.JArray)obj.movieRoom).Count; 
-                }
-            }
-            catch
-            {
-                arrLen = 0;
-            }
-
-            if(arrLen == 0) {
+            if(dataStorageHandler.storage.movie.Count == 0) {
                 tools.textColor("Er zijn nog geen zalen geregistreerd", 12, false);
             } else {
-                while(true) {
-                    for(int i = 0; i < arrLen; i++) {
-                        tools.textColor($"Nummer: {obj.movieRoom[i].roomNumber}", 14, false);
-                        tools.textColor($"Totale stoelen: {obj.movieRoom[i].totalSeats}", 14, false);
-                        tools.textColor($"Blauwe stoelen: {obj.movieRoom[i].blueSeats}", 14, false);
-                        tools.textColor($"Oranje stoelen: {obj.movieRoom[i].orangeSeats}", 14, false);
-                        tools.textColor($"Rode stoelen: {obj.movieRoom[i].redSeats}\n", 14, false);
-                    }
-
-                    string back = Menu.Menubuilder($"" + "\n", new string[] {"Terug?"}, 14, 14);
-                    if(back == "Terug?") {
-                        roomMain();
+                for(int i = 0; i < dataStorageHandler.storage.movieRoom.Count; i++) {
+                    tools.textColor($"Nummer: {obj.movieRoom[i].roomNumber}", 14, false);
+                    tools.textColor($"Soort zaal: {obj.movieRoom[i].roomKind}", 14, false);
+                    tools.textColor($"Totale stoelen: {obj.movieRoom[i].totalSeats}", 14, false);
+                    tools.textColor($"Blauwe stoelen: {obj.movieRoom[i].blueSeats}", 14, false);
+                    tools.textColor($"Oranje stoelen: {obj.movieRoom[i].orangeSeats}", 14, false);
+                    tools.textColor($"Rode stoelen: {obj.movieRoom[i].redSeats}\n", 14, false);
                     }
                 }
+                string back = Menu.Menubuilder($"" + "\n", new string[] {"Terug?"}, 14, 14);
+                if(back == "Terug?") {
+                    roomMain();
             }
         }
 
         public static void createRoom() {
             Console.Clear();
             int roomNumber, totalSeats, blueSeats, orangeSeats, redSeats;
+            string roomKind;
             while(true) {
-                while(true) {
-                    string fileContent = File.ReadAllText("storage.json");
-                    storage = JsonConvert.DeserializeObject<dataStorage>(fileContent);
+                
+                roomNumber = dataStorageHandler.storage.movieRoom.Count+1;
+                roomKind = Menu.Menubuilder($"Soort zaal" + "\n", new string[] {"2D", "3D", "IMAX"}, 14, 14);
 
-                    tools.textColor("Zaal nummer: ", 14, true);
-                    string roomNumberInput = Console.ReadLine();
-                    int value;
-                    var storedNumber = 0;
-                    foreach (var item in storage.movieRoom)
-                    {
-                        storedNumber = item.roomNumber;
-                    }
-                    if(storedNumber == Convert.ToInt32(roomNumberInput)) {
-                        Console.WriteLine("Het ingevoerde zaal nummer bestaat al");
-                    } else {
-                        if (int.TryParse(roomNumberInput, out value)) {
-                            roomNumber = Convert.ToInt32(roomNumberInput);
-                            break;
-                        } else { tools.textColor("Gebruik a.u.b alleen cijfers", 12, false); }
-                    }
-                }
+                Console.Clear();
+
                 while(true) {
                     tools.textColor("Totaal aantal stoelen: ", 14, true);
                     string totalSeatsInput = Console.ReadLine();
@@ -131,6 +103,7 @@ namespace ProjectB.pages
 
             movieRooms obj = new movieRooms {
                 roomNumber = roomNumber,
+                roomKind = roomKind,
                 totalSeats = totalSeats,
                 blueSeats = blueSeats,
                 orangeSeats = orangeSeats,
