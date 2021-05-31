@@ -162,7 +162,7 @@ namespace ProjectB.pages
                 
                 Console.Clear();
                 string back = Menu.Menubuilder("Film " + moviename + " is toegevoegd" + "\n", new string[] {"Nog een film toevoegen", "Film lijst bekijken", "Terug?"}, 10, 14);
-                if(back == "Nog een zaal toevoegen") {
+                if(back == "Nog een film toevoegen") {
                     createMovie();
                 } else if(back == "Terug?") {
                     moviesMain();
