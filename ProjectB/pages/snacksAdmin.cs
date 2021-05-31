@@ -4,6 +4,7 @@ using ProjectB.classes;
 using ProjectB.DAL;
 using System.IO;
 using System.Text.RegularExpressions;
+using System.Collections.Generic;
 
 namespace ProjectB.pages
 {
@@ -12,14 +13,14 @@ namespace ProjectB.pages
         public static dataStorage storage { get; set; }
         public static void snacksMain() {
             Console.Clear();
-            string movieMenu = Menu.Menubuilder($"Snacks beheren" + "\n", new string[] {"Snack toevoegen", "Snack verwijderen", "Snacks bekijken", "Terug naar hoofdmenu"}, 10, 14);
-            if(movieMenu == "Snack toevoegen") {
+            string snackMenu = Menu.Menubuilder($"Snacks beheren" + "\n", new string[] {"Snack toevoegen", "Snack verwijderen", "Snacks bekijken", "Terug naar hoofdmenu"}, 10, 14);
+            if(snackMenu == "Snack toevoegen") {
                createSnack();
-            } else if(movieMenu == "Snack verwijderen") {
+            } else if(snackMenu == "Snack verwijderen") {
                 removeSnacks();
-            } else if(movieMenu == "Snacks bekijken") {
+            } else if(snackMenu == "Snacks bekijken") {
                 showSnacks();
-            } else if(movieMenu == "Terug naar hoofdmenu") {
+            } else if(snackMenu == "Terug naar hoofdmenu") {
                 Menu.dashboard();
             }
         }
@@ -49,7 +50,7 @@ namespace ProjectB.pages
 
             while(true) {
                 Console.Clear();
-                tools.textColor("Snack naam: ", 14, false);
+                tools.textColor("Snack naam: ", 14, true);
                 snackName = Console.ReadLine();
 
                 if(Regex.IsMatch(snackName, "^[\\w ]+$")) { break; }
@@ -57,7 +58,7 @@ namespace ProjectB.pages
             }
             while(true) {
                 Console.Clear();
-                tools.textColor("Snack prijs: ", 14, false);
+                tools.textColor("Snack prijs: ", 14, true);
                 string snackPriceInput = Console.ReadLine();
 
                 double fakeDouble;
@@ -69,7 +70,7 @@ namespace ProjectB.pages
             }
             while(true) {
                 Console.Clear();
-                tools.textColor("Snack aantal: ", 14, false);
+                tools.textColor("Snack aantal: ", 14, true);
                 string snackQuantityInput = Console.ReadLine();
 
                 int fakeInt;

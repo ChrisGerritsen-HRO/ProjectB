@@ -60,6 +60,10 @@ namespace ProjectB.pages
             }
         } 
         public static void adminMenu() {
+            foreach (var item in reserveSnack.snackBasket)
+            {
+                Console.WriteLine(item);   
+            }
             string adminMenu = Menubuilder($"Welkom: {Login.user.firstName}" + "\n", new string[] {"Reserveringen beheren", "Films beheren", "Zalen beheren", "Gebruikers beheren", "Snacks beheren", "Uitloggen"}, 12, 14);
             if (adminMenu == "Reserveringen beheren") {
                 Menu.dashboard();
