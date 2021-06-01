@@ -8,6 +8,7 @@ namespace ProjectB.pages
     {
         public static void aboutPage()
         {
+            Console.Clear();
             tools.textColor("       Informatie      ", 14, false);
             tools.textColor("----------------------", 14, false);
             tools.textColor("Bioscoop       | ", 14, true); Console.WriteLine("bioscoop naam hier"); 
