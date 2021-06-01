@@ -51,9 +51,10 @@ namespace ProjectB.pages
             {   
                 Console.Clear();
                 bool check = false;
+                DateTime myDate = DateTime.ParseExact(strInput, "HH:mm", System.Globalization.CultureInfo.InvariantCulture);
                 for(int i = 0; i < len; i++) 
                 {   
-                    if(obj.movie[i].movieTime == strInput)
+                    if(obj.movie[i].movieTime == myDate)
                     {
                         Console.WriteLine("Deze films zijn beschikbaar om {0} uur:", result);
                         tools.textColor($"Naam         | {obj.movie[i].movieName}\nBeschrijving | {obj.movie[i].movieDescription}\nLeeftijd     | {obj.movie[i].movieAge}+\nGenre        | {obj.movie[i].movieGenre}\nTijdstip     | {obj.movie[i].movieTime}\nDuur         | {obj.movie[i].movieDuration} minuten\nZaal         | {obj.movie[i].movieTheater}\n", 14, false);
@@ -83,24 +84,6 @@ namespace ProjectB.pages
                 Menu.Mainmenu();
             }
             }
-            
-        
-        public static void MovieFind()
-        {
-            Console.Clear();
-            string path = "storage.json";
-            string filePath = Directory.GetCurrentDirectory() + "\\" + path;
-            string fileContent = File.ReadAllText("storage.json");
-            dynamic obj = JsonConvert.DeserializeObject(fileContent);
-            
-            var userinput = Console.ReadLine();
-            foreach (var item in obj)
-            {
-
-                Console.WriteLine("");
-
-            }
-        }
     }
 }
 
