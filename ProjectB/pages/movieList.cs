@@ -28,11 +28,15 @@ namespace ProjectB.pages
             dynamic obj = JsonConvert.DeserializeObject(fileContent);
 
             var len = ((Newtonsoft.Json.Linq.JArray)obj.movie).Count;
-            for(int i = 0; i < len; i++) {
+            // for(int i = 0; i < len; i++) {
+            //     tools.textColor("----------------------------", 14, false);
+            //     tools.textColor($"Naam         | {obj.movie[i].movieName}\nBeschrijving | {obj.movie[i].movieDescription}\nLeeftijd     | {obj.movie[i].movieAge}+\nGenre        | {obj.movie[i].movieGenre}\nTijdstip     | " + movieAdmin.movieSequence(obj.movie[i].movieName) + $"\nDuur         | {obj.movie[i].movieDuration} minuten\nZaal         | {obj.movie[i].movieTheater}\n", 14, false);
+            // } 
+            foreach(var item in dataStorageHandler.storage.movie)
+            {
                 tools.textColor("----------------------------", 14, false);
-                tools.textColor($"Naam         | {obj.movie[i].movieName}\nBeschrijving | {obj.movie[i].movieDescription}\nLeeftijd     | {obj.movie[i].movieAge}+\nGenre        | {obj.movie[i].movieGenre}\nTijdstip     | {obj.movie[i].movieTime}\nDuur         | {obj.movie[i].movieDuration} minuten\nZaal         | {obj.movie[i].movieTheater}\n", 14, false);
+                tools.textColor($"Naam         | {item.movieName}\nBeschrijving | {item.movieDescription}\nLeeftijd     | {item.movieAge}+\nGenre        | {item.movieGenre}\nTijdstip     | {movieAdmin.movieSequence(item)}\nDuur         | {item.movieDuration} minuten\nZaal         | {item.movieTheater}\n", 14, false);
             } 
-
             tools.textColor(">> Terug", 14, false);
             while (true) {
                 var key = Console.ReadKey();

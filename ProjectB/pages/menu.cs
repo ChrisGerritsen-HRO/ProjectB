@@ -14,14 +14,13 @@ namespace ProjectB.pages
         
         public static void Mainmenu()
         {
-            string mainmenu = Menubuilder(@"  _     _                                                               
- | |   (_)                                                              
- | |__  _  ___  ___  ___ ___   ___  _ __    _ __   __ _  __ _ _ __ ___  
- | '_ \| |/ _ \/ __|/ __/ _ \ / _ \| '_ \  | '_ \ / _` |/ _` | '_ ` _ \ 
- | |_) | | (_) \__ \ (_| (_) | (_) | |_) | | | | | (_| | (_| | | | | | |
- |_.__/|_|\___/|___/\___\___/ \___/| .__/  |_| |_|\__,_|\__,_|_| |_| |_|
-                                   | |                                  
-                                   |_|                                  " + "\n", new string[] { "Registreer", "Inloggen", "Films", "Over", "Afsluiten" }, 12, 14);
+            string mainmenu = Menubuilder(@" __    __     ______     __   __   __     ______        ______     ______   ______     ______    
+/\ '-./  \   /\  __ \   /\ \ / /  /\ \   /\  ___\      /\  ___\   /\__  _\ /\  __ \   /\  == \   
+\ \ \-./\ \  \ \ \/\ \  \ \ \'/   \ \ \  \ \  __\      \ \___  \  \/_/\ \/ \ \  __ \  \ \  __<   
+ \ \_\ \ \_\  \ \_____\  \ \__|    \ \_\  \ \_____\     \/\_____\    \ \_\  \ \_\ \_\  \ \_\ \_\ 
+  \/_/  \/_/   \/_____/   \/_/      \/_/   \/_____/      \/_____/     \/_/   \/_/\/_/   \/_/ /_/ 
+                                                                                                 
+" + "\n", new string[] { "Registreer", "Inloggen", "Films", "Over", "Afsluiten" }, 12, 14);
             if (mainmenu == "Registreer") {
                 Console.Clear();
                 Register.registerMain();
@@ -43,6 +42,8 @@ namespace ProjectB.pages
                 userMenu();
             } else if (Login.user is not null && Login.user.role == "admin") {
                 adminMenu();
+            } else if(Login.user is null){ 
+                Mainmenu();
             }
         }
 
@@ -51,7 +52,7 @@ namespace ProjectB.pages
             if (userMenu == "Films bekijken") {
                 movieList.choice();
             } else if (userMenu == "Reserveren") {
-
+                reserveMovie.reserveMain();
             } else if (userMenu == "Mijn reserveringen") {
 
             } else if (userMenu == "Uitloggen") {
