@@ -11,5 +11,6 @@ namespace ProjectB.DAL
         public List<movieRooms> movieRoom { get; set; } = new List<movieRooms>();
         public List<snacks> snack { get; set; } = new List<snacks>();
         public List<moviesPlanning> MoviePlanning { get; set;} = new List<moviesPlanning>();
+        public List<reservation> Reservations { get; set; } = new List<reservation>();
     }
 }
