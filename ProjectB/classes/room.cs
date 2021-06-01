@@ -6,6 +6,7 @@ namespace ProjectB.classes
 {
     public class movieRooms {
         public int roomNumber { get; set; }
+        public string roomKind { get; set; }
         public int totalSeats { get; set; }
         public int blueSeats { get; set; }
         public int orangeSeats { get; set; }

@@ -10,7 +10,9 @@ namespace ProjectB
         {
             dataStorageHandler.init("storage.json");
             dataStorageHandler.saveChanges();
+            Console.Clear();
             Menu.Mainmenu();
+            Login.user = "";
         }
     }
 }

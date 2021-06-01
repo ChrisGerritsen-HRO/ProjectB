@@ -132,6 +132,7 @@ namespace ProjectB.pages
             // JSON
             dataStorageHandler.storage.personAccount.Add(obj);
             dataStorageHandler.saveChanges();
+            Console.Clear();
             Menu.Mainmenu();
         }
     }
