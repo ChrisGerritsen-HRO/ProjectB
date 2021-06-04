@@ -60,7 +60,7 @@ namespace ProjectB.pages
             }
         } 
         public static void adminMenu() {
-            string adminMenu = Menubuilder($"Welkom: {Login.user.firstName}" + "\n", new string[] {"Reserveringen beheren", "Films beheren", "Zalen beheren", "Gebruikers beheren", "Uitloggen"}, 14, 14);
+            string adminMenu = Menubuilder($"Welkom: {Login.user.firstName}" + "\n", new string[] {"Reserveringen beheren", "Films beheren", "Zalen beheren", "Gebruikers beheren", "Snacks beheren", "Uitloggen"}, 14, 14);
             if (adminMenu == "Reserveringen beheren") {
                 Menu.dashboard();
             } else if (adminMenu == "Films beheren") {
@@ -69,6 +69,8 @@ namespace ProjectB.pages
                 roomAdmin.roomMain();
             } else if (adminMenu == "Gebruikers beheren") {
                 Menu.dashboard();
+            } else if (adminMenu == "Snacks beheren"){ 
+                snacksAdmin.snacksMain();
             } else if (adminMenu == "Uitloggen") {
                 Login.logout();
             }
