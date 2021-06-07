@@ -9,7 +9,7 @@ namespace ProjectB.pages
 {
     class Login
     {
-        public static dynamic user { get; set; }
+        public static personAccounts user { get; set; }
         public static void loginMain() {
             login();
         }
@@ -17,7 +17,9 @@ namespace ProjectB.pages
         public static void login() {
             Console.Clear();
             string fileContent = File.ReadAllText("storage.json");
-            dynamic obj = JsonConvert.DeserializeObject(fileContent);
+         
+            
+            List<personAccounts> a = dataStorageHandler.storage.personAccount;
             
             int count = 0;
             while(true) {
@@ -26,10 +28,10 @@ namespace ProjectB.pages
                 string email = Console.ReadLine();
                 tools.textColor("Wachtwoord: ", 14, true);
                 string password = Console.ReadLine();
-                var len = ((Newtonsoft.Json.Linq.JArray)obj.personAccount).Count;
+                var len = a.Count;
                 for(int i = 0; i < len; i++) {
-                    if(obj.personAccount[i].userEmail == email && obj.personAccount[i].password == password) {
-                        user = obj.personAccount[i];
+                    if(a[i].userEmail == email && a[i].password == password) {
+                        user = a[i];
                         Menu.dashboard();
                     } else {
                         tools.textColor("Email en wachtwoord komen niet overeen", 12, true);
@@ -44,7 +46,7 @@ namespace ProjectB.pages
 
         public static void logout() {
             Console.Clear();
-            user = "";
+            user = null;
             Menu.Mainmenu();
         }
     }
