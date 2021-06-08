@@ -9,7 +9,7 @@ namespace ProjectB.classes
         public int movieID { get; set; }
         public int movieTimeID { get; set; }
         public int roomNumber { get; set; }
-        public string roomSeats { get; set; }
+        public int[] roomSeats { get; set; }
         public string snacks { get; set; }
         public string reservationID { get; set; }
     }

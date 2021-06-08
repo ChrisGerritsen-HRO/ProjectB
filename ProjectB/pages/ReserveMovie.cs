@@ -52,7 +52,8 @@ namespace ProjectB.pages
                     reserverMovieID = movieID;
                     reserveMovieTimeID = item.movieTimeID;
                     Console.WriteLine(timeSelected); // hier kan je naar de functie gaan van stoel selecteren en aantal
-                    reserveSnack.reserverSnackMain();
+                    // reserveSnack.reserverSnackMain();
+                    reserveRoom.selectChair();
                     break;
                 }
             }
