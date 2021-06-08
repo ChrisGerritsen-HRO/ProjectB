@@ -11,6 +11,7 @@ namespace ProjectB.pages
         public static int reserverMovieID { get; set; }
         public static int reserveMovieTimeID { get; set; }
         public static void reserveMain() {
+            Console.Clear();
             string fileContent = File.ReadAllText("storage.json");
             dynamic obj = JsonConvert.DeserializeObject(fileContent);
             for(int i = 0; i < dataStorageHandler.storage.movie.Count; i++)
@@ -20,7 +21,7 @@ namespace ProjectB.pages
             }
             
             while(true){
-                tools.textColor("Kies een film: ", 14, true);
+                tools.textColor("Kies een film ID: ", 14, true);
                 int selectedID;
                 selectedID = Convert.ToInt32(Console.ReadLine());
                 if(selectedID > dataStorageHandler.storage.movie.Count-1 || selectedID < 0) { // Als de ingevoerde ID hoger is dan de hoogste ID dan onderstaande uitgevoerd
