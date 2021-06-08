@@ -32,7 +32,7 @@ namespace ProjectB.pages
                 } else {
                     string selectedSnackName = obj.snack[selectedID].snackName;
                     string selectedSnackPrice = obj.snack[selectedID].snackPrice;
-                    snacksList = snacksList + selectedSnackName + selectedSnackPrice + "\n";
+                    snacksList = snacksList + selectedSnackName + " " + selectedSnackPrice + "\n";
                 }
 
                 if(snacksList == null) {

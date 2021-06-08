@@ -40,7 +40,8 @@ namespace ProjectB.pages
                 userMail = Login.user.userEmail,
                 movieID = reserveMovie.reserverMovieID,
                 movieTimeID = reserveMovie.reserveMovieTimeID,
-                roomNumber = 1,
+                roomNumber = reserveRoom.roomNum,
+                roomSeats = reserveRoom.seats,
                 snacks = reserveSnack.snacksList,
                 reservationID = reservationID
             };
