@@ -36,10 +36,6 @@ namespace ProjectB.pages
                 for(int i = 0; i < dataStorageHandler.storage.movieRoom.Count; i++) {
                     tools.textColor($"Nummer: {obj.movieRoom[i].roomNumber}", 14, false);
                     tools.textColor($"Soort zaal: {obj.movieRoom[i].roomKind}", 14, false);
-                    tools.textColor($"Totale stoelen: {obj.movieRoom[i].totalSeats}", 14, false);
-                    tools.textColor($"Blauwe stoelen: {obj.movieRoom[i].blueSeats}", 14, false);
-                    tools.textColor($"Oranje stoelen: {obj.movieRoom[i].orangeSeats}", 14, false);
-                    tools.textColor($"Rode stoelen: {obj.movieRoom[i].redSeats}\n", 14, false);
                     }
                 }
                 string back = Menu.Menubuilder($"" + "\n", new string[] {"Terug?"}, 14, 14);
@@ -50,7 +46,8 @@ namespace ProjectB.pages
 
         public static void createRoom() {
             Console.Clear();
-            int roomNumber, totalSeats, blueSeats, orangeSeats, redSeats;
+            // int roomNumber, totalSeats, blueSeats, orangeSeats, redSeats;
+            int roomNumber, value, columns, rows;
             string roomKind;
             while(true) {
                 
@@ -59,55 +56,88 @@ namespace ProjectB.pages
 
                 Console.Clear();
 
-                while(true) {
-                    tools.textColor("Totaal aantal stoelen: ", 14, true);
-                    string totalSeatsInput = Console.ReadLine();
-                    int value;
-                    if (int.TryParse(totalSeatsInput, out value)) {
-                        totalSeats = Convert.ToInt32(totalSeatsInput);
-                        break;
-                    } else { tools.textColor("Gebruik a.u.b alleen cijfers", 12, false); }
+                while (true)
+            {
+                tools.textColor("Aantal rijen: ", 14, true); // geef aantal rijen in de zaal
+                string input = Console.ReadLine();
+                if (int.TryParse(input, out value))
+                {
+                    rows = Convert.ToInt32(input);
+                    break;
                 }
-                while(true) {
-                    tools.textColor("Aantal blauwe stoelen: ", 14, true);
-                    string blueSeatsInput = Console.ReadLine();
-                    int value;
-                    if (int.TryParse(blueSeatsInput, out value)) {
-                        blueSeats = Convert.ToInt32(blueSeatsInput);
-                        break;
-                    } else { tools.textColor("Gebruik a.u.b alleen cijfers", 12, false); }
+                else { tools.textColor("Alleen cijfers A.U.B", 12, false); }
+            }
+
+            while (true)
+            {
+                tools.textColor("Max aantal stoelen per rij: ", 14, true); //geef aantal stoellen per rij
+                string input = Console.ReadLine();
+                if (int.TryParse(input, out value))
+                {
+                    columns = Convert.ToInt32(input);
+                    break;
                 }
-                while(true) {
-                    tools.textColor("Aantal oranje stoelen: ", 14, true);
-                    string orangeSeatsInput = Console.ReadLine();
-                    int value;
-                    if (int.TryParse(orangeSeatsInput, out value)) {
-                        orangeSeats = Convert.ToInt32(orangeSeatsInput);
-                        break;
-                    } else { tools.textColor("Gebruik a.u.b alleen cijfers", 12, false); }
+                else { tools.textColor("Alleen cijfers A.U.B", 12, false); }
+            }
+
+            Console.Clear();
+            string[] room = new string[rows * columns]; //maak een array aan van het aantal stoellen in de zaal
+            string[] seatPrice = new string[rows * columns]; //een array die voor iedere index in room de kleur opslaat
+            while (true)
+            {
+                for (int i = 0; i <= rows - 1; i++)
+                {
+                    int j = 0;
+                    while (j <= columns - 1)
+                    {
+                        room[i * columns + j] = "X";
+                        j++;
+                    }
+                    room[i * columns + j - 1] += "\n";
                 }
-                while(true) {
-                    tools.textColor("Aantal rode stoelen: ", 14, true);
-                    string redSeatsInput = Console.ReadLine();
-                    int value;
-                    if (int.TryParse(redSeatsInput, out value)) {
-                        redSeats = Convert.ToInt32(redSeatsInput);
-                        break;
-                    } else { tools.textColor("Gebruik a.u.b alleen cijfers", 12, false); }
+                break;
+            }
+
+            int selected = 0;
+            while (selected < rows * columns)
+            {
+                int i = 0;
+                foreach (var element in room) //print de zaal uit met de juiste kleuren
+                {
+                    Console.Write(" ");
+                    if (i == selected)
+                    {
+                        Console.BackgroundColor = (ConsoleColor)8;
+                    }
+                    if (seatPrice[i] == "R") { tools.textColor(element, 12, true); }
+                    else if (seatPrice[i] == "B") { tools.textColor(element, 9, true); }
+                    else if (seatPrice[i] == "Y") { tools.textColor(element, 14, true); }
+                    else if (seatPrice[i] == "") { tools.textColor(element, 0, true); }
+                    else if (seatPrice[i] == "G") { tools.textColor(element, 7, true); }
+                    else { Console.Write(element); }
+                    Console.ResetColor();
+
+                    i++;
                 }
-                if(redSeats + orangeSeats + blueSeats != totalSeats) {
-                    Console.Clear();
-                    tools.textColor($"De kleur stoelen komen niet tot het aantal van de totaal stoelen! Probeer het opnieuw! ({redSeats} + {orangeSeats} + {blueSeats} != {totalSeats})", 12, false);
-                } else { break;}
+
+                Console.Write("\n Selecteer stoelen prijs(R/B/Y/none/back): "); //geef vooer iedere stoel aan welke prijs deze stoel is
+                string input = Console.ReadLine();
+                if (input == "R") { seatPrice[selected] = "R"; }
+                else if (input == "Y") { seatPrice[selected] = "Y"; }
+                else if (input == "B") { seatPrice[selected] = "B"; }
+                else if (input == "back") { selected -= 2; }
+                else { seatPrice[selected] = ""; }
+                selected++;
+                Console.Clear();
             }
 
             movieRooms obj = new movieRooms {
                 roomNumber = roomNumber,
                 roomKind = roomKind,
-                totalSeats = totalSeats,
-                blueSeats = blueSeats,
-                orangeSeats = orangeSeats,
-                redSeats = redSeats
+                rows = rows,
+                columns = columns,
+                seats = room,
+                seatPrice = seatPrice
             };
 
             dataStorageHandler.storage.movieRoom.Add(obj);
@@ -120,6 +150,7 @@ namespace ProjectB.pages
                 roomMain();
             }
         }
+    }
 
         public static void removeRoom() {
             Console.Clear();
@@ -144,10 +175,6 @@ namespace ProjectB.pages
                 for(int i = 0; i < arrLen; i++) {
                     tools.textColor($"ID: {i}", 14, false);
                     tools.textColor($"Nummer: {obj.movieRoom[i].roomNumber}", 14, false);
-                    tools.textColor($"Totale stoelen: {obj.movieRoom[i].totalSeats}", 14, false);
-                    tools.textColor($"Blauwe stoelen: {obj.movieRoom[i].blueSeats}", 14, false);
-                    tools.textColor($"Oranje stoelen: {obj.movieRoom[i].orangeSeats}", 14, false);
-                    tools.textColor($"Rode stoelen: {obj.movieRoom[i].redSeats}\n", 14, false);
                 }
 
                 int selectedID = 0;

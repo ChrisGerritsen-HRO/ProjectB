@@ -13,5 +13,6 @@ namespace ProjectB.classes
         public int movieDuration { get; set; }
         public DateTime movieEndTime { get; set; }
         public int movieTheater { get; set; }
+        public string[] seats { get; set; }
     }
 }

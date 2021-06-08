@@ -8,6 +8,8 @@ using System.Collections.Generic;
 namespace ProjectB.pages
 {
     class reserveMovie {
+        public static int reserverMovieID { get; set; }
+        public static int reserveMovieTimeID { get; set; }
         public static void reserveMain() {
             string fileContent = File.ReadAllText("storage.json");
             dynamic obj = JsonConvert.DeserializeObject(fileContent);
@@ -47,7 +49,10 @@ namespace ProjectB.pages
             string timeSelected = Console.ReadLine();
             foreach(var item in dataStorageHandler.storage.MoviePlanning) {
                 if(timeSelected == item.movieTime.ToString("HH:mm") && item.movieID == movieID) {
+                    reserverMovieID = movieID;
+                    reserveMovieTimeID = item.movieTimeID;
                     Console.WriteLine(timeSelected); // hier kan je naar de functie gaan van stoel selecteren en aantal
+                    reserveSnack.reserverSnackMain();
                     break;
                 }
             }

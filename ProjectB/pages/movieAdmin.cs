@@ -233,6 +233,35 @@ namespace ProjectB.pages
             int movieTheater = themovie.movieTheater;
             int movieID = themovie.movieID;
             string movieName = themovie.movieName;
+            // List<string> roomSeatsList = new List<string>();
+            string[] roomSeats = new string[0];
+            // var roomSeats = "";
+
+            string fileContent = File.ReadAllText("storage.json");
+            dynamic objContent = JsonConvert.DeserializeObject(fileContent);
+            int arrLen = ((Newtonsoft.Json.Linq.JArray)objContent.movieRoom).Count;
+
+            for (int i = 0; i < arrLen; i++)
+            {
+                int roomNumber = objContent.movieRoom[i].roomNumber;
+                if(movieTheater == roomNumber) {
+                    int rows = objContent.movieRoom[i].rows;
+                    int columns = objContent.movieRoom[i].columns;
+                    Array.Resize(ref roomSeats, rows * columns);
+                    // roomSeats = objContent.movieRoom[i].seats;
+                    // foreach (var item in objContent.movieRoom[i].seats)
+                    // {
+                    //     roomSeatsList.Add(item);
+                    // }
+                    for (int j = 0; j < objContent.movieRoom[i].seatPrice.Count; j++)
+                    {
+                        roomSeats[j] = objContent.movieRoom[i].seatPrice[j];
+                    }
+                }
+            }
+
+            // string[] roomSeats = roomSeatsList.ToArray();
+
             while(themovietime.TimeOfDay < endDay.TimeOfDay) {
                 moviesPlanning obj = new moviesPlanning {
                     movieTimeID = themovie.GetHashCode(),
@@ -241,7 +270,8 @@ namespace ProjectB.pages
                     movieDuration = movieDuration,
                     movieTime = themovietime,
                     movieEndTime = themovietime.Add(new TimeSpan(0,movieDuration,0)),
-                    movieTheater = movieTheater
+                    movieTheater = movieTheater,
+                    seats = roomSeats
                 };
                 dataStorageHandler.storage.MoviePlanning.Add(obj);
                 themovietime = themovietime.AddMinutes(themovie.movieDuration+30);

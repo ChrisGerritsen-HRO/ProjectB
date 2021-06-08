@@ -14,14 +14,13 @@ namespace ProjectB.pages
         
         public static void Mainmenu()
         {
-            string mainmenu = Menubuilder(@"  _     _                                                               
- | |   (_)                                                              
- | |__  _  ___  ___  ___ ___   ___  _ __    _ __   __ _  __ _ _ __ ___  
- | '_ \| |/ _ \/ __|/ __/ _ \ / _ \| '_ \  | '_ \ / _` |/ _` | '_ ` _ \ 
- | |_) | | (_) \__ \ (_| (_) | (_) | |_) | | | | | (_| | (_| | | | | | |
- |_.__/|_|\___/|___/\___\___/ \___/| .__/  |_| |_|\__,_|\__,_|_| |_| |_|
-                                   | |                                  
-                                   |_|                                  " + "\n", new string[] { "Registreer", "Inloggen", "Films", "Over", "Afsluiten" }, 12, 14);
+            string mainmenu = Menubuilder(@" __    __     ______     __   __   __     ______        ______     ______   ______     ______    
+/\ '-./  \   /\  __ \   /\ \ / /  /\ \   /\  ___\      /\  ___\   /\__  _\ /\  __ \   /\  == \   
+\ \ \-./\ \  \ \ \/\ \  \ \ \'/   \ \ \  \ \  __\      \ \___  \  \/_/\ \/ \ \  __ \  \ \  __<   
+ \ \_\ \ \_\  \ \_____\  \ \__|    \ \_\  \ \_____\     \/\_____\    \ \_\  \ \_\ \_\  \ \_\ \_\ 
+  \/_/  \/_/   \/_____/   \/_/      \/_/   \/_____/      \/_____/     \/_/   \/_/\/_/   \/_/ /_/ 
+                                                                                                 
+" + "\n", new string[] { "Registreer", "Inloggen", "Films", "Over", "Afsluiten" }, 12, 14);
             if (mainmenu == "Registreer") {
                 Console.Clear();
                 Register.registerMain();
@@ -43,6 +42,8 @@ namespace ProjectB.pages
                 userMenu();
             } else if (Login.user is not null && Login.user.role == "admin") {
                 adminMenu();
+            } else if(Login.user is null){ 
+                Mainmenu();
             }
         }
 
@@ -51,21 +52,23 @@ namespace ProjectB.pages
             if (userMenu == "Films bekijken") {
                 movieList.choice();
             } else if (userMenu == "Reserveren") {
-                reserveMovie.reserveMain();
+                reserveUser.reserveUserMain();
             } else if (userMenu == "Mijn reserveringen") {
-
+                reserveUser.viewUserReservation();
             } else if (userMenu == "Uitloggen") {
                 Login.logout();
             }
         } 
         public static void adminMenu() {
-            string adminMenu = Menubuilder($"Welkom: {Login.user.firstName}" + "\n", new string[] {"Reserveringen beheren", "Films beheren", "Zalen beheren", "Gebruikers beheren", "Uitloggen"}, 14, 14);
+            string adminMenu = Menubuilder($"Welkom: {Login.user.firstName}" + "\n", new string[] {"Reserveringen beheren", "Films beheren", "Zalen beheren", "Snacks beheren", "Gebruikers beheren", "Uitloggen"}, 14, 14);
             if (adminMenu == "Reserveringen beheren") {
                 Menu.dashboard();
             } else if (adminMenu == "Films beheren") {
                 movieAdmin.moviesMain();
             } else if (adminMenu == "Zalen beheren") {
                 roomAdmin.roomMain();
+            } else if (adminMenu == "Snacks beheren") {
+                snacksAdmin.snacksMain();
             } else if (adminMenu == "Gebruikers beheren") {
                 Menu.dashboard();
             } else if (adminMenu == "Uitloggen") {
