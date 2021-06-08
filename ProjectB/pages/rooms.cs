@@ -6,7 +6,7 @@ namespace ProjectB.pages
 {
     class rooms
     {
-                public static List<int> createRoom() //maak als admin een visuele room aan
+        public static List<int> createRoom() //maak als admin een visuele room aan
         {
             int value, columns, rows;
             while (true)
@@ -142,13 +142,6 @@ namespace ProjectB.pages
                 }
             }
             return selectedChairs;
-        }
-
-
-        static void Main(string[] args)
-        {
-            List<int> stoellen = createRoom();
-            stoellen.ForEach(Console.WriteLine);
         }
     }
 }
