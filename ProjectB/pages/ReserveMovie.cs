@@ -52,8 +52,9 @@ namespace ProjectB.pages
                 if(timeSelected == item.movieTime.ToString("HH:mm") && item.movieID == movieID) {
                     reserverMovieID = movieID;
                     reserveMovieTimeID = item.movieTimeID;
-                    Console.WriteLine(timeSelected); // hier kan je naar de functie gaan van stoel selecteren en aantal
-                    reserveSnack.reserverSnackMain();
+                    // hier kan je naar de functie gaan van stoel selecteren en aantal
+                    // reserveSnack.reserverSnackMain();
+                    reserveRoom.selectChair();
                     break;
                 }
             }
