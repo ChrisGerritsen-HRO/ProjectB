@@ -80,7 +80,7 @@ namespace ProjectB.pages
             else if (userinput == "2")
             {
                 Console.Clear();
-                Menu.Mainmenu();
+                Menu.dashboard();
             }
             }
             
