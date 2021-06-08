@@ -52,7 +52,56 @@ namespace ProjectB.pages
                     reserverMovieID = movieID;
                     reserveMovieTimeID = item.movieTimeID;
                     Console.WriteLine(timeSelected); // hier kan je naar de functie gaan van stoel selecteren en aantal
-                    reserveSnack.reserverSnackMain();
+                    string[] seats = new string[0];
+                    int rows = 0;
+                    int columns = 0;
+                    string[] seatPrice = new string[0];
+                    int moviePlanLen = ((Newtonsoft.Json.Linq.JArray)obj.MoviePlanning).Count;
+                    for (var i = 0; i < moviePlanLen; i++)
+                    {
+                        if (reserveMovieTimeID == obj.MoviePlanning[i].movieTimeID)
+                        {
+                            foreach (var items in obj.movieRoom)
+                            {
+                                if (obj.MoviePlanning[i].movieTheater == items.roomNumber)
+                                {
+                                    rows = items.rows;
+                                    columns = items.columns;
+                                    Array.Resize(ref seats, rows * columns);
+                                    Array.Resize(ref seatPrice, rows * columns);
+                                    for (var j = 0; j < obj.movieRoom.seats.Count; j++)
+                                    {
+                                        seats[j] = obj.movieRoom[i].seats[j];
+                                        seatPrice[j] = obj.MoviePlanning[i].seatPrice[j];
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    rooms.selectChair(seatPrice, seats, rows, columns);
+
+
+
+                    /*for (int i = 0; i < arrLen; i++)
+            {
+                int roomNumber = objContent.movieRoom[i].roomNumber;
+                if(movieTheater == roomNumber) {
+                    int rows = objContent.movieRoom[i].rows;
+                    int columns = objContent.movieRoom[i].columns;
+                    Array.Resize(ref roomSeats, rows * columns);
+                    // roomSeats = objContent.movieRoom[i].seats;
+                    // foreach (var item in objContent.movieRoom[i].seats)
+                    // {
+                    //     roomSeatsList.Add(item);
+                    // }
+                    for (int j = 0; j < objContent.movieRoom[i].seatPrice.Count; j++)
+                    {
+                        roomSeats[j] = objContent.movieRoom[i].seatPrice[j];
+                    }
+                }
+            }*/
+
+                    //string[] seatPrice, string[] room, int rows, int columns
                     break;
                 }
             }
