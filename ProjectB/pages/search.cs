@@ -10,8 +10,9 @@ using System.Text.RegularExpressions;
 namespace ProjectB.pages
 {
     public class search {
-        public static void movieSearch() {   
-            tools.textColor("Voer een tijd (HH:mm) of naam van een film in:", 15, false);  
+        public static void movieSearch() {  
+            Console.Clear(); 
+            tools.textColor("Voer een tijd (HH:mm) of naam van een film in:", 14, false);  
             string path = "storage.json";
             string filePath = Directory.GetCurrentDirectory() + "\\" + path;
             string fileContent = File.ReadAllText("storage.json");
@@ -23,7 +24,7 @@ namespace ProjectB.pages
             if (Regex.IsMatch(strInput, "[a-zA-Z]")) // Checks if there is a letter in the input to decide if it's a name or a time.
             {   
                 Console.Clear();   
-                tools.textColor("Deze films zijn beschikbaar voor de zoekterm: " + strInput, 15, false);
+                tools.textColor("Deze films zijn beschikbaar voor de zoekterm: " + strInput, 14, false);
                 bool check = false;
                 foreach(var item in dataStorageHandler.storage.movie) {   
                     if(string.Equals(item.movieName, strInput, StringComparison.CurrentCultureIgnoreCase))
@@ -37,7 +38,7 @@ namespace ProjectB.pages
                     
                 }
                 if(!check) {
-                    tools.textColor("Er zijn geen beschikbare films voor deze tijd of zoekterm.", 15, false);
+                    tools.textColor("Er zijn geen beschikbare films voor deze tijd of zoekterm.", 12, false);
                 }
                 
                 
@@ -65,7 +66,7 @@ namespace ProjectB.pages
                     
                 }
                 if(!check) {
-                    tools.textColor("Er zijn geen beschikbare films voor deze tijd of zoekterm.", 15, false);
+                    tools.textColor("Er zijn geen beschikbare films voor deze tijd of zoekterm.", 12, false);
                 }
             }        
                 

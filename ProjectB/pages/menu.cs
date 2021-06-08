@@ -1,4 +1,5 @@
 using System;
+using ProjectB.classes;
 
 namespace ProjectB.pages
 {
@@ -38,11 +39,14 @@ namespace ProjectB.pages
 
         public static void dashboard() {
             Console.Clear();
-            if (Login.user is not null && Login.user.role == "user") {
+            
+            personAccounts user = (personAccounts)Login.user;
+        
+            if (user != null && user.role != null && (user.role) ==  "user") {
                 userMenu();
-            } else if (Login.user is not null && Login.user.role == "admin") {
+            } else if (user != null && user.role == "admin") {
                 adminMenu();
-            } else if(Login.user is null){ 
+            } else { 
                 Mainmenu();
             }
         }
@@ -70,7 +74,7 @@ namespace ProjectB.pages
             } else if (adminMenu == "Snacks beheren") {
                 snacksAdmin.snacksMain();
             } else if (adminMenu == "Gebruikers beheren") {
-                Menu.dashboard();
+                userAdmin.choice();
             } else if (adminMenu == "Uitloggen") {
                 Login.logout();
             }

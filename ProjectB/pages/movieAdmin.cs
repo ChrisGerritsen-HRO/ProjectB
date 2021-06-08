@@ -102,7 +102,8 @@ namespace ProjectB.pages
                     DateTime startDay = new DateTime(2021, 4 , 2, 9, 00, 00);
                     DateTime endDay = new DateTime(2021, 4 , 2, 22, 00, 00);
                     movietime = DateTime.Parse(timeinput);
-                    if(movietime.TimeOfDay > startDay.TimeOfDay && movietime.TimeOfDay < endDay.TimeOfDay) {
+                    Console.WriteLine(movietime);
+                    if(movietime.TimeOfDay >= startDay.TimeOfDay && movietime.TimeOfDay <= endDay.TimeOfDay) {
                         break;
                     } else {
                         tools.textColor("De bioscoop gaat om 09:00 open en sluit om 22:00", 12, false);
@@ -150,7 +151,7 @@ namespace ProjectB.pages
                     movieAge = movieage,
                     movieGenre = moviegenre,
                     movieTime = movietime,
-                    movieEndTime = movietime.Add(new TimeSpan(0,movieduration,0)),
+                    movieEndTime = movietime.Add(new TimeSpan(hours:0,minutes:movieduration,seconds:0)),
                     movieDuration = movieduration,
                     movieTheater = movietheater,
 
@@ -215,18 +216,21 @@ namespace ProjectB.pages
             }
         }
         public static string movieSequence(movies thename) {
+            DateTime startDay = new DateTime(2021, 4 , 2, 9, 00, 00);
             DateTime endDay = new DateTime(2021, 4 , 2, 22, 00, 00);
             DateTime themovietime = thename.movieTime;
             string thewholestring = "";
-            while(themovietime.TimeOfDay < endDay.TimeOfDay) {
+            while(themovietime.TimeOfDay <= endDay.TimeOfDay) {
                 thewholestring += themovietime.ToString("HH:mm");
-                themovietime = themovietime.AddMinutes(thename.movieDuration+30);
+                themovietime = themovietime.Add(new TimeSpan(hours:0,minutes:thename.movieDuration+30,seconds:0));
                 thewholestring += ", ";
+                if(themovietime.TimeOfDay < startDay.TimeOfDay) {break;}
             }
             return thewholestring;
         }
 
         public static void moviesInPlanning(movies themovie) {
+            DateTime startDay = new DateTime(2021, 4 , 2, 9, 00, 00);
             DateTime endDay = new DateTime(2021, 4 , 2, 22, 00, 00);
             DateTime themovietime = themovie.movieTime;
             int movieDuration = themovie.movieDuration;
@@ -262,19 +266,21 @@ namespace ProjectB.pages
 
             // string[] roomSeats = roomSeatsList.ToArray();
 
-            while(themovietime.TimeOfDay < endDay.TimeOfDay) {
+            while(themovietime.TimeOfDay <= endDay.TimeOfDay) {
                 moviesPlanning obj = new moviesPlanning {
                     movieTimeID = themovie.GetHashCode(),
                     movieID = movieID,
                     movieName = movieName,
                     movieDuration = movieDuration,
                     movieTime = themovietime,
-                    movieEndTime = themovietime.Add(new TimeSpan(0,movieDuration,0)),
-                    movieTheater = movieTheater,
-                    seats = roomSeats
+                    seats = roomSeats,
+                    movieEndTime = themovietime.Add(new TimeSpan(hours:0,minutes:movieDuration,seconds:0)),
+                    movieTheater = movieTheater
                 };
                 dataStorageHandler.storage.MoviePlanning.Add(obj);
-                themovietime = themovietime.AddMinutes(themovie.movieDuration+30);
+                themovietime = themovietime.Add(new TimeSpan(hours:0,minutes:themovie.movieDuration+30,seconds:0));
+                if(themovietime.TimeOfDay < startDay.TimeOfDay) {break;}
+                //themovietime = themovietime.AddMinutes(themovie.movieDuration+30);
             }       
             dataStorageHandler.saveChanges();  
         }
