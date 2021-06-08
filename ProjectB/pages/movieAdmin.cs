@@ -255,7 +255,7 @@ namespace ProjectB.pages
                     // }
                     for (int j = 0; j < objContent.movieRoom[i].seatPrice.Count; j++)
                     {
-                        roomSeats[1] = objContent.movieRoom[i].seatPrice[j];
+                        roomSeats[j] = objContent.movieRoom[i].seatPrice[j];
                     }
                 }
             }
