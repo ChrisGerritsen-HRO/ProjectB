@@ -10,6 +10,7 @@ using System.Text;
 namespace ProjectB.pages
 {
     class reserveUser {
+        public static dataStorage storage { get; set; }
         public static string reservationID { get; set; }
         public static void reserveUserMain() {
             makeReservationID();
@@ -40,11 +41,40 @@ namespace ProjectB.pages
                 movieID = reserveMovie.reserverMovieID,
                 movieTimeID = reserveMovie.reserveMovieTimeID,
                 roomNumber = 1,
+                snacks = reserveSnack.snacksList,
                 reservationID = reservationID
             };
 
             dataStorageHandler.storage.Reservations.Add(obj);
             dataStorageHandler.saveChanges();
+        }
+
+        public static void viewUserReservation() {
+            Console.Clear();
+            string fileContent = File.ReadAllText("storage.json");
+            storage = JsonConvert.DeserializeObject<dataStorage>(fileContent);
+            string reservationList = "";
+
+            if(storage.Reservations != null) {
+                for (int i = 0; i < storage.Reservations.Count; i++)
+                {
+                    foreach (var item in storage.Reservations)
+                    {
+                        if(item.userMail == Login.user.userEmail) {
+                            reservationList = reservationList + $"Reserverings Nummer: {item.reservationID}\n";
+                        } else {
+                            tools.textColor("Er staan geen reserveringen op uw naam!", 12, false);
+                        }
+                    }
+                }
+
+                tools.textColor("\n>> Terug", 14, false);
+                while (true) {
+                    var key = Console.ReadKey();
+                    if (key.Key.ToString() == "Enter" && Login.user == null) {Console.Clear(); Menu.Mainmenu();}
+                    else {continue;}
+                }
+            }
         }
     }
 }

@@ -10,7 +10,7 @@ namespace ProjectB.pages
 {
     class reserveSnack
     {
-        // public static List<string> snackBasket = new List<string>();
+        public static string snacksList { get; set; }
         public static void reserverSnackMain() {
             Console.Clear();
 
@@ -31,17 +31,15 @@ namespace ProjectB.pages
                     tools.textColor("Dit is geen geldig ID!", 12, false);
                 } else {
                     string selectedSnackName = obj.snack[selectedID].snackName;
-                    reservation.snacks.Add(selectedSnackName);
+                    string selectedSnackPrice = obj.snack[selectedID].snackPrice;
+                    snacksList = snacksList + selectedSnackName + selectedSnackPrice + "\n";
                 }
 
-                if(reservation.snacks == null) {
+                if(snacksList == null) {
                     Console.WriteLine("Mandje:\nGeen snacks gevonden");
                 } else {
                     Console.WriteLine("Mandje:");
-                    foreach (var item in reservation.snacks)
-                    {
-                        Console.WriteLine(item);
-                    }
+                    Console.WriteLine(snacksList);
                 }
 
                 string next = Menu.Menubuilder($"" + "\n", new string[] {"Nog een snack toevoegen", "Verder"}, 14, 14);
@@ -49,10 +47,10 @@ namespace ProjectB.pages
                 } else if(next == "Verder") {
                     // Reserveren afronden en alles gegevens opslaan.
                     reserveUser.finishReservation();
+                    tools.textColor($"Bedankt voor de reservering! Reserverings nummer: {reserveUser.reservationID}", 10, false);
                     break;
                 }
             }
-            
 
             tools.textColor("\n>> Terug naar hoofmenu", 14, false);
             while (true) {

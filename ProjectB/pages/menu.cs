@@ -52,21 +52,23 @@ namespace ProjectB.pages
             if (userMenu == "Films bekijken") {
                 movieList.choice();
             } else if (userMenu == "Reserveren") {
-                reserveMovie.reserveMain();
+                reserveUser.reserveUserMain();
             } else if (userMenu == "Mijn reserveringen") {
-
+                reserveUser.viewUserReservation();
             } else if (userMenu == "Uitloggen") {
                 Login.logout();
             }
         } 
         public static void adminMenu() {
-            string adminMenu = Menubuilder($"Welkom: {Login.user.firstName}" + "\n", new string[] {"Reserveringen beheren", "Films beheren", "Zalen beheren", "Gebruikers beheren", "Uitloggen"}, 14, 14);
+            string adminMenu = Menubuilder($"Welkom: {Login.user.firstName}" + "\n", new string[] {"Reserveringen beheren", "Films beheren", "Zalen beheren", "Snacks beheren", "Gebruikers beheren", "Uitloggen"}, 14, 14);
             if (adminMenu == "Reserveringen beheren") {
                 Menu.dashboard();
             } else if (adminMenu == "Films beheren") {
                 movieAdmin.moviesMain();
             } else if (adminMenu == "Zalen beheren") {
                 roomAdmin.roomMain();
+            } else if (adminMenu == "Snacks beheren") {
+                snacksAdmin.snacksMain();
             } else if (adminMenu == "Gebruikers beheren") {
                 Menu.dashboard();
             } else if (adminMenu == "Uitloggen") {

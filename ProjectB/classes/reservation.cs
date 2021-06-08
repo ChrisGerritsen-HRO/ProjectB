@@ -9,7 +9,8 @@ namespace ProjectB.classes
         public int movieID { get; set; }
         public int movieTimeID { get; set; }
         public int roomNumber { get; set; }
-        public static List<string> snacks = new List<string>();
+        public string roomSeats { get; set; }
+        public string snacks { get; set; }
         public string reservationID { get; set; }
     }
 }
