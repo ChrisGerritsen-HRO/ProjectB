@@ -106,9 +106,10 @@ namespace ProjectB.pages
                 }
                 else if (key.Key.ToString() == "Enter")
                 {
-                    seatPrice[selected] = "G"; //gekozen stoellen worden grijs in de array
+                    if (seatPrice[selected] == "G") {continue;}
+                    else{seatPrice[selected] = "G"; //gekozen stoellen worden grijs in de array
                     selectedChairs.Add(selected+1);
-                    amountOfSelectedChairs++;
+                    amountOfSelectedChairs++;}
                 }
             }
             for (int i = 0; i < obj.MoviePlanning.Count; i++)
