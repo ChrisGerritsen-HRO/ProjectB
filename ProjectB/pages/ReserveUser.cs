@@ -76,7 +76,7 @@ namespace ProjectB.pages
                                 movieRoom = storage.MoviePlanning[j].movieTheater;
                             }
                         }
-                        reservationList = reservationList + $"Reserverings Nummer: {storage.Reservations[i].reservationID}\nFilm: {movieName}\nDatum en tijd: {DateTime.Parse(movieStartTime)}\nZaal: {movieRoom}\n";
+                        reservationList = reservationList + $"Reserverings Nummer: {storage.Reservations[i].reservationID}\nFilm: {movieName}\nDatum en tijd: {DateTime.Parse(movieStartTime)}\nZaal: {movieRoom}\n\n";
                     }
                 }
                 if(reservationList == "") {
@@ -90,6 +90,66 @@ namespace ProjectB.pages
                 var key = Console.ReadKey();
                 if (key.Key.ToString() == "Enter") {Console.Clear(); Menu.dashboard();}
                 else {continue;}
+            }
+        }
+
+        public static void cancelUserReservation() {
+            Console.Clear();
+            string fileContent = File.ReadAllText("storage.json");
+            storage = JsonConvert.DeserializeObject<dataStorage>(fileContent);
+            string reservationList = "";
+
+            if(storage.Reservations != null) {
+                for (int i = 0; i < storage.Reservations.Count; i++)
+                {
+                    string storedEmail = storage.Reservations[i].userMail;
+                    string userEmail = Login.user.userEmail;
+                    int movieTimeID = storage.Reservations[i].movieTimeID;
+
+                    string movieName = "";
+                    string movieStartTime = "";
+                    int movieRoom = 0;
+                    
+                    if(storedEmail == userEmail) {
+                        for (int j = 0; j < storage.MoviePlanning.Count; j++)
+                        {
+                            if(movieTimeID == storage.MoviePlanning[j].movieTimeID) {
+                                movieName = storage.MoviePlanning[j].movieName;
+                                movieStartTime = storage.MoviePlanning[j].movieTime.ToString();
+                                movieRoom = storage.MoviePlanning[j].movieTheater;
+                            }
+                        }
+                        reservationList = reservationList + $"Reserverings Nummer: {storage.Reservations[i].reservationID}\nFilm: {movieName}\nDatum en tijd: {DateTime.Parse(movieStartTime)}\nZaal: {movieRoom}\n";
+                    }
+                }
+                if(reservationList == "") {
+                    Console.WriteLine("U heeft op het moment geen reserveringen.");
+                } else {
+                    bool loop = true;
+                    while(loop) {
+                        Console.WriteLine(reservationList);
+                        tools.textColor("Vul het Nummer in van de reservering die u wilt annuleren.", 14, false);
+                        string cancelReservationID = Console.ReadLine();
+
+                        for (int i = 0; i < storage.Reservations.Count; i++)
+                        {
+                            string storedReservationID = storage.Reservations[i].reservationID;
+                            if(cancelReservationID == storedReservationID) {
+                                dataStorageHandler.storage.Reservations.RemoveAt(i);
+                                dataStorageHandler.saveChanges();
+                                loop = false;
+                            } else {
+                                tools.textColor("Dit nummer bestaat niet.\n", 12, false);
+                            }
+                        }
+                    }
+                }
+                string back = Menu.Menubuilder($"" + "\n", new string[] {"Nog een reservering annuleren", "Terug?"}, 14, 14);
+                if(back == "Nog een reservering annuleren") {
+                    reserveUser.cancelUserReservation();
+                } else if(back == "Terug?") {
+                    Menu.dashboard();
+                }
             }
         }
     }
