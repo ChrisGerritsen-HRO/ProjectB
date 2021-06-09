@@ -30,7 +30,7 @@ namespace ProjectB.pages
             string fileContent = File.ReadAllText("storage.json");
             dynamic obj = JsonConvert.DeserializeObject(fileContent);
 
-            if(dataStorageHandler.storage.movie.Count == 0) {
+            if(dataStorageHandler.storage.movieRoom.Count == 0) {
                 tools.textColor("Er zijn nog geen zalen geregistreerd", 12, false);
             } else {
                 for(int i = 0; i < dataStorageHandler.storage.movieRoom.Count; i++) {

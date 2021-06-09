@@ -59,22 +59,37 @@ namespace ProjectB.pages
             if(storage.Reservations != null) {
                 for (int i = 0; i < storage.Reservations.Count; i++)
                 {
-                    foreach (var item in storage.Reservations)
-                    {
-                        if(item.userMail == Login.user.userEmail) {
-                            reservationList = reservationList + $"Reserverings Nummer: {item.reservationID}\n";
-                        } else {
-                            tools.textColor("Er staan geen reserveringen op uw naam!", 12, false);
+                    string storedEmail = storage.Reservations[i].userMail;
+                    string userEmail = Login.user.userEmail;
+                    int movieTimeID = storage.Reservations[i].movieTimeID;
+
+                    string movieName = "";
+                    string movieStartTime = "";
+                    int movieRoom = 0;
+                    
+                    if(storedEmail == userEmail) {
+                        for (int j = 0; j < storage.MoviePlanning.Count; j++)
+                        {
+                            if(movieTimeID == storage.MoviePlanning[j].movieTimeID) {
+                                movieName = storage.MoviePlanning[j].movieName;
+                                movieStartTime = storage.MoviePlanning[j].movieTime.ToString();
+                                movieRoom = storage.MoviePlanning[j].movieTheater;
+                            }
                         }
+                        reservationList = reservationList + $"Reserverings Nummer: {storage.Reservations[i].reservationID}\nFilm: {movieName}\nDatum en tijd: {DateTime.Parse(movieStartTime)}\nZaal: {movieRoom}\n";
                     }
                 }
-
-                tools.textColor("\n>> Terug", 14, false);
-                while (true) {
-                    var key = Console.ReadKey();
-                    if (key.Key.ToString() == "Enter" && Login.user == null) {Console.Clear(); Menu.Mainmenu();}
-                    else {continue;}
+                if(reservationList == "") {
+                    Console.WriteLine("U heeft op het moment geen reserveringen.");
+                } else {
+                    Console.WriteLine(reservationList);
                 }
+            }
+            tools.textColor("\n>> Terug naar hoofmenu", 14, false);
+            while (true) {
+                var key = Console.ReadKey();
+                if (key.Key.ToString() == "Enter") {Console.Clear(); Menu.dashboard();}
+                else {continue;}
             }
         }
     }
