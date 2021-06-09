@@ -52,13 +52,15 @@ namespace ProjectB.pages
         }
 
         public static void userMenu() {
-            string userMenu = Menubuilder($"Welkom: {Login.user.firstName}" + "\n", new string[] {"Films bekijken", "Reserveren", "Mijn reserveringen", "Uitloggen"}, 14, 14);
+            string userMenu = Menubuilder($"Welkom: {Login.user.firstName}" + "\n", new string[] {"Films bekijken", "Reserveren", "Mijn reserveringen", "Reservering annuleren", "Uitloggen"}, 14, 14);
             if (userMenu == "Films bekijken") {
                 movieList.choice();
             } else if (userMenu == "Reserveren") {
                 reserveUser.reserveUserMain();
             } else if (userMenu == "Mijn reserveringen") {
                 reserveUser.viewUserReservation();
+            } else if (userMenu == "Reservering annuleren") {
+                reserveUser.cancelUserReservation();
             } else if (userMenu == "Uitloggen") {
                 Login.logout();
             }
