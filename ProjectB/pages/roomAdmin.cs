@@ -30,12 +30,13 @@ namespace ProjectB.pages
             string fileContent = File.ReadAllText("storage.json");
             dynamic obj = JsonConvert.DeserializeObject(fileContent);
 
-            if(dataStorageHandler.storage.movie.Count == 0) {
+            if(dataStorageHandler.storage.movieRoom.Count == 0) {
                 tools.textColor("Er zijn nog geen zalen geregistreerd", 12, false);
             } else {
                 for(int i = 0; i < dataStorageHandler.storage.movieRoom.Count; i++) {
                     tools.textColor($"Nummer: {obj.movieRoom[i].roomNumber}", 14, false);
                     tools.textColor($"Soort zaal: {obj.movieRoom[i].roomKind}", 14, false);
+                    tools.textColor("----------------------------", 14, false);
                     }
                 }
                 string back = Menu.Menubuilder($"" + "\n", new string[] {"Terug?"}, 14, 14);
@@ -156,40 +157,30 @@ namespace ProjectB.pages
             Console.Clear();
             string fileContent = File.ReadAllText("storage.json");
             dynamic obj = JsonConvert.DeserializeObject(fileContent);
-            int arrLen = 0;
-
-            try
-            {
-                if (((Newtonsoft.Json.Linq.JArray)obj.movieRoom).Count > 0) {
-                    arrLen = ((Newtonsoft.Json.Linq.JArray)obj.movieRoom).Count; 
-                }
-            }
-            catch
-            {
-                arrLen = 0;
-            }
+            int arrLen = dataStorageHandler.storage.movieRoom.Count;
 
             if(arrLen == 0) {
                 tools.textColor("Er zijn nog geen zalen geregistreerd", 12, false);
             } else {
                 for(int i = 0; i < arrLen; i++) {
-                    tools.textColor($"ID: {i}", 14, false);
                     tools.textColor($"Nummer: {obj.movieRoom[i].roomNumber}", 14, false);
+                    tools.textColor($"Nummer: {obj.movieRoom[i].roomKind}", 14, false);
+                    tools.textColor("----------------------------", 14, false);
                 }
 
                 int selectedID = 0;
                 while(true) {
-                    tools.textColor("ID van de zaal: ", 14, true);
+                    tools.textColor("Nummer van de zaal: ", 14, true);
                     selectedID = Convert.ToInt32(Console.ReadLine());
-                    if(selectedID > arrLen-1 || selectedID < 0) {
+                    if(selectedID > arrLen || selectedID <= 0) {
                         tools.textColor("Dit is geen geldig zaal nummer", 12, false);
                     } else {
                         break;
                     }
                 }
-                string deletedRoom = obj.movieRoom[selectedID].roomNumber;
+                string deletedRoom = obj.movieRoom[selectedID-1].roomNumber;
 
-                dataStorageHandler.storage.movieRoom.RemoveAt(selectedID);
+                dataStorageHandler.storage.movieRoom.RemoveAt(selectedID-1);
                 dataStorageHandler.saveChanges();
                 Console.Clear();
                 tools.textColor("Zaal nummer ", 15, true); tools.textColor($"{deletedRoom}", 11, true); tools.textColor(" is succesvol verwijderd\n", 15, false); 

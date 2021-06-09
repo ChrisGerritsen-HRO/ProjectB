@@ -11,6 +11,7 @@ namespace ProjectB.pages
         public static int reserverMovieID { get; set; }
         public static int reserveMovieTimeID { get; set; }
         public static void reserveMain() {
+            Console.Clear();
             string fileContent = File.ReadAllText("storage.json");
             dynamic obj = JsonConvert.DeserializeObject(fileContent);
             for(int i = 0; i < dataStorageHandler.storage.movie.Count; i++)
@@ -20,7 +21,7 @@ namespace ProjectB.pages
             }
             
             while(true){
-                tools.textColor("Kies een film: ", 14, true);
+                tools.textColor("Kies een film ID: ", 14, true);
                 int selectedID;
                 selectedID = Convert.ToInt32(Console.ReadLine());
                 if(selectedID > dataStorageHandler.storage.movie.Count-1 || selectedID < 0) { // Als de ingevoerde ID hoger is dan de hoogste ID dan onderstaande uitgevoerd
@@ -51,57 +52,9 @@ namespace ProjectB.pages
                 if(timeSelected == item.movieTime.ToString("HH:mm") && item.movieID == movieID) {
                     reserverMovieID = movieID;
                     reserveMovieTimeID = item.movieTimeID;
-                    Console.WriteLine(timeSelected); // hier kan je naar de functie gaan van stoel selecteren en aantal
-                    string[] seats = new string[0];
-                    int rows = 0;
-                    int columns = 0;
-                    string[] seatPrice = new string[0];
-                    int moviePlanLen = ((Newtonsoft.Json.Linq.JArray)obj.MoviePlanning).Count;
-                    for (var i = 0; i < moviePlanLen; i++)
-                    {
-                        if (reserveMovieTimeID == obj.MoviePlanning[i].movieTimeID)
-                        {
-                            foreach (var items in obj.movieRoom)
-                            {
-                                if (obj.MoviePlanning[i].movieTheater == items.roomNumber)
-                                {
-                                    rows = items.rows;
-                                    columns = items.columns;
-                                    Array.Resize(ref seats, rows * columns);
-                                    Array.Resize(ref seatPrice, rows * columns);
-                                    for (var j = 0; j < obj.movieRoom.seats.Count; j++)
-                                    {
-                                        seats[j] = obj.movieRoom[i].seats[j];
-                                        seatPrice[j] = obj.MoviePlanning[i].seatPrice[j];
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    rooms.selectChair(seatPrice, seats, rows, columns);
-
-
-
-                    /*for (int i = 0; i < arrLen; i++)
-            {
-                int roomNumber = objContent.movieRoom[i].roomNumber;
-                if(movieTheater == roomNumber) {
-                    int rows = objContent.movieRoom[i].rows;
-                    int columns = objContent.movieRoom[i].columns;
-                    Array.Resize(ref roomSeats, rows * columns);
-                    // roomSeats = objContent.movieRoom[i].seats;
-                    // foreach (var item in objContent.movieRoom[i].seats)
-                    // {
-                    //     roomSeatsList.Add(item);
-                    // }
-                    for (int j = 0; j < objContent.movieRoom[i].seatPrice.Count; j++)
-                    {
-                        roomSeats[j] = objContent.movieRoom[i].seatPrice[j];
-                    }
-                }
-            }*/
-
-                    //string[] seatPrice, string[] room, int rows, int columns
+                    // hier kan je naar de functie gaan van stoel selecteren en aantal
+                    // reserveSnack.reserverSnackMain();
+                    reserveRoom.selectChair();
                     break;
                 }
             }
