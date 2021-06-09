@@ -3,11 +3,13 @@ using System.IO;
 using System.Collections.Generic;
 using ProjectB.classes;
 using Newtonsoft.Json;
+using ProjectB.DAL;
 
 namespace ProjectB.pages
 {
     class reserveRoom {
         // public static List<int> selectChair(string[] seatPrice, string[] room, int rows, int columns) //gebruiker kan stoellen uit de zaal kiezen
+        public static dataStorage storage { get; set; }
         public static int[] seats = new int[0];
         public static int roomNum = 0;
         public static void selectChair()
@@ -21,11 +23,12 @@ namespace ProjectB.pages
             string[] room = new string[0];
             int rows = 0;
             int columns = 0;
+            int movieTimeID = 0;
 
             int roomNumber = 0;
             for (int i = 0; i < obj.MoviePlanning.Count; i++)
             {
-                int movieTimeID = obj.MoviePlanning[i].movieTimeID;
+                movieTimeID = obj.MoviePlanning[i].movieTimeID;
                 if(reserveMovie.reserveMovieTimeID == movieTimeID) {
                     roomNumber = obj.MoviePlanning[i].movieTheater;
                 }
@@ -46,7 +49,7 @@ namespace ProjectB.pages
             }
             for (int i = 0; i < obj.MoviePlanning.Count; i++)
             {
-                int movieTimeID = obj.MoviePlanning[i].movieTimeID;
+                movieTimeID = obj.MoviePlanning[i].movieTimeID;
                 if(reserveMovie.reserveMovieTimeID == movieTimeID) {
                     for (int j = 0; j < obj.MoviePlanning[i].seats.Count; j++)
                     {
@@ -108,6 +111,15 @@ namespace ProjectB.pages
                     amountOfSelectedChairs++;
                 }
             }
+            for (int i = 0; i < obj.MoviePlanning.Count; i++)
+            {
+                var moviePlanningList = obj.MoviePlanning;
+                if(reserveMovie.reserveMovieTimeID == movieTimeID) {
+                    dataStorageHandler.storage.MoviePlanning.Insert(i, new moviesPlanning { seats = seatPrice });
+                    dataStorageHandler.saveChanges();
+                } 
+            }
+            
             Array.Resize(ref seats, amountOfChairs);
             seats = selectedChairs.ToArray();
             roomNum = roomNumber;
